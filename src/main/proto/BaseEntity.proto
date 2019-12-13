@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package b2b;
+option java_multiple_files = true;
+option java_package = "com.usoft.b2b.external.api.entity";
+
+//每次请求的头信息
+message ReqHeader {
+    int32 uu = 1; //用户UU号
+    int32 enuu = 2; //企业ENUU号
+}
+
+// 每次响应的头信息
+message RespHeader {
+    int32 code = 1; // 状态码 0.正常 非0.异常
+    string msg = 2; // 错误信息 code!=0时,有值
+}
+
+// 分页信息
+message PagingInfo {
+    int32 totalPage = 1; // 总页数
+    int32 totalCount = 2; // 总条数
+    int32 pageSize = 3; // 每页条数
+    int32 pageNumber = 4; // 当前页码
+}

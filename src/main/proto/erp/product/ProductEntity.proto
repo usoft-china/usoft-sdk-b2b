@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+import "BaseEntity.proto";
+package b2b.erp.product;
+option java_multiple_files = true;
+option java_package = "com.usoft.b2b.external.erp.product.api.entity";
+
+//ERP系统的产品
+message Product {
+    int64 pr_id = 1; //erp物料id
+    string pr_code = 2; //物料编号
+    string pr_detail = 3; //物料名称
+    double pr_reserve = 4; //ERP空闲库存
+    double price = 5; //价格
+    string manufactureDate = 6; //产品生产日期
+    string pr_spec = 7; //物料规格
+    string pr_unit = 8; //物料单位
+    double pr_zxbzs = 9; //最新包装数
+    double pr_zxdhl = 10; //最新订货量
+    double pr_leadtime = 11; //采购提前期,天数
+    double pr_ltinstock = 12; //备料提前期，天数
+    string pr_brand = 13; //物料品牌
+    string pr_orispeccode = 14; //原厂型号
+    string pr_uuid = 15; //标准料号
+    string pr_status = 16; //状态： ‘已审核’->有效；‘已禁用’->失效
+    int32 pr_issale = 17; //销售状态
+    int32 pr_ispurchase = 18; //采购状态
+    int32 pr_isshow = 19; //开放采购状态
+    int32 pr_ispubsale = 20; //开放销售状态
+    int64 b2b_id = 21; //平台物料id（现在对应也是公共物料库的id）
+    string kind = 22; //类目（平台）
+    string pbrand = 23; //品牌（平台）
+    string pcmpcode = 24; //型号（平台）
+    string kinden = 25; //类目英文
+    string pbranden = 26; //品牌英文
+    int32 standard = 27; //是否是标准；1： 标准， 0： 非标准
+    int64 pr_enuu = 28; //物料所属企业UU（需要在erp调用接口时，设置到product实体）
+}

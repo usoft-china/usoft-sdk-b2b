@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+import "erp/product/ProductEntity.proto";
+import "BaseEntity.proto";
+package b2b.erp.product;
+option java_multiple_files = true;
+option java_package = "com.usoft.b2b.external.erp.product.api.protobuf";
+
+service IProductService {
+    //定时任务更新物料信息 -restAPI /product/cycleupdate, method:post, type:json
+    rpc updateProducts (UpdateProductsReq) returns (UpdateProductsResp);
+}
+
+//定时任务更新物料信息 请求参数
+message UpdateProductsReq {
+    repeated Product data = 1; //采购单集合
+}
+
+//定时任务更新物料信息 响应参数
+message UpdateProductsResp {
+    RespHeader respHeader = 1; // 响应体
+}
