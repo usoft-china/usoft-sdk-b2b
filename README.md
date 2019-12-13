@@ -43,7 +43,7 @@
 
 ## 使用示例地址
 
-[使用示例地址](.%5Csrc%5Ctest%5Cjava%5Ccom%5Cusoft%5Csdk%5Cb2b)
+[使用示例地址](./src/test/java/com/usoft/sdk/b2b)
 
 ## sdk开发规范
 
