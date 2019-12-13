@@ -14,6 +14,7 @@ service IProductService {
 //定时任务更新物料信息 请求参数
 message UpdateProductsReq {
     repeated Product data = 1; //采购单集合
+    int64 enUU = 2; //企业UU号
 }
 
 //定时任务更新物料信息 响应参数
