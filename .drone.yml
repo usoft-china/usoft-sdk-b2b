@@ -1,0 +1,50 @@
+kind: pipeline
+name: default
+
+steps:
+- name: deploy_dev
+  image: usoft/maven:3.6.0-jdk-8
+  commands:
+  - mvn clean deploy -Dmaven.test.skip=true -s /usr/share/maven/ref/settings.xml -P dev -f pom.xml
+  when:
+    branch:
+    - develop
+    event:
+    - push
+
+- name: deploy_prod
+  image: usoft/maven:3.6.0-jdk-8
+  commands:
+  - mvn clean deploy -Dmaven.test.skip=true -s /usr/share/maven/ref/settings.xml -P prod -f pom.xml
+  when:
+    branch:
+    - master
+    event:
+    - push
+
+- name: sync_github_master
+  image: usoft/protoc-gen-doc:3.6.1
+  commands:
+  - git remote add github git@github.com:usoft-china/usoft-sdk-b2b.git
+  - git push github master:master
+  when:
+    branch:
+    - master
+    event:
+    - push    
+
+- name: notify_email
+  image: drillster/drone-email
+  settings:
+    host: smtp.mxhichina.com
+    port: 25
+    username: alert@usoftchina.com
+    password: Mall1234567890
+    from: alert@usoftchina.com
+  when:
+    branch:
+    - develop
+    - master
+    status:
+    - success
+    - failure
