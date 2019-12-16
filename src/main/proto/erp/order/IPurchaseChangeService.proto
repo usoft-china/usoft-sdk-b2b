@@ -1,0 +1,48 @@
+syntax = "proto3";
+import "erp/order/PurchaseChangeEntity.proto";
+import "BaseEntity.proto";
+package b2b.erp.order;
+
+option java_multiple_files = true;
+option java_package = "com.usoft.b2b.external.erp.order.api.protobuf";
+option java_outer_classname = "IPurchaseChangeServiceProto";
+
+service IPurchaseChangeService {
+
+    //将买家ERP的采购变更单写到平台  -restAPI /erp/purchase/change, method:post, type:json
+    rpc savePurchaseChange(SavePurchaseChangeListReq) returns(SavePurchaseChangeListResq);
+    //买家ERP从平台获取变更单的回复信息  -restAPI /erp/purchase/change/reply, method:get, type:json
+    rpc getPurchaseChangeReplyList(GetPurchaseChangeReplyListReq) returns(GetPurchaseChangeReplyListResp);
+    //平台的变更单回复信息传到ERP之后，修改平台里面的变更单的回复状态  -restAPI /erp/purchase/change/reply, method:post, type:string
+    rpc updatePurchaseChangeReplyStatus(UpdatePurchaseChangeReplyStatusReq) returns(UpdatePurchaseChangeReplyStatusResp);
+}
+
+//将买家ERP的采购变更单写到平台  请求参数
+message SavePurchaseChangeListReq {
+    repeated PurchaseChange purchaseChangeList = 1; //采购变更单集合
+}
+
+//将买家ERP的采购变更单写到平台  响应参数
+message SavePurchaseChangeListResq {
+}
+
+//买家ERP从平台获取变更单的回复信息  请求参数
+message GetPurchaseChangeReplyListReq {
+    RespHeader respHeader = 1; // 响应体
+}
+
+//买家ERP从平台获取变更单的回复信息  响应参数
+message GetPurchaseChangeReplyListResp{
+    RespHeader respHeader = 1; // 响应体
+    repeated PurchaseChangeReply replyList = 2; //采购变更单供应商回复集合
+}
+
+//平台的变更单回复信息传到ERP之后，修改平台里面的变更单的回复状态  请求参数
+message UpdatePurchaseChangeReplyStatusReq {
+    string idstr = 1; //回复信息上传成功的采购变更单id字符串
+}
+
+//平台的变更单回复信息传到ERP之后，修改平台里面的变更单的回复状态  响应参数
+message UpdatePurchaseChangeReplyStatusResp {
+    RespHeader respHeader = 1; // 响应体
+}

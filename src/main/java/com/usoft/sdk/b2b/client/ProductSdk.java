@@ -15,12 +15,13 @@ import java.util.Map;
  **/
 public class ProductSdk extends BaseSdk {
 
-	public ProductSdk(String baseUrl) {
-		super(baseUrl);
+
+	public ProductSdk(String baseUrl, String secretId, String secretKey) {
+		super(baseUrl, secretId, secretKey);
 	}
 
-	public ProductSdk(String baseUrl, int timeout) {
-		super(baseUrl, timeout);
+	public ProductSdk(String baseUrl, String secretId, String secretKey, int timeout) {
+		super(baseUrl, secretId, secretKey, timeout);
 	}
 
 	/**

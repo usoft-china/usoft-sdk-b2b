@@ -35,7 +35,7 @@ public class ProtoBufUtil {
 	/**
 	 * Json列表字符串 转 ProtoBuf实体列表
 	 *
-	 * @param builder        目标ProtoBuf实体
+	 * @param message        目标ProtoBuf实体
 	 * @param jsonSourceList Json字符串
 	 * @param <T>
 	 * @return

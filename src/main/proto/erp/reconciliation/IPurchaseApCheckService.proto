@@ -1,0 +1,53 @@
+syntax = "proto3";
+import "erp/reconciliation/PurchaseApCheckEntity.proto";
+import "BaseEntity.proto";
+package b2b.erp.reconciliation;
+
+
+option java_multiple_files = true;
+option java_package = "com.usoft.b2b.external.erp.reconciliation.api.protobuf";
+option java_outer_classname = "IPurchaseApCheckServiceProto";
+
+service IPurchaseApCheckService {
+    //买获取B2B新增的对账单信息 -restAPI /erp/sale/APCheck, method:get, type:json
+    rpc getApCheck(GetApCheckListReq) returns (GetApCheckListResp) {}
+
+    // 平台的应收对账传到供应商ERP之后，修改平台里面的订单的上传状态-restAPI /erp/sale/APCheck, method:post, type:json
+    rpc onApCheckSuccess(OnApChcekSuccessReq) returns (OnApChcekSuccessResp) {}
+
+    // 买家ERP回复平台传入的应收账单(不同意和确认)-restAPI /erp/sale/reply, method:post, type:json
+    rpc replyApCheck(ReplyApCheckReq) returns (ReplyApCheckResp) {}
+}
+
+// 买家ERP回复平台传入的应收账单 响应信息
+message ReplyApCheckResp {
+    RespHeader respHeader = 1; // 响应体
+}
+
+// 买家ERP回复平台传入的应收账单
+message ReplyApCheckReq {
+    repeated PurchaseApCheck apCheckList = 1; // ERP上传的对账单信息
+}
+
+// ERP传回id串更新下载状态
+message OnApChcekSuccessReq {
+    string data = 1;// id串
+}
+
+// 平台的应收对账传到供应商ERP之后，修改平台里面的订单的上传状态 响应参数
+message OnApChcekSuccessResp {
+    RespHeader respHeader = 1; // 响应体
+}
+
+//买家ERP获取平台供应商新增的对账单信息 请求参数
+message GetApCheckListReq {
+    int64 enUU = 1;// 获取的企业UU
+    int32 sendStatus = 2; // 上传状态
+    string checkStatus = 3; // 对账状态
+}
+
+//买家ERP获取平台供应商新增的对账单信息 响应参数
+message GetApCheckListResp {
+    RespHeader respHeader = 1; // 响应体
+    repeated PurchaseApCheck apCheckList = 2; //b2b供应商新增的对账单信息
+}

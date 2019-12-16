@@ -42,6 +42,17 @@ public class HttpUtil {
 	 * @throws IOException
 	 */
 	public static String doGet(String url, Map<String, String> params, int timeout) throws IOException {
+		return doGet(getPath(url, params), timeout);
+	}
+
+	/**
+	 * 获取请求全路径
+	 *
+	 * @param url
+	 * @param params
+	 * @return
+	 */
+	public static String getPath(String url, Map<String, String> params) {
 		String path = url;
 		if (StringUtils.isNotBlank(url) && MapUtils.isNotEmpty(params)) {
 			StringBuilder sb = new StringBuilder(url);
@@ -51,7 +62,7 @@ public class HttpUtil {
 			}
 			path = sb.toString().substring(0, sb.toString().length() - 1);
 		}
-		return doGet(path, timeout);
+		return path;
 	}
 
 	/***
