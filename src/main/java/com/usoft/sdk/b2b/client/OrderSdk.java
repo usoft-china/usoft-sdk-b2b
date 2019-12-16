@@ -55,8 +55,8 @@ public class OrderSdk extends BaseSdk {
 		Map<String, String> params = generateSignature(url, null);
 		url = HttpUtil.getPath(url, params);
 		Map<String, String> fromData = new HashMap<>();
-		params.put("data", req.getIdStr());
-		HttpUtil.doPost(url, params, timeout);
+		fromData.put("data", req.getIdStr());
+		HttpUtil.doPost(url, fromData, timeout);
 		return UpdateSaleDownStatusResp.newBuilder().build();
 	}
 }
