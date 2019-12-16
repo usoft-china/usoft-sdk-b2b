@@ -37,6 +37,6 @@ public class ProductSdkTest {
 	}
 	@Test
 	public void test(){
-		System.out.println(HmacUtils.encode("http://test-b2b.uuzcc.cn/erp/sale?access_id=10041559","2c1ea089876b796fe050007f01002ea6" ));
+		System.out.println(HmacUtils.encode("http://local.uuzcc.cn:8090/platform-b2b/erp/sale?access_id=10041559","2c1ea089876b796fe050007f01002ea6" ));
 	}
 }

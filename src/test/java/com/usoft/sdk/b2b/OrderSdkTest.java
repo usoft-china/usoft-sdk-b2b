@@ -2,6 +2,8 @@ package com.usoft.sdk.b2b;
 
 import com.usoft.b2b.external.erp.order.api.protobuf.GetSaleDownListReq;
 import com.usoft.b2b.external.erp.order.api.protobuf.GetSaleDownListResp;
+import com.usoft.b2b.external.erp.order.api.protobuf.UpdateSaleDownStatusReq;
+import com.usoft.b2b.external.erp.order.api.protobuf.UpdateSaleDownStatusResp;
 import com.usoft.sdk.b2b.client.OrderSdk;
 import com.usoft.sdk.b2b.utils.ProtoBufUtil;
 import org.junit.jupiter.api.Test;
@@ -29,4 +31,11 @@ public class OrderSdkTest {
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}
 
+	@Test
+	public void updateSaleDownStatus() throws IOException {
+		UpdateSaleDownStatusReq.Builder req = UpdateSaleDownStatusReq.newBuilder();
+		req.setIdStr("123");
+		UpdateSaleDownStatusResp resp = orderSdk.updateSaleDownStatus(req.build());
+		System.out.println(ProtoBufUtil.toJSON(resp));
+	}
 }
