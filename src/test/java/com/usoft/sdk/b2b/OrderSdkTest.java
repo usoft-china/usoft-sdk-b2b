@@ -46,6 +46,7 @@ public class OrderSdkTest {
 	@Test
 	public void updateSaleReplyStatus() throws IOException {
 		UpdateSaleReplyStatusReq.Builder req = UpdateSaleReplyStatusReq.newBuilder();
+		req.setIdStr("123");
 		UpdateSaleReplyStatusResp resp = orderSdk.updateSaleReplyStatus(req.build());
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}
@@ -60,6 +61,7 @@ public class OrderSdkTest {
 	@Test
 	public void updateSaleDownDetailEnd() throws IOException {
 		UpdateSaleDownDetailEndReq.Builder req = UpdateSaleDownDetailEndReq.newBuilder();
+		req.setIdStr("123");
 		UpdateSaleDownDetailEndResp resp = orderSdk.updateSaleDownDetailEnd(req.build());
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}
@@ -74,6 +76,7 @@ public class OrderSdkTest {
 	@Test
 	public void updateSaleDownChangeStatus() throws IOException {
 		UpdateSaleDownChangeStatusReq.Builder req = UpdateSaleDownChangeStatusReq.newBuilder();
+		req.setIdStr("123");
 		UpdateSaleDownChangeStatusResp resp = orderSdk.updateSaleDownChangeStatus(req.build());
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}
@@ -95,6 +98,7 @@ public class OrderSdkTest {
 	@Test
 	public void updateSaleDownChangeReplyStatus() throws IOException {
 		UpdateSaleDownChangeReplyStatusReq.Builder req = UpdateSaleDownChangeReplyStatusReq.newBuilder();
+		req.setIdStr("123");
 		UpdateSaleDownChangeReplyStatusResp resp = orderSdk.updateSaleDownChangeReplyStatus(req.build());
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}
@@ -123,6 +127,7 @@ public class OrderSdkTest {
 	@Test
 	public void updatePurchaseReplyStatus() throws IOException {
 		UpdatePurchaseReplyStatusReq.Builder req = UpdatePurchaseReplyStatusReq.newBuilder();
+		req.setIdStr("123");
 		UpdatePurchaseReplyStatusResp resp = orderSdk.updatePurchaseReplyStatus(req.build());
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}
@@ -144,6 +149,7 @@ public class OrderSdkTest {
 	@Test
 	public void updateMessageLogStatus() throws IOException {
 		UpdateMessageLogStatusReq.Builder req = UpdateMessageLogStatusReq.newBuilder();
+		req.setIdStr("123");
 		UpdateMessageLogStatusResp resp = orderSdk.updateMessageLogStatus(req.build());
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}
@@ -172,6 +178,7 @@ public class OrderSdkTest {
 	@Test
 	public void updatePurchaseChangeReplyStatus() throws IOException {
 		UpdatePurchaseChangeReplyStatusReq.Builder req = UpdatePurchaseChangeReplyStatusReq.newBuilder();
+		req.setIdStr("123");
 		UpdatePurchaseChangeReplyStatusResp resp = orderSdk.updatePurchaseChangeReplyStatus(req.build());
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}
