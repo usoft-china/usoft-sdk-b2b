@@ -1,8 +1,7 @@
 package com.usoft.sdk.b2b.client;
 
 import com.alibaba.fastjson.JSONObject;
-import com.usoft.b2b.external.erp.deliver.api.entity.AcceptNotify;
-import com.usoft.b2b.external.erp.deliver.api.entity.PurchaseNotify;
+import com.usoft.b2b.external.erp.deliver.api.entity.*;
 import com.usoft.b2b.external.erp.deliver.api.protobuf.*;
 import com.usoft.sdk.b2b.utils.HttpUtil;
 import com.usoft.sdk.b2b.utils.ProtoBufUtil;
@@ -181,4 +180,189 @@ public class DeliverSdk extends BaseSdk{
         return SaveUnAcceptNotifyVerifyListResp.newBuilder().build();
     }
 
+
+    /**
+     * 将ERP的采购验收单写到平台
+     *
+     * @param req
+     * @return
+     */
+    public SavePurchaseProdInOutResp savePurchaseProdInOut(SavePurchaseProdInOutReq req) throws IOException {
+        String url = baseUrl + "/erp/purchase/prodInOut";
+        Map<String, String> params = generateSignature(url, null);
+        url = HttpUtil.getPath(url, params);
+        Map<String, String> fromData = new HashMap<>();
+        fromData.put("data", ProtoBufUtil.toJSON(req.getDataList()));
+
+        String respJson = HttpUtil.doPost(url, fromData, timeout);
+        List<PurchaseProdInOut> list = ProtoBufUtil.toProtoBufList(PurchaseProdInOut.newBuilder().build(), respJson);
+        SavePurchaseProdInOutResp.Builder resp = SavePurchaseProdInOutResp.newBuilder();
+        resp.addAllData(list);
+        return resp.build();
+    }
+
+    /**
+     * 将ERP的反过账的采购验收单写到平台
+     *
+     * @param req
+     * @return
+     */
+    public NonPostingProdInOutResp nonPostingProdInOut(NonPostingProdInOutReq req) throws IOException {
+        String url = baseUrl + "/erp/purchase/prodInOut/nonPosting";
+        Map<String, String> params = generateSignature(url, null);
+        url = HttpUtil.getPath(url, params);
+        Map<String, String> fromData = new HashMap<>();
+        fromData.put("data", ProtoBufUtil.toJSON(req.getDataList()));
+        HttpUtil.doPost(url, fromData, timeout);
+        return NonPostingProdInOutResp.newBuilder().build();
+    }
+
+    /**
+     * 将ERP的采购验退单写到平台
+     *
+     * @param req
+     * @return
+     */
+    public SavePurchaseProdReturnResp savePurchaseProdReturn(SavePurchaseProdReturnReq req) throws IOException {
+        String url = baseUrl + "/erp/purchase/prodReturn";
+        Map<String, String> params = generateSignature(url, null);
+        url = HttpUtil.getPath(url, params);
+        Map<String, String> fromData = new HashMap<>();
+        fromData.put("data", ProtoBufUtil.toJSON(req.getDataList()));
+
+        String respJson = HttpUtil.doPost(url, fromData, timeout);
+        List<PurchaseProdInOut> list = ProtoBufUtil.toProtoBufList(PurchaseProdInOut.newBuilder().build(), respJson);
+        SavePurchaseProdReturnResp.Builder resp = SavePurchaseProdReturnResp.newBuilder();
+        resp.addAllData(list);
+        return resp.build();
+    }
+
+    /**
+     * 将ERP的反过账的采购验退单写到平台
+     *
+     * @param req
+     * @return
+     */
+    public NonPostingProdReturnResp nonPostingProdReturn(NonPostingProdReturnReq req) throws IOException {
+        String url = baseUrl + "/erp/purchase/prodReturn/nonPosting";
+        Map<String, String> params = generateSignature(url, null);
+        url = HttpUtil.getPath(url, params);
+        Map<String, String> fromData = new HashMap<>();
+        fromData.put("data", ProtoBufUtil.toJSON(req.getDataList()));
+        HttpUtil.doPost(url, fromData, timeout);
+        return NonPostingProdReturnResp.newBuilder().build();
+    }
+
+
+    /**
+     * 卖家ERP从平台获取客户送货提醒
+     * @param req
+     * @return
+     * @throws IOException
+     */
+    public GetSaleNotifyDownListResp getSaleNotifyDownList(GetSaleNotifyDownListReq req) throws IOException {
+        String url = baseUrl + "/erp/sale/notice";
+        Map<String, String> params = generateSignature(url, null);
+        String respJson = HttpUtil.doGet(url, params, timeout);
+        List<SaleNotifyDown> list = ProtoBufUtil.toProtoBufList(SaleNotifyDown.newBuilder().build(), respJson);
+        GetSaleNotifyDownListResp.Builder resp = GetSaleNotifyDownListResp.newBuilder();
+        resp.addAllSaleNotifyDownList(list);
+        return resp.build();
+    }
+
+    /**
+     * 卖家ERP从平台获取客户送货提醒
+     *
+     * @param req
+     * @return
+     */
+    public UpdateSaleNotifyDownStatusResp updateSaleNotifyDownStatus(UpdateSaleNotifyDownStatusReq req) throws IOException {
+        String url = baseUrl + "/erp/sale/notice";
+        Map<String, String> params = generateSignature(url, null);
+        url = HttpUtil.getPath(url, params);
+        Map<String, String> fromData = new HashMap<>();
+        fromData.put("data", req.getIdStr());
+        HttpUtil.doPost(url, fromData, timeout);
+        return UpdateSaleNotifyDownStatusResp.newBuilder().build();
+    }
+
+    /**
+     * 卖家ERP从平台获取客户送货提醒
+     *
+     * @param req
+     * @return
+     */
+    public SaveSaleOutListResp saveSaleOutList(SaveSaleOutListReq req) throws IOException {
+        String url = baseUrl + "/erp/sale/notice/send";
+        Map<String, String> params = generateSignature(url, null);
+        url = HttpUtil.getPath(url, params);
+        Map<String, String> fromData = new HashMap<>();
+        fromData.put("data", ProtoBufUtil.toJSON(req.getSaleOutListList()));
+        HttpUtil.doPost(url, fromData, timeout);
+        return SaveSaleOutListResp.newBuilder().build();
+    }
+
+    /**
+     * 卖家ERP从平台获取在平台维护的发货单
+     * @param req
+     * @return
+     * @throws IOException
+     */
+    public GetSaleOutListResp getSaleOutList(GetSaleOutListReq req) throws IOException {
+        String url = baseUrl + "/erp/sale/notice/send";
+        Map<String, String> params = generateSignature(url, null);
+        String respJson = HttpUtil.doGet(url, params, timeout);
+        List<SaleOut> list = ProtoBufUtil.toProtoBufList(SaleOut.newBuilder().build(), respJson);
+        GetSaleOutListResp.Builder resp = GetSaleOutListResp.newBuilder();
+        resp.addAllSaleOutList(list);
+        return resp.build();
+    }
+
+    /**
+     * 平台的发货单传到供应商ERP之后，修改平台里面的发货单的上传状态
+     *
+     * @param req
+     * @return
+     */
+    public UpdateSaleOutStatusResp updateSaleOutStatus(UpdateSaleOutStatusReq req) throws IOException {
+        String url = baseUrl + "/erp/sale/notice/send/back";
+        Map<String, String> params = generateSignature(url, null);
+        url = HttpUtil.getPath(url, params);
+        Map<String, String> fromData = new HashMap<>();
+        fromData.put("data", req.getIdStr());
+        HttpUtil.doPost(url, fromData, timeout);
+        return UpdateSaleOutStatusResp.newBuilder().build();
+    }
+
+    /**
+     * 卖家ERP从平台获取在平台维护的发货单
+     * @param req
+     * @return
+     * @throws IOException
+     */
+    public UpdateSaleNotifyDownEndResp updateSaleNotifyDownEnd(UpdateSaleNotifyDownEndReq req) throws IOException {
+        String url = baseUrl + "/erp/sale/notice/end";
+        Map<String, String> params = generateSignature(url, null);
+        String respJson = HttpUtil.doGet(url, params, timeout);
+        List<SaleNotifyDownEnd> list = ProtoBufUtil.toProtoBufList(SaleNotifyDownEnd.newBuilder().build(), respJson);
+        UpdateSaleNotifyDownEndResp.Builder resp = UpdateSaleNotifyDownEndResp.newBuilder();
+        resp.addAllEndList(list);
+        return resp.build();
+    }
+
+    /**
+     * 平台的结案、反结案客户送货提醒单传到供应商ERP之后，修改平台里面的上传状态
+     *
+     * @param req
+     * @return
+     */
+    public UpdateSaleNotifyDownEndStatusResp updateSaleNotifyDownEndStatus(UpdateSaleNotifyDownEndStatusReq req) throws IOException {
+        String url = baseUrl + "/erp/sale/notice/send/back";
+        Map<String, String> params = generateSignature(url, null);
+        url = HttpUtil.getPath(url, params);
+        Map<String, String> fromData = new HashMap<>();
+        fromData.put("data", req.getIdStr());
+        HttpUtil.doPost(url, fromData, timeout);
+        return UpdateSaleNotifyDownEndStatusResp.newBuilder().build();
+    }
 }

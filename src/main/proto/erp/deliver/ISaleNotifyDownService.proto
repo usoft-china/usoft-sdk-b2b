@@ -18,7 +18,7 @@ service ISaleNotifyDownService {
     rpc getSaleOutList(GetSaleOutListReq) returns(GetSaleOutListResp);
     //平台的发货单传到供应商ERP之后，修改平台里面的发货单的上传状态  -restAPI /erp/sale/notice/send/back, method:post, type:json
     rpc updateSaleOutStatus(UpdateSaleOutStatusReq) returns(UpdateSaleOutStatusResp);
-    //卖家ERP从平台获取结案、反结案客户送货提醒  -restAPI /erp/sale/notice/end, method:post, type:json
+    //卖家ERP从平台获取结案、反结案客户送货提醒  -restAPI /erp/sale/notice/end, method:get, type:json
     rpc updateSaleNotifyDownEnd(UpdateSaleNotifyDownEndReq) returns(UpdateSaleNotifyDownEndResp);
     //平台的结案、反结案客户送货提醒单传到供应商ERP之后，修改平台里面的上传状态  -restAPI /erp/sale/notice/end/back, method:post, type:json
     rpc updateSaleNotifyDownEndStatus(UpdateSaleNotifyDownEndStatusReq) returns(UpdateSaleNotifyDownEndStatusResp);

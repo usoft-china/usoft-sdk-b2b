@@ -77,12 +77,109 @@ public class DeliverSdkTest {
     @Test
     public void checkAcceptNotify() throws IOException {
         CheckAcceptNotifyReq.Builder req = CheckAcceptNotifyReq.newBuilder();
-        PurchaseNotify.Builder builder = PurchaseNotify.newBuilder();
-        builder.setPnB2Bid(2);
-        builder.setPnId(123);
-        builder.setVeUu(321);
-        req.addPurchaseNotifyList(builder);
         CheckAcceptNotifyResp resp = deliverSdk.checkAcceptNotify(req.build());
+        System.out.println(ProtoBufUtil.toJSON(resp));
+    }
+
+    @Test
+    public void saveAcceptNotifyConfirm() throws IOException {
+        SaveAcceptNotifyConfirmListReq.Builder req = SaveAcceptNotifyConfirmListReq.newBuilder();
+        SaveAcceptNotifyConfirmListResp resp = deliverSdk.saveAcceptNotifyConfirm(req.build());
+        System.out.println(ProtoBufUtil.toJSON(resp));
+    }
+
+    @Test
+    public void saveAcceptNotifyVerify() throws IOException {
+        SaveAcceptNotifyVerifyListReq.Builder req = SaveAcceptNotifyVerifyListReq.newBuilder();
+        SaveAcceptNotifyVerifyListResp resp = deliverSdk.saveAcceptNotifyVerify(req.build());
+        System.out.println(ProtoBufUtil.toJSON(resp));
+    }
+
+    @Test
+    public void saveUnAcceptNotifyVerify() throws IOException {
+        SaveUnAcceptNotifyVerifyListReq.Builder req = SaveUnAcceptNotifyVerifyListReq.newBuilder();
+        SaveUnAcceptNotifyVerifyListResp resp = deliverSdk.saveUnAcceptNotifyVerify(req.build());
+        System.out.println(ProtoBufUtil.toJSON(resp));
+    }
+
+
+    @Test
+    public void savePurchaseProdInOut() throws IOException {
+        SavePurchaseProdInOutReq.Builder req = SavePurchaseProdInOutReq.newBuilder();
+        SavePurchaseProdInOutResp resp = deliverSdk.savePurchaseProdInOut(req.build());
+        System.out.println(ProtoBufUtil.toJSON(resp));
+    }
+
+    @Test
+    public void nonPostingProdInOut() throws IOException {
+        NonPostingProdInOutReq.Builder req = NonPostingProdInOutReq.newBuilder();
+        NonPostingProdInOutResp resp = deliverSdk.nonPostingProdInOut(req.build());
+        System.out.println(ProtoBufUtil.toJSON(resp));
+    }
+
+    @Test
+    public void savePurchaseProdReturn() throws IOException {
+        SavePurchaseProdReturnReq.Builder req = SavePurchaseProdReturnReq.newBuilder();
+        SavePurchaseProdReturnResp resp = deliverSdk.savePurchaseProdReturn(req.build());
+        System.out.println(ProtoBufUtil.toJSON(resp));
+    }
+
+    @Test
+    public void nonPostingProdReturn() throws IOException {
+        NonPostingProdReturnReq.Builder req = NonPostingProdReturnReq.newBuilder();
+        NonPostingProdReturnResp resp = deliverSdk.nonPostingProdReturn(req.build());
+        System.out.println(ProtoBufUtil.toJSON(resp));
+    }
+
+    @Test
+    public void getSaleNotifyDownList() throws IOException {
+        GetSaleNotifyDownListReq.Builder req = GetSaleNotifyDownListReq.newBuilder();
+        GetSaleNotifyDownListResp resp = deliverSdk.getSaleNotifyDownList(req.build());
+        System.out.println(ProtoBufUtil.toJSON(resp));
+    }
+
+    @Test
+    public void updateSaleNotifyDownStatus() throws IOException {
+        UpdateSaleNotifyDownStatusReq.Builder req = UpdateSaleNotifyDownStatusReq.newBuilder();
+        req.setIdStr("123");
+        UpdateSaleNotifyDownStatusResp resp = deliverSdk.updateSaleNotifyDownStatus(req.build());
+        System.out.println(ProtoBufUtil.toJSON(resp));
+    }
+
+    @Test
+    public void saveSaleOutList() throws IOException {
+        SaveSaleOutListReq.Builder req = SaveSaleOutListReq.newBuilder();
+        SaveSaleOutListResp resp = deliverSdk.saveSaleOutList(req.build());
+        System.out.println(ProtoBufUtil.toJSON(resp));
+    }
+
+    @Test
+    public void getSaleOutList() throws IOException {
+        GetSaleOutListReq.Builder req = GetSaleOutListReq.newBuilder();
+        GetSaleOutListResp resp = deliverSdk.getSaleOutList(req.build());
+        System.out.println(ProtoBufUtil.toJSON(resp));
+    }
+
+    @Test
+    public void updateSaleOutStatus() throws IOException {
+        UpdateSaleOutStatusReq.Builder req = UpdateSaleOutStatusReq.newBuilder();
+        req.setIdStr("123");
+        UpdateSaleOutStatusResp resp = deliverSdk.updateSaleOutStatus(req.build());
+        System.out.println(ProtoBufUtil.toJSON(resp));
+    }
+
+    @Test
+    public void updateSaleNotifyDownEnd() throws IOException {
+        UpdateSaleNotifyDownEndReq.Builder req = UpdateSaleNotifyDownEndReq.newBuilder();
+        UpdateSaleNotifyDownEndResp resp = deliverSdk.updateSaleNotifyDownEnd(req.build());
+        System.out.println(ProtoBufUtil.toJSON(resp));
+    }
+
+    @Test
+    public void updateSaleNotifyDownEndStatus() throws IOException {
+        UpdateSaleNotifyDownEndStatusReq.Builder req = UpdateSaleNotifyDownEndStatusReq.newBuilder();
+        req.setIdStr("123");
+        UpdateSaleNotifyDownEndStatusResp resp = deliverSdk.updateSaleNotifyDownEndStatus(req.build());
         System.out.println(ProtoBufUtil.toJSON(resp));
     }
 }
