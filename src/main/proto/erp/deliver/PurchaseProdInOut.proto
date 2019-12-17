@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package b2b.erp.deliver;
+option java_multiple_files = true;
+option java_package = "com.usoft.b2b.external.erp.deliver.api.entity";
+
+//采购验收\验退单
+message PurchaseProdInOut {
+    int64 pi_id = 1; //erp出入库单据的id
+    string pi_inoutno = 2; //erp出入库单据单号
+    int64 pi_vendoruu = 3; //供应商UU
+    string pi_currency = 4; //币别
+    float pi_rate = 5; //汇率
+    string pi_payment = 6; //付款方式
+    string pi_transport = 7; //运输方式
+    string pi_remark = 8; //备注
+    string pi_inoutman = 9; //过账人
+    string pi_date = 10; //过账日期
+    string pi_sendcode = 11; //送货单号
+    string pi_receivename = 12; //应付供应商名
+    string pi_receivecode = 13; //应付供应商编号
+    int64 pi_b2b_id = 14; //b2bId
+    message PurchaseProdInOutDetail {
+        int32 pd_detno = 1; // 明细行序号
+        string pd_ordercode = 2; // 采购单编号
+        int32 pd_orderdetno = 3;// 采购单明细行号
+        double pd_inqty = 4;// 入库数量
+        double pd_outqty = 5;// 出库数量
+        double pd_orderprice = 6;// 采购成本
+        double pd_taxrate = 7;// 税率
+        string pd_batchcode = 8;// 批号
+        string pd_remark = 9;// 备注
+        string pd_prodcode = 10;//物料编号
+        string pd_whname = 11;//仓库名称
+    }
+    repeated PurchaseProdInOutDetail details = 15; //明细
+
+}

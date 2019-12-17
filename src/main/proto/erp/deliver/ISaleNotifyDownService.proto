@@ -1,0 +1,89 @@
+syntax = "proto3";
+import "erp/deliver/SaleNotifyDownEntity.proto";
+import "BaseEntity.proto";
+package b2b.erp.deliver;
+
+option java_multiple_files = true;
+option java_package = "com.usoft.b2b.external.erp.deliver.api.protobuf";
+option java_outer_classname = "ISaleNotifyDownServiceProto";
+
+service ISaleNotifyDownService {
+    //卖家ERP从平台获取客户送货提醒  -restAPI /erp/sale/notice, method:get, type:json
+    rpc getSaleNotifyDownList(GetSaleNotifyDownListReq) returns(GetSaleNotifyDownListResp);
+    //卖家ERP从平台获取客户送货提醒  -restAPI /erp/sale/notice, method:post, type:string
+    rpc updateSaleNotifyDownStatus(UpdateSaleNotifyDownStatusReq) returns(UpdateSaleNotifyDownStatusResp);
+    //将卖家ERP的发货单写到平台  -restAPI /erp/sale/notice/send, method:post, type:json
+    rpc saveSaleOutList(SaveSaleOutListReq) returns(SaveSaleOutListResp);
+    //卖家ERP从平台获取在平台维护的发货单  -restAPI /erp/sale/notice/send, method:get, type:json
+    rpc getSaleOutList(GetSaleOutListReq) returns(GetSaleOutListResp);
+    //平台的发货单传到供应商ERP之后，修改平台里面的发货单的上传状态  -restAPI /erp/sale/notice/send/back, method:post, type:json
+    rpc updateSaleOutStatus(UpdateSaleOutStatusReq) returns(UpdateSaleOutStatusResp);
+    //卖家ERP从平台获取结案、反结案客户送货提醒  -restAPI /erp/sale/notice/end, method:post, type:json
+    rpc updateSaleNotifyDownEnd(UpdateSaleNotifyDownEndReq) returns(UpdateSaleNotifyDownEndResp);
+    //平台的结案、反结案客户送货提醒单传到供应商ERP之后，修改平台里面的上传状态  -restAPI /erp/sale/notice/end/back, method:post, type:json
+    rpc updateSaleNotifyDownEndStatus(UpdateSaleNotifyDownEndStatusReq) returns(UpdateSaleNotifyDownEndStatusResp);
+}
+
+//卖家ERP从平台获取客户送货提醒  请求参数
+message GetSaleNotifyDownListReq {
+}
+
+//卖家ERP从平台获取客户送货提醒  响应参数
+message GetSaleNotifyDownListResp {
+    RespHeader respHeader = 1;// 响应头
+    repeated SaleNotifyDown saleNotifyDownList = 2; //待上传的客户送货提醒
+}
+
+//平台的送货提醒传到供应商ERP之后，修改平台里面的送货提醒的上传状态  请求参数
+message UpdateSaleNotifyDownStatusReq {
+    string idStr = 1; //上传成功的平台送货提醒id字符串
+}
+//平台的送货提醒传到供应商ERP之后，修改平台里面的送货提醒的上传状态  响应参数
+message UpdateSaleNotifyDownStatusResp {
+    RespHeader respHeader = 1;// 响应头
+}
+
+//将卖家ERP的发货单写到平台  请求参数
+message SaveSaleOutListReq {
+    repeated SaleOut saleOutList = 1; //ERP的发货单
+}
+//将卖家ERP的发货单写到平台  响应参数
+message SaveSaleOutListResp {
+    RespHeader respHeader = 1;// 响应头
+}
+
+//卖家ERP从平台获取在平台维护的发货单  请求参数
+message GetSaleOutListReq {
+    repeated SaleOut saleOutList = 1; //ERP的发货单
+}
+//卖家ERP从平台获取在平台维护的发货单  响应参数
+message GetSaleOutListResp {
+    repeated SaleOut saleOutList = 1; //发货单
+}
+
+//平台的发货单传到供应商ERP之后，修改平台里面的发货单的上传状态  请求参数
+message UpdateSaleOutStatusReq {
+    string idStr = 1; //上传成功的平台发货单id
+}
+//平台的发货单传到供应商ERP之后，修改平台里面的发货单的上传状态  响应参数
+message UpdateSaleOutStatusResp {
+    RespHeader respHeader = 1;// 响应头
+}
+
+//卖家ERP从平台获取结案、反结案客户送货提醒  请求参数
+message UpdateSaleNotifyDownEndReq {
+}
+//卖家ERP从平台获取结案、反结案客户送货提醒  响应参数
+message UpdateSaleNotifyDownEndResp {
+    RespHeader respHeader = 1;// 响应头
+    repeated SaleNotifyDownEnd endList = 2; //结案、反结案客户送货提醒
+}
+
+//平台的结案、反结案客户送货提醒单传到供应商ERP之后，修改平台里面的上传状态  请求参数
+message UpdateSaleNotifyDownEndStatusReq {
+    string idStr = 1; //上传成功的送货提醒平台id
+}
+//平台的结案、反结案客户送货提醒单传到供应商ERP之后，修改平台里面的上传状态  响应参数
+message UpdateSaleNotifyDownEndStatusResp {
+    RespHeader respHeader = 1;// 响应头
+}

@@ -1,0 +1,121 @@
+syntax = "proto3";
+import "erp/deliver/PurchaseNotifyEntity.proto";
+import "BaseEntity.proto";
+package b2b.erp.deliver;
+
+option java_multiple_files = true;
+option java_package = "com.usoft.b2b.external.erp.deliver.api.protobuf";
+option java_outer_classname = "IPurchaseNotifyServiceProto";
+
+service IPurchaseNotifyService {
+
+    //将ERP的送货提醒写到平台  -restAPI /erp/purchase/notice, method:post, type:json
+    rpc getSaleDownChangeList(SavePurchaseNotifyReq) returns(SavePurchaseNotifyResp);
+    //从买家ERP获取平台的发货单  -restAPI /erp/purchase/notice/accept, method:get, type:json
+    rpc getAcceptNotifyList(GetAcceptNotifyListReq) returns(GetAcceptNotifyListResp);
+    //从买家ERP获取平台的发货单  -restAPI /erp/purchase/notice/accept/back, method:post, type:json
+    rpc updateAcceptNotifyStatus(UpdateAcceptNotifyStatusReq) returns(UpdateAcceptNotifyStatusResp);
+    //买家ERP主动收料的记录上传到平台  -restAPI /erp/purchase/notice/accept, method:post, type:json
+    rpc saveAcceptNotify(SaveAcceptNotifyListReq) returns(SaveAcceptNotifyListResp);
+    //买家结案送货提醒后，传到平台  -restAPI /erp/purchase/notice/end, method:post, type:json
+    rpc updateAcceptNotifyEnd(UpdateAcceptNotifyEndReq) returns(UpdateAcceptNotifyEndResp);
+    //每天定时观察校验送货提醒  -restAPI /erp/purchase/notice/endCheck, method:post, type:json
+    rpc checkAcceptNotify(CheckAcceptNotifyReq) returns(CheckAcceptNotifyResp);
+    //买家修改收料通知的数量后，写回到平台（UAS点全部拒收）  -restAPI /erp/purchase/notice/accept/confirm, method:post, type:json
+    rpc saveAcceptNotifyConfirm(SaveAcceptNotifyConfirmListReq) returns(SaveAcceptNotifyConfirmListResp);
+    //买家收料通知转收料单的数量，写回到平台  -restAPI /erp/purchase/notice/accept/verify, method:post, type:json
+    rpc saveAcceptNotifyVerify(SaveAcceptNotifyVerifyListReq) returns(SaveAcceptNotifyVerifyListResp);
+    //买家反审核收料单的数量，写回到平台  -restAPI /erp/purchase/notice/accept/unverify, method:post, type:json
+    rpc saveUnAcceptNotifyVerify(SaveUnAcceptNotifyVerifyListReq) returns(SaveUnAcceptNotifyVerifyListResp);
+}
+
+//将ERP的送货提醒写到平台  请求参数
+message SavePurchaseNotifyReq {
+    repeated PurchaseNotify purchaseNotifyList = 1;
+}
+
+//将ERP的送货提醒写到平台  响应参数
+message SavePurchaseNotifyResp {
+    RespHeader respHeader = 1; // 响应体
+    repeated PurchaseNotify purchaseNotifyList = 2; //带b2b_id的送货提醒
+}
+
+//从买家ERP获取平台的发货单  请求参数
+message GetAcceptNotifyListReq {
+}
+
+//从买家ERP获取平台的发货单  响应参数
+message GetAcceptNotifyListResp {
+    RespHeader respHeader = 1; // 响应体
+    repeated AcceptNotify acceptNotifyList = 2;
+}
+
+//平台的发货单传到ERP之后，修改平台里面的发货单的状态  请求参数
+message UpdateAcceptNotifyStatusReq {
+    string idstr = 1; //传输成功的发货单id
+}
+
+//平台的发货单传到ERP之后，修改平台里面的发货单的状态  响应参数
+message UpdateAcceptNotifyStatusResp {
+}
+
+//买家ERP主动收料的记录上传到平台  请求参数
+message SaveAcceptNotifyListReq {
+    repeated AcceptNotify acceptNotifyList = 1; //主动收料的记录
+}
+
+//买家ERP主动收料的记录上传到平台  响应参数
+message SaveAcceptNotifyListResp {
+    RespHeader respHeader = 1; // 响应体
+    repeated AcceptNotify acceptNotifyList = 2; //主动收料的记录
+}
+
+//买家结案送货提醒后，传到平台  请求参数
+message UpdateAcceptNotifyEndReq {
+    repeated AcceptNotify acceptNotifyList = 1; //结案送货提醒
+}
+
+//买家结案送货提醒后，传到平台  响应参数
+message UpdateAcceptNotifyEndResp {
+    RespHeader respHeader = 1; // 响应体
+    string idStr = 2; //上传成功的结案送货提醒erpid字符串
+}
+
+//每天定时观察校验送货提醒  请求参数
+message CheckAcceptNotifyReq {
+    repeated PurchaseNotify purchaseNotifyList = 1; //送货提醒
+}
+
+//每天定时观察校验送货提醒  响应参数
+message CheckAcceptNotifyResp {
+}
+
+//买家修改收料通知的数量后，写回到平台（UAS点全部拒收） 请求参数
+message SaveAcceptNotifyConfirmListReq {
+    repeated AcceptNotifyConfirm acceptNotifyConfirmList = 1;
+}
+
+//买家修改收料通知的数量后，写回到平台（UAS点全部拒收） 响应参数
+message SaveAcceptNotifyConfirmListResp {
+    RespHeader respHeader = 1; // 响应体
+}
+
+//买家收料通知转收料单的数量，写回到平台 请求参数
+message SaveAcceptNotifyVerifyListReq {
+    repeated AcceptNotifyVerify verifyList = 1; //已转检验的收料单
+}
+
+//买家收料通知转收料单的数量，写回到平台 响应参数
+message SaveAcceptNotifyVerifyListResp {
+    RespHeader respHeader = 1; // 响应体
+}
+
+//买家反审核收料单的数量，写回到平台 请求参数
+message SaveUnAcceptNotifyVerifyListReq {
+    repeated AcceptNotifyVerify verifyList = 1; //已转检验的收料单
+}
+
+//买家反审核收料单的数量，写回到平台 响应参数
+message SaveUnAcceptNotifyVerifyListResp {
+    RespHeader respHeader = 1; // 响应体
+}
