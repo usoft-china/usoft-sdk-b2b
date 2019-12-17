@@ -17,7 +17,7 @@ service ISaleDownChangeService {
     rpc saveSaleDownChangeReply(SaveSaleDownChangeReplyReq) returns(SaveSaleDownChangeReplyResp);
     //卖家ERP从平台获取在平台回复的记录  -restAPI /erp/sale/change/reply, method:get, type:json
     rpc getSaleDownChangeReplyList(GetSaleDownChangeReplyListReq) returns(GetSaleDownChangeReplyListResp);
-    //平台的回复信息传到供应商ERP之后，修改平台里面的变更单的回复信息上传状态  -restAPI /erp/sale/change/reply/back, method:get, type:json
+    //平台的回复信息传到供应商ERP之后，修改平台里面的变更单的回复信息上传状态  -restAPI /erp/sale/change/reply/back, method:post, type:json
     rpc updateSaleDownChangeReplyStatus(UpdateSaleDownChangeReplyStatusReq) returns(UpdateSaleDownChangeReplyStatusResp);
 }
 
@@ -33,7 +33,7 @@ message GetSaleDownChangeListResp {
 
 //平台的变更单传到供应商ERP之后，修改平台里面的变更单的上传状态  请求参数
 message UpdateSaleDownChangeStatusReq {
-    string idstr = 1; //上传成功的采购变更单id字符串
+    string idStr = 1; //上传成功的采购变更单id字符串
 }
 
 //平台的变更单传到供应商ERP之后，修改平台里面的变更单的上传状态 响应参数
@@ -64,7 +64,7 @@ message GetSaleDownChangeReplyListResp {
 
 //平台的回复信息传到供应商ERP之后，修改平台里面的变更单的回复信息上传状态  请求参数
 message UpdateSaleDownChangeReplyStatusReq {
-    string idstr = 1; //上传成功的平台的回复信息的id字符串
+    string idStr = 1; //上传成功的平台的回复信息的id字符串
 }
 
 //平台的回复信息传到供应商ERP之后，修改平台里面的变更单的回复信息上传状态  响应参数

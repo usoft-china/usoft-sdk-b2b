@@ -35,8 +35,7 @@ public class ProductSdk extends BaseSdk {
 		Map<String, String> map = new HashMap<>();
 		map.put("data", ProtoBufUtil.toJSON(req.getDataList()));
 		map.put("enUU", req.getEnUU() + "");
-		String respJson = HttpUtil.doPost(url, map, timeout);
-		ProtoBufUtil.toProtoBuf(UpdateProductsResp.newBuilder(), respJson);
+		HttpUtil.doPost(url, map, timeout);
 		return UpdateProductsResp.newBuilder().build();
 	}
 }

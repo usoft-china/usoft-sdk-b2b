@@ -10,7 +10,7 @@ option java_outer_classname = "IPurchaseChangeServiceProto";
 service IPurchaseChangeService {
 
     //将买家ERP的采购变更单写到平台  -restAPI /erp/purchase/change, method:post, type:json
-    rpc savePurchaseChange(SavePurchaseChangeListReq) returns(SavePurchaseChangeListResq);
+    rpc savePurchaseChangeList(SavePurchaseChangeListReq) returns(SavePurchaseChangeListResp);
     //买家ERP从平台获取变更单的回复信息  -restAPI /erp/purchase/change/reply, method:get, type:json
     rpc getPurchaseChangeReplyList(GetPurchaseChangeReplyListReq) returns(GetPurchaseChangeReplyListResp);
     //平台的变更单回复信息传到ERP之后，修改平台里面的变更单的回复状态  -restAPI /erp/purchase/change/reply, method:post, type:string
@@ -23,7 +23,7 @@ message SavePurchaseChangeListReq {
 }
 
 //将买家ERP的采购变更单写到平台  响应参数
-message SavePurchaseChangeListResq {
+message SavePurchaseChangeListResp {
 }
 
 //买家ERP从平台获取变更单的回复信息  请求参数
@@ -39,7 +39,7 @@ message GetPurchaseChangeReplyListResp{
 
 //平台的变更单回复信息传到ERP之后，修改平台里面的变更单的回复状态  请求参数
 message UpdatePurchaseChangeReplyStatusReq {
-    string idstr = 1; //回复信息上传成功的采购变更单id字符串
+    string idStr = 1; //回复信息上传成功的采购变更单id字符串
 }
 
 //平台的变更单回复信息传到ERP之后，修改平台里面的变更单的回复状态  响应参数
