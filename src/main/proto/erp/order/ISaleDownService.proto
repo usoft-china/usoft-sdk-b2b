@@ -20,7 +20,7 @@ service ISaleDownService {
     //卖家ERP从平台获取结案、反结案客户采购单 -restAPI /erp/sale/end, method:get, type:json
     rpc getSaleDownDetailEnd(GetSaleDownDetailEndReq) returns (GetSaleDownDetailEndResp) { }
     //平台的结案、反结案客户采购单传到供应商ERP之后，修改平台里面的上传状态 -restAPI /erp/sale/end/back, method:post, type:string
-    rpc updateSaleDownDetailEndReq(UpdateSaleDownDetailEndReq) returns (UpdateSaleDownDetailEndResp) { }
+    rpc updateSaleDownDetailEnd(UpdateSaleDownDetailEndReq) returns (UpdateSaleDownDetailEndResp) { }
 }
 
 //获取所有待上传到卖家erp的订单  请求参数
@@ -46,12 +46,12 @@ message UpdateSaleDownStatusResp {
 
 //卖家ERP从平台获取在平台回复的记录  请求参数
 message GetSaleReplyListReq {
-    repeated SaleReply saleReplyList = 1; //回复记录集合
 }
 
 //卖家ERP从平台获取在平台回复的记录  响应参数
 message GetSaleReplyListResp {
     RespHeader respHeader = 1;// 响应头
+    repeated SaleReply saleReplyList = 2; //回复记录集合
 }
 
 //平台的回复记录传到供应商ERP之后，修改平台里面的回复记录的上传状态  请求参数

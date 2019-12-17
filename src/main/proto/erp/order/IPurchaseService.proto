@@ -10,11 +10,11 @@ option java_outer_classname = "IPurchaseServiceProto";
 service IPurchaseRestService {
 
     //将ERP的采购订单写到平台 -restAPI /erp/purchase, method:post, type:json
-    rpc savePurchase(SavePurchaseListReq) returns (SavePurchaseListResp) { }
+    rpc savePurchaseList(SavePurchaseListReq) returns (SavePurchaseListResp) { }
     //买家ERP获取平台的订单回复 -restAPI /erp/purchase/reply, method:get, type:json
     rpc getPurchaseReplyList(GetPurchaseReplyListReq) returns (GetPurchaseReplyListResp) {}
     //保存买家ERP主动回复的记录到平台 -restAPI /erp/purchase/reply, method:post, type:json
-    rpc savePurchaseReply(SavePurchaseReplyListReq) returns (SavePurchaseReplyListResp) {}
+    rpc savePurchaseReplyList(SavePurchaseReplyListReq) returns (SavePurchaseReplyListResp) {}
     //平台的订单回复传到ERP之后，修改平台里面的回复记录的状态 -restAPI /erp/purchase/reply/back, method:post, type:string
     rpc updatePurchaseReplyStatus(UpdatePurchaseReplyStatusReq) returns (UpdatePurchaseReplyStatusResp) {}
     //买家结案、反结案采购单后，传到平台 -restAPI /erp/purchase/end, method:post, type:json
@@ -24,7 +24,7 @@ service IPurchaseRestService {
     //平台的打印记录传到ERP之后，修改平台里面的打印记录的传输状态 -restAPI /erp/purchase/print/back, method:POST, type:string
     rpc updateMessageLogStatus(UpdateMessageLogStatusReq) returns (UpdateMessageLogStatusResp) {}
     //将未上传的采购明细上传到平台 -restAPI /erp/purchase/item, method:POST, type:json
-    rpc savePurchaseDetail(SavePurchaseDetailListReq) returns (SavePurchaseDetailListResp) {}
+    rpc savePurchaseDetailList(SavePurchaseDetailListReq) returns (SavePurchaseDetailListResp) {}
 }
 
 //保存erp采购单到平台 请求参数
@@ -90,7 +90,7 @@ message GetMessageLogListResp {
 
 //平台的打印记录传到ERP之后，修改平台里面的打印记录的传输状态 请求参数
 message UpdateMessageLogStatusReq {
-    string codeArray = 1; //保存进erp的MessageLog的b2b_id
+    string idStr = 1; //保存进erp的MessageLog的b2b_id
 }
 
 //平台的打印记录传到ERP之后，修改平台里面的打印记录的传输状态 响应参数
