@@ -25,12 +25,12 @@ public class DeliverSdkTest {
 //	private DeliverSdk productSdk = new DeliverSdk("http://b2b-api.usoftchina.com", "10041559", "2c1ea089876b796fe050007f01002ea6");
 
     @Test
-    public void getSaleDownChangeList() throws IOException {
+    public void savePurchaseNotify() throws IOException {
         SavePurchaseNotifyReq.Builder req = SavePurchaseNotifyReq.newBuilder();
         PurchaseNotify.Builder builder = PurchaseNotify.newBuilder();
         builder.setPnB2Bid(123);
         req.addPurchaseNotifyList(builder);
-        SavePurchaseNotifyResp resp = deliverSdk.getSaleDownChangeList(req.build());
+        SavePurchaseNotifyResp resp = deliverSdk.savePurchaseNotify(req.build());
         System.out.println(ProtoBufUtil.toJSON(resp));
     }
 

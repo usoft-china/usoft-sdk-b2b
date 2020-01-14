@@ -31,7 +31,7 @@ public class DeliverSdk extends BaseSdk{
      * @param req
      * @return
      */
-    public SavePurchaseNotifyResp getSaleDownChangeList(SavePurchaseNotifyReq req) throws IOException {
+    public SavePurchaseNotifyResp savePurchaseNotify(SavePurchaseNotifyReq req) throws IOException {
         String url = baseUrl + "/erp/purchase/notice";
         Map<String, String> params = generateSignature(url, null);
         url = HttpUtil.getPath(url, params);

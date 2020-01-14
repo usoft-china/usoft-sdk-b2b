@@ -10,7 +10,7 @@ option java_outer_classname = "IPurchaseNotifyServiceProto";
 service IPurchaseNotifyService {
 
     //将ERP的送货提醒写到平台  -restAPI /erp/purchase/notice, method:post, type:json
-    rpc getSaleDownChangeList(SavePurchaseNotifyReq) returns(SavePurchaseNotifyResp);
+    rpc savePurchaseNotify(SavePurchaseNotifyReq) returns(SavePurchaseNotifyResp);
     //从买家ERP获取平台的发货单  -restAPI /erp/purchase/notice/accept, method:get, type:json
     rpc getAcceptNotifyList(GetAcceptNotifyListReq) returns(GetAcceptNotifyListResp);
     //从买家ERP获取平台的发货单  -restAPI /erp/purchase/notice/accept/back, method:post, type:json
