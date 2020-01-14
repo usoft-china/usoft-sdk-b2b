@@ -10,17 +10,19 @@ option java_outer_classname = "ISaleDownServiceProto";
 service ISaleDownService {
 
     //获取所有待上传到卖家erp的订单 -restAPI /erp/sale, method:get, type:json
-    rpc getSaleDownList(GetSaleDownListReq) returns (GetSaleDownListResp) { }
+    rpc getSaleDownList (GetSaleDownListReq) returns (GetSaleDownListResp);
     //平台的订单传到卖方ERP之后，修改平台里面的订单的上传状态 -restAPI /erp/sale, method:post, type:string
-    rpc updateSaleDownStatus(UpdateSaleDownStatusReq) returns (UpdateSaleDownStatusResp) { }
+    rpc updateSaleDownStatus (UpdateSaleDownStatusReq) returns (UpdateSaleDownStatusResp);
     //卖家ERP从平台获取在平台回复的记录 -restAPI /erp/sale/reply, method:get, type:json
-    rpc getSaleReplyList(GetSaleReplyListReq) returns (GetSaleReplyListResp) { }
+    rpc getSaleReplyList (GetSaleReplyListReq) returns (GetSaleReplyListResp);
+    //将卖家ERP的订单回复写到平台 -restAPI /erp/sale/reply, method:post, type:string
+    rpc saleReply (SaleReplyReq) returns (SaleReplyResp);
     //平台的回复记录传到供应商ERP之后，修改平台里面的回复记录的上传状态 -restAPI /erp/sale/reply/back, method:post, type:string
-    rpc updateSaleReplyStatus(UpdateSaleReplyStatusReq) returns (UpdateSaleReplyStatusResp) { }
+    rpc updateSaleReplyStatus (UpdateSaleReplyStatusReq) returns (UpdateSaleReplyStatusResp);
     //卖家ERP从平台获取结案、反结案客户采购单 -restAPI /erp/sale/end, method:get, type:json
-    rpc getSaleDownDetailEnd(GetSaleDownDetailEndReq) returns (GetSaleDownDetailEndResp) { }
+    rpc getSaleDownDetailEnd (GetSaleDownDetailEndReq) returns (GetSaleDownDetailEndResp);
     //平台的结案、反结案客户采购单传到供应商ERP之后，修改平台里面的上传状态 -restAPI /erp/sale/end/back, method:post, type:string
-    rpc updateSaleDownDetailEnd(UpdateSaleDownDetailEndReq) returns (UpdateSaleDownDetailEndResp) { }
+    rpc updateSaleDownDetailEnd (UpdateSaleDownDetailEndReq) returns (UpdateSaleDownDetailEndResp);
 }
 
 //获取所有待上传到卖家erp的订单  请求参数
@@ -31,7 +33,7 @@ message GetSaleDownListReq {
 //获取所有待上传到卖家erp的订单  响应参数
 message GetSaleDownListResp {
     RespHeader respHeader = 1; // 响应体
-    repeated SaleDown saleDownList = 2;//采购单集合
+    repeated SaleDown saleDownList = 2; //采购单集合
 }
 
 //平台的订单传到卖方ERP之后，修改平台里面的订单的上传状态  请求参数
@@ -41,7 +43,7 @@ message UpdateSaleDownStatusReq {
 
 //平台的订单传到卖方ERP之后，修改平台里面的订单的上传状态  响应参数
 message UpdateSaleDownStatusResp {
-    RespHeader respHeader = 1;// 响应头
+    RespHeader respHeader = 1; // 响应头
 }
 
 //卖家ERP从平台获取在平台回复的记录  请求参数
@@ -50,8 +52,18 @@ message GetSaleReplyListReq {
 
 //卖家ERP从平台获取在平台回复的记录  响应参数
 message GetSaleReplyListResp {
-    RespHeader respHeader = 1;// 响应头
+    RespHeader respHeader = 1; // 响应头
     repeated SaleReply saleReplyList = 2; //回复记录集合
+}
+
+//将卖家ERP的订单回复写到平台  请求参数
+message SaleReplyReq {
+    repeated SaleReply data = 1; //SaleDown明细回复
+}
+
+//将卖家ERP的订单回复写到平台  响应参数
+message SaleReplyResp {
+    RespHeader respHeader = 1; // 响应头
 }
 
 //平台的回复记录传到供应商ERP之后，修改平台里面的回复记录的上传状态  请求参数
@@ -61,7 +73,7 @@ message UpdateSaleReplyStatusReq {
 
 //平台的回复记录传到供应商ERP之后，修改平台里面的回复记录的上传状态  响应参数
 message UpdateSaleReplyStatusResp {
-    RespHeader respHeader = 1;// 响应头
+    RespHeader respHeader = 1; // 响应头
 }
 
 //卖家ERP从平台获取结案、反结案客户采购单  请求参数
@@ -70,7 +82,7 @@ message GetSaleDownDetailEndReq {
 
 //卖家ERP从平台获取结案、反结案客户采购单  响应参数
 message GetSaleDownDetailEndResp {
-    RespHeader respHeader = 1;// 响应头
+    RespHeader respHeader = 1; // 响应头
     repeated SaleDownDetailEnd detailEndList = 2; //结案、反结案的客户采购单
 }
 
@@ -81,5 +93,5 @@ message UpdateSaleDownDetailEndReq {
 
 //平台的结案、反结案客户采购单传到供应商ERP之后，修改平台里面的上传状态  响应参数
 message UpdateSaleDownDetailEndResp {
-    RespHeader respHeader = 1;// 响应头
+    RespHeader respHeader = 1; // 响应头
 }

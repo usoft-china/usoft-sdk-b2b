@@ -44,6 +44,13 @@ public class OrderSdkTest {
 	}
 
 	@Test
+	public void saleReply() throws IOException {
+		SaleReplyReq.Builder req = SaleReplyReq.newBuilder();
+		SaleReplyResp resp = orderSdk.saleReply(req.build());
+		System.out.println(ProtoBufUtil.toJSON(resp));
+	}
+
+	@Test
 	public void updateSaleReplyStatus() throws IOException {
 		UpdateSaleReplyStatusReq.Builder req = UpdateSaleReplyStatusReq.newBuilder();
 		req.setIdStr("123");

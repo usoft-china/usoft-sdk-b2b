@@ -74,6 +74,23 @@ public class OrderSdk extends BaseSdk {
 	}
 
 	/**
+	 * 将卖家ERP的订单回复写到平台
+	 *
+	 * @param req
+	 * @return
+	 * @throws IOException
+	 */
+	public SaleReplyResp saleReply(SaleReplyReq req) throws IOException {
+		String url = baseUrl + "/erp/sale/reply";
+		Map<String, String> params = generateSignature(url, null);
+		url = HttpUtil.getPath(url, params);
+		Map<String, String> fromData = new HashMap<>(1);
+		fromData.put("data", ProtoBufUtil.toJSON(req.getDataList()));
+		HttpUtil.doPost(url, fromData, timeout);
+		return SaleReplyResp.newBuilder().build();
+	}
+
+	/**
 	 * 平台的回复记录传到供应商ERP之后，修改平台里面的回复记录的上传状态
 	 *
 	 * @param req
