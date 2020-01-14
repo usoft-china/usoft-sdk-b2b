@@ -53,7 +53,7 @@ public class DeliverSdkTest {
     public void saveAcceptNotify() throws IOException {
         SaveAcceptNotifyListReq.Builder req = SaveAcceptNotifyListReq.newBuilder();
         AcceptNotify.Builder builder = AcceptNotify.newBuilder();
-        builder.setAnBuyeruu("123");
+        builder.setAnBuyeruu(123);
         builder.setAnRemark("frev");
         req.addAcceptNotifyList(builder);
         SaveAcceptNotifyListResp resp = deliverSdk.saveAcceptNotify(req.build());
@@ -65,7 +65,7 @@ public class DeliverSdkTest {
         UpdateAcceptNotifyEndReq.Builder req = UpdateAcceptNotifyEndReq.newBuilder();
         AcceptNotify.Builder builder = AcceptNotify.newBuilder();
         AcceptNotify.Builder builder2 = AcceptNotify.newBuilder();
-        builder.setAnBuyeruu("123");
+        builder.setAnBuyeruu(123);
         builder.setAnRemark("frev");
         builder2.setAnRemark("frev");
         req.addAcceptNotifyList(builder);

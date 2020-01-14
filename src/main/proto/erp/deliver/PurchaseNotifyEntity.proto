@@ -22,16 +22,17 @@ message PurchaseNotify {
 
 //买家ERP的收料通知单(对应送货单)
 message AcceptNotify {
-	string b2b_ss_id = 1; //平台发货单id
-	string an_venduu = 2; //发货单 所属企业(卖家)UU
+	int64 b2b_ss_id = 1; //平台发货单id
+	int64 an_venduu = 2; //发货单 所属企业(卖家)UU
 	string an_currency = 3; //币别
 	float an_rate = 4; //汇率
 	string an_payment = 5; //付款方式
-	string an_buyeruu = 6; //客户联系人UU
+	int64 an_buyeruu = 6; //客户联系人UU
 	string an_remark = 7; //备注
 	string an_sendcode = 8; //送货单单号
 	string an_recorder = 9; //录单人
 	string an_date = 10; //发货单日期
+	int64 an_id = 11;// ERP主键字段
 	message AcceptNotifyDetail {
 		string and_ordercode = 1; //采购订单单号
 		int32 and_orderdetno = 2; //采购订单明细
@@ -41,7 +42,7 @@ message AcceptNotify {
 		string and_remark = 6; //备注
 		int32 and_detno = 7; //序号
 	}
-	repeated AcceptNotifyDetail detailList = 11; //发货单明细
+	repeated AcceptNotifyDetail detailList = 12; //发货单明细
 }
 
 //用于修改收料通知
