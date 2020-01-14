@@ -8,7 +8,7 @@ option java_package = "com.usoft.b2b.external.erp.deliver.api.entity";
 message PurchaseNotify {
 	  int64 pn_id = 1; //原id，erp id
 	  int64 ve_uu = 2; //供应商UU号
-	  string pn_instring = 3;//录入日期
+	  string pn_indate = 3;//录入日期
 	  double pn_qty = 4; //需求数量
 	  string pn_delivery = 5; //要求发货日期
 	  string pn_ordercode = 6; //订单编号
