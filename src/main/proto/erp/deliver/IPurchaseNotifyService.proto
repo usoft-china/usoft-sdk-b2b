@@ -8,7 +8,6 @@ option java_package = "com.usoft.b2b.external.erp.deliver.api.protobuf";
 option java_outer_classname = "IPurchaseNotifyServiceProto";
 
 service IPurchaseNotifyService {
-
     //将ERP的送货提醒写到平台  -restAPI /erp/purchase/notice, method:post, type:json
     rpc savePurchaseNotify(SavePurchaseNotifyReq) returns(SavePurchaseNotifyResp);
     //从买家ERP获取平台的发货单  -restAPI /erp/purchase/notice/accept, method:get, type:json
@@ -18,9 +17,9 @@ service IPurchaseNotifyService {
     //买家ERP主动收料的记录上传到平台  -restAPI /erp/purchase/notice/accept, method:post, type:json
     rpc saveAcceptNotify(SaveAcceptNotifyListReq) returns(SaveAcceptNotifyListResp);
     //买家结案送货提醒后，传到平台  -restAPI /erp/purchase/notice/end, method:post, type:json
-    rpc updateAcceptNotifyEnd(UpdateAcceptNotifyEndReq) returns(UpdateAcceptNotifyEndResp);
+    rpc updatePurchaseNotifyEnd(UpdatePurchaseNotifyEndReq) returns(UpdatePurchaseNotifyEndResp);
     //每天定时观察校验送货提醒  -restAPI /erp/purchase/notice/endCheck, method:post, type:json
-    rpc checkAcceptNotify(CheckAcceptNotifyReq) returns(CheckAcceptNotifyResp);
+    rpc checkPurchaseNotify(CheckPurchaseNotifyReq) returns(CheckPurchaseNotifyResp);
     //买家修改收料通知的数量后，写回到平台（UAS点全部拒收）  -restAPI /erp/purchase/notice/accept/confirm, method:post, type:json
     rpc saveAcceptNotifyConfirm(SaveAcceptNotifyConfirmListReq) returns(SaveAcceptNotifyConfirmListResp);
     //买家收料通知转收料单的数量，写回到平台  -restAPI /erp/purchase/notice/accept/verify, method:post, type:json
@@ -71,23 +70,23 @@ message SaveAcceptNotifyListResp {
 }
 
 //买家结案送货提醒后，传到平台  请求参数
-message UpdateAcceptNotifyEndReq {
-    repeated AcceptNotify acceptNotifyList = 1; //结案送货提醒
+message UpdatePurchaseNotifyEndReq {
+    repeated PurchaseNotify purchaseNotifyList = 1; //结案送货提醒
 }
 
 //买家结案送货提醒后，传到平台  响应参数
-message UpdateAcceptNotifyEndResp {
+message UpdatePurchaseNotifyEndResp {
     RespHeader respHeader = 1; // 响应体
     string idStr = 2; //上传成功的结案送货提醒erpid字符串
 }
 
 //每天定时观察校验送货提醒  请求参数
-message CheckAcceptNotifyReq {
+message CheckPurchaseNotifyReq {
     repeated PurchaseNotify purchaseNotifyList = 1; //送货提醒
 }
 
 //每天定时观察校验送货提醒  响应参数
-message CheckAcceptNotifyResp {
+message CheckPurchaseNotifyResp {
 }
 
 //买家修改收料通知的数量后，写回到平台（UAS点全部拒收） 请求参数

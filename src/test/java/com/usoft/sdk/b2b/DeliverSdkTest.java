@@ -61,23 +61,23 @@ public class DeliverSdkTest {
     }
 
     @Test
-    public void updateAcceptNotifyEnd() throws IOException {
-        UpdateAcceptNotifyEndReq.Builder req = UpdateAcceptNotifyEndReq.newBuilder();
-        AcceptNotify.Builder builder = AcceptNotify.newBuilder();
-        AcceptNotify.Builder builder2 = AcceptNotify.newBuilder();
-        builder.setAnBuyeruu(123);
-        builder.setAnRemark("frev");
-        builder2.setAnRemark("frev");
-        req.addAcceptNotifyList(builder);
-        req.addAcceptNotifyList(builder2);
-        UpdateAcceptNotifyEndResp resp = deliverSdk.updateAcceptNotifyEnd(req.build());
+    public void updatePurchaseNotifyEnd() throws IOException {
+        UpdatePurchaseNotifyEndReq.Builder req = UpdatePurchaseNotifyEndReq.newBuilder();
+        PurchaseNotify.Builder builder = PurchaseNotify.newBuilder();
+        PurchaseNotify.Builder builder2 = PurchaseNotify.newBuilder();
+//        builder.setAnBuyeruu(123);
+//        builder.setAnRemark("frev");
+//        builder2.setAnRemark("frev");
+        req.addPurchaseNotifyList(builder);
+        req.addPurchaseNotifyList(builder2);
+        UpdatePurchaseNotifyEndResp resp = deliverSdk.updatePurchaseNotifyEnd(req.build());
         System.out.println(ProtoBufUtil.toJSON(resp));
     }
 
     @Test
-    public void checkAcceptNotify() throws IOException {
-        CheckAcceptNotifyReq.Builder req = CheckAcceptNotifyReq.newBuilder();
-        CheckAcceptNotifyResp resp = deliverSdk.checkAcceptNotify(req.build());
+    public void checkPurchaseNotify() throws IOException {
+        CheckPurchaseNotifyReq.Builder req = CheckPurchaseNotifyReq.newBuilder();
+        CheckPurchaseNotifyResp resp = deliverSdk.checkPurchaseNotify(req.build());
         System.out.println(ProtoBufUtil.toJSON(resp));
     }
 

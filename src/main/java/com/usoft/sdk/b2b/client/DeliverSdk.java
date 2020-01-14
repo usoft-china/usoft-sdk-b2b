@@ -102,16 +102,16 @@ public class DeliverSdk extends BaseSdk{
      * @param req
      * @return
      */
-    public UpdateAcceptNotifyEndResp updateAcceptNotifyEnd(UpdateAcceptNotifyEndReq req) throws IOException {
+    public UpdatePurchaseNotifyEndResp updatePurchaseNotifyEnd(UpdatePurchaseNotifyEndReq req) throws IOException {
         String url = baseUrl + "/erp/purchase/notice/end";
         Map<String, String> params = generateSignature(url, null);
         url = HttpUtil.getPath(url, params);
         Map<String, String> fromData = new HashMap<>();
-        fromData.put("data", ProtoBufUtil.toJSON(req.getAcceptNotifyListList()));
+        fromData.put("data", ProtoBufUtil.toJSON(req.getPurchaseNotifyListList()));
 
         String respJson = HttpUtil.doPost(url, fromData, timeout);
         List<String> list = JSONObject.parseArray(respJson, String.class);
-        UpdateAcceptNotifyEndResp.Builder resp = UpdateAcceptNotifyEndResp.newBuilder();
+        UpdatePurchaseNotifyEndResp.Builder resp = UpdatePurchaseNotifyEndResp.newBuilder();
         resp.setIdStr(list.get(0));
         return resp.build();
     }
@@ -122,14 +122,14 @@ public class DeliverSdk extends BaseSdk{
      * @param req
      * @return
      */
-    public CheckAcceptNotifyResp checkAcceptNotify(CheckAcceptNotifyReq req) throws IOException {
+    public CheckPurchaseNotifyResp checkPurchaseNotify(CheckPurchaseNotifyReq req) throws IOException {
         String url = baseUrl + "/erp/purchase/notice/endCheck";
         Map<String, String> params = generateSignature(url, null);
         url = HttpUtil.getPath(url, params);
         Map<String, String> fromData = new HashMap<>();
         fromData.put("data", ProtoBufUtil.toJSON(req.getPurchaseNotifyListList()));
         HttpUtil.doPost(url, fromData, timeout);
-        return CheckAcceptNotifyResp.newBuilder().build();
+        return CheckPurchaseNotifyResp.newBuilder().build();
     }
 
     /**
