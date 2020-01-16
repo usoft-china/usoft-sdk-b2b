@@ -15,7 +15,7 @@ message SaleDown {
     int64 sa_custcontactuu = 7; // 客户联系人UU(采购企业联系人uu)
 	string sa_custmobile = 8; //客户联系人手机号(采购企业联系人手机号)
     int64 sa_useruu = 9; //企业业务员UU（供应商联系人uu）
-	string sa_date = 10; //单据归属日期
+	int64 sa_date = 10; //单据归属日期(时间戳)
     string sa_recorddate = 11; //new Date()
 	string sa_payments = 12; //付款方式
     string sa_currency = 13; //付款币种
@@ -32,7 +32,7 @@ message SaleDown {
         string sd_custproddetail = 5; //物料标题
         string sd_custprodspec = 6; //物料规格
         string sd_custprodunit = 7; //物料单位
-        string sd_delivery = 8; //交货日期
+        int64 sd_delivery = 8; //交货日期(时间戳)
         double sd_replyqty = 9; //回复数量
         string sd_replydate = 10; //(最近一次)回复的交期
         string sd_replydetail = 11; //(最近一次)回复的备注
@@ -63,11 +63,11 @@ message SaleDown {
 message SaleReply {
     int64 sr_id = 1; //erpid
     double sr_qty = 2; //数量
-    string sr_delivery = 3; //交货日期
+    int64 sr_delivery = 3; //交货日期(时间戳)
     string sr_remark = 4; //备注
     string sr_sacode = 5; //采购单单号
     int32 sr_sddetno = 6; //采购明细序号
-    string sr_date = 7; //回复日期
+    int64 sr_date = 7; //回复日期(时间戳)
     string sr_recorder = 8; //回复人
     int64 cu_uu = 9;
     int64 b2b_pd_id = 10; //明细id

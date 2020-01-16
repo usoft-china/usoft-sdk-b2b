@@ -18,7 +18,7 @@ public class ProductSdkTest {
 	/**
 	 * 测试地址
 	 */
-	private ProductSdk productSdk = new ProductSdk("http://test-product.uuzcc.cn","10041559","2c1ea089876b796fe050007f01002ea6");
+	private ProductSdk productSdk = new ProductSdk("http://test-product.uuzcc.cn","10050624","c49f7be6a861461ab951e55030055a5c");
 
 	/**
 	 * 正式地址
@@ -27,11 +27,13 @@ public class ProductSdkTest {
 	@Test
 	public void updateProducts() throws IOException {
 		UpdateProductsReq.Builder req = UpdateProductsReq.newBuilder();
-		req.setEnUU(10041559);
-//		Product.Builder builder = Product.newBuilder();
-//		builder.setPrId(1234);
-//		builder.setB2BId(234);
-//		req.addData(builder);
+		req.setEnUU(10050624);
+		Product.Builder builder = Product.newBuilder();
+		builder.setPrId(1234);
+		builder.setPrCode("PdProdcode");
+		builder.setPrDetail("PrDetail");
+		builder.setPrEnuu(10050624);
+		req.addData(builder);
 		UpdateProductsResp resp = productSdk.updateProducts(req.build());
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}

@@ -26,7 +26,7 @@ public class ProtoBufUtil {
 	/**
 	 * ProtoBuf to Json Format
 	 */
-	private static final JsonFormat.Printer JSON_FORMAT_PRINTER = JsonFormat.printer().includingDefaultValueFields().omittingInsignificantWhitespace();
+	private static final MyJsonFormat.Printer JSON_FORMAT_PRINTER = MyJsonFormat.printer().preservingProtoFieldNames().includingDefaultValueFields().omittingInsignificantWhitespace();
 	/**
 	 * Parser Json To ProtoBuf
 	 */

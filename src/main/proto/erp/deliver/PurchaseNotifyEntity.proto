@@ -8,9 +8,9 @@ option java_package = "com.usoft.b2b.external.erp.deliver.api.entity";
 message PurchaseNotify {
 	  int64 pn_id = 1; //原id，erp id
 	  int64 ve_uu = 2; //供应商UU号
-	  string pn_indate = 3;//录入日期
+	  int64 pn_indate = 3;//录入日期(时间戳)
 	  double pn_qty = 4; //需求数量
-	  string pn_delivery = 5; //要求发货日期
+	  int64 pn_delivery = 5; //要求发货日期(时间戳)
 	  string pn_ordercode = 6; //订单编号
 	  int32 pn_orderdetno = 7; //订单明细序号
 	  string pn_remark = 8; //备注
@@ -31,7 +31,7 @@ message AcceptNotify {
 	string an_remark = 7; //备注
 	string an_sendcode = 8; //送货单单号
 	string an_recorder = 9; //录单人
-	string an_date = 10; //发货单日期
+	int64 an_date = 10; //发货单日期(时间戳)
 	int64 an_id = 11;// ERP主键字段
 	message AcceptNotifyDetail {
 		string and_ordercode = 1; //采购订单单号
@@ -62,5 +62,5 @@ message AcceptNotifyVerify {
 	double ve_okqty = 6; //检验合格数
 	double ve_notokqty = 7; //检验不合格数
 	string ve_testman = 8; //检验员
-	string ve_date = 9; //检验日期
+	int64 ve_date = 9; //检验日期(时间戳)
 }

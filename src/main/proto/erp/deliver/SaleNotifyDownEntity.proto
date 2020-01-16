@@ -11,7 +11,7 @@ message SaleNotifyDown {
     int32 sn_podetno = 4; //po明细序号
     string sn_remark = 5; //备注
     double sn_qty = 6; //数量
-    string sn_delivery = 7; //交货日期
+    int64 sn_delivery = 7; //交货日期(时间戳)
     double sn_sendqty = 8; //已发货数
 }
 

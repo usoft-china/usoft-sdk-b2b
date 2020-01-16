@@ -1,11 +1,15 @@
 package com.usoft.sdk.b2b;
 
+import com.usoft.b2b.external.erp.order.api.entity.Purchase;
 import com.usoft.b2b.external.erp.order.api.protobuf.*;
 import com.usoft.sdk.b2b.client.OrderSdk;
+import com.usoft.sdk.b2b.utils.DateUtil;
 import com.usoft.sdk.b2b.utils.ProtoBufUtil;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.Date;
+import java.util.Random;
 
 /**
  * @author: wangcanyi
@@ -15,7 +19,8 @@ public class OrderSdkTest {
 	/**
 	 * 测试地址
 	 */
-	private OrderSdk orderSdk = new OrderSdk("http://test-b2b.uuzcc.cn", "10041559", "2c1ea089876b796fe050007f01002ea6");
+	private OrderSdk orderSdk = new OrderSdk("http://test-b2b.uuzcc.cn", "10050624", "c49f7be6a861461ab951e55030055a5c");
+//	private OrderSdk orderSdk = new OrderSdk("http://local.uuzcc.cn:8090/platform-b2b", "10050624", "c49f7be6a861461ab951e55030055a5c");
 
 	/**
 	 * 正式地址
@@ -113,6 +118,75 @@ public class OrderSdkTest {
 	@Test
 	public void savePurchaseList() throws IOException {
 		SavePurchaseListReq.Builder req = SavePurchaseListReq.newBuilder();
+		Purchase.Builder purchase = Purchase.newBuilder();
+		//订单基本信息
+		int random = new Random().nextInt(100000000);
+		purchase.setPuCode("PuCode" + random);//采购单号
+//		purchase.setPuDate(DateUtil.getCurrentDate("yyyy/MM/dd"));  //单据归属日期(yyyy-MM-dd HH:mm:ss)
+		purchase.setPuDate(new Date().getTime());//+""  "2020/01/15"
+		purchase.setEmUu(1000027480);  //ERP单据中采购员UU号
+		purchase.setEmName("EmName");  //ERP单据中采购员姓名
+		purchase.setEmSex("男");  //ERP单据中采购员性别
+		purchase.setEmMobile("13611111111");  //ERP单据中采购员电话
+		purchase.setEmEmail("ememail@email.com");  //ERP单据中采购员邮箱
+		purchase.setVeUu(10050624);  //供应商uu
+		purchase.setPuCop("PuCop");  //客户公司名称
+		purchase.setVeContactuu(1000027480);  //ERP中单据供应商联系人UU
+		purchase.setPuCurrency("RMB");//付款币种(RMB USD)
+		purchase.setPuRate(1);  //汇率
+		purchase.setPuKind("一般请购");  // 采购类型
+		purchase.setPuPayments("月结30天");//付款方式
+		purchase.setPuRemark("PuRemark");  //备注
+		purchase.setPuRecordman("张三");  //录单人
+		purchase.setPuAuditman("李四");  //审核人
+		purchase.setPuShipaddresscode("福建省漳州市南靖县万利达工业园B栋 王五收 手机:13611111111");  //收货地址
+		purchase.setPuReceivename("深圳市XXX电子有限公司");  //应付供应商名称
+		purchase.setPuReceivecode("1017");  //应付供应商编号
+		purchase.setPuId(random);  //在ERP中采购单的id
+
+		//订单明细
+		Purchase.PurchaseDetail.Builder detail = Purchase.PurchaseDetail.newBuilder();
+		detail.setPdCode("PuCode" + random); //采购单号
+		detail.setPdProdcode("PdProdcode"); //物料编号   PdProdcode
+		detail.setPdQty(10); //采购数量
+		detail.setPdPrice(10.0); //单价
+//		detail.setPdDelivery(DateUtil.getCurrentDate("yyyy/MM/dd")); //交货日期DateUtil.getCurrentDate(DateUtil.PATTERN_DATE_TIME)
+		detail.setPdDelivery(new Date().getTime()); //交货日期
+		detail.setPdRemark("PdRemark"); //备注
+		detail.setPdRate(0.01f); //税率
+		detail.setPdDetno(1); //序号
+//		string pd_factory = 9; //送货工厂
+		detail.setPdVendspec("PdVendspec"); //供应商规格
+//		int32 pd_beipin = 11; //备品数量
+		detail.setPdPurcvendname("PdPurcvendname"); //终端供应商名称
+//		int64 pd_purcvenduu = 13; //终端供应商uu
+//		string pd_custpurchasecode = 14; //客户采购订单号
+//		int32 pd_custpurchasedetno = 15; //客户采购订单序号
+//		string pd_acceptcustname = 16; //收货客户
+//		string pd_acceptcustaddress = 17; //收货地址
+//		int64 pd_acceptcustuu = 18; //收货客户uu
+//		string pd_hasissued = 19; //是否能发货
+//		float pd_purcprice = 20; //终端价格
+//		float pd_purctaxrate = 21; //终端税率
+//		string pd_purccurrency = 22; //终端币别
+//		string pd_taxcode = 23; //税收分类编码
+//		string pd_billname = 24; //开票名称
+//		string pd_orispeccode = 25;//开票型号
+//		message Attach {
+//			int64 fp_id = 1; //id
+//			string fp_name = 2; //附件名称
+//			string fp_url = 3; //附件Url
+//			int64 fp_size = 4; //附件大小
+//		}
+//		repeated Attach attaches = 26; //附件
+//		string pd_repprodcode = 27; //替代料号
+//		string pd_repdetail = 28; //替代料名称
+//		string pd_repspec = 29; //替代料规格
+//		string pr_oldcode = 30; //旧料编号
+//		string pr_oldname = 31; //旧料名称
+//		string pr_oldspec = 32; //旧料规格
+		purchase.addPurchaseDetails(detail);
+		req.addData(purchase);
 		SavePurchaseListResp resp = orderSdk.savePurchaseList(req.build());
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}

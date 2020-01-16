@@ -7,14 +7,14 @@ option java_package = "com.usoft.b2b.external.erp.reconciliation.api.entity";
 // 应收对账单
 message PurchaseApCheck {
     int64 ac_b2bid = 1; // b2bid
-	string ac_fromdate = 2; // 对账起始日期
-    string ac_todate = 3; // 对账截止日期
-	string ac_recorddate = 4; // 录单日期
+	int64 ac_fromdate = 2; // 对账起始日期(时间戳)
+    int64 ac_todate = 3; // 对账截止日期(时间戳)
+	int64 ac_recorddate = 4; // 录单日期(时间戳)
     string ac_recorder = 5;//录单人
-	string ac_apdate = 6; // 应付日期
+	int64 ac_apdate = 6; // 应付日期(时间戳)
     string ac_checkstatus = 7;//对账状态
     string ac_remark = 8;// 备注
-    string ac_commitdate = 9;//提交日期  #
+    int64 ac_commitdate = 9;//提交日期(时间戳)  #
 	int32 ac_status = 10;//上传状态 #
     double ac_checkamount = 11; // 对账金额
     string ac_currency = 12; // 币别

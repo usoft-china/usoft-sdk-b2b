@@ -10,7 +10,7 @@ message SaleDownChange {
     string sc_code = 2; //采购变更单号
     string sc_sacode = 3; //采购订单编号
     int64 sc_custuu = 4; //采购变更单所属企业UU
-    string sc_indate = 5; //单据录入日期
+    int64 sc_indate = 5; //单据录入日期(时间戳)
     string sc_recorder = 6; //录单人
     string sc_newpayments = 7; //新付款方式
     string sc_newcurrency = 8; //新付款币种
@@ -29,7 +29,7 @@ message SaleDownChange {
         double scd_newqty = 7; //新数量
         double scd_newprice = 8; //新含税单价
         float scd_newtaxrate = 9; //新税率
-        string scd_newdelivery = 10; //新交货日期
+        int64 scd_newdelivery = 10; //新交货日期(时间戳)
         string scd_remark = 11; //备注
     }
     repeated SaleDownChangeDetail detailList = 14; //明细

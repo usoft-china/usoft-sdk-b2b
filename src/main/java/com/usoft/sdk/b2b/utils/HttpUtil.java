@@ -118,8 +118,7 @@ public class HttpUtil {
 				BasicNameValuePair basicNameValuePair = new BasicNameValuePair(kv.getKey(), kv.getValue());
 				nvList.add(basicNameValuePair);
 			}
-			UrlEncodedFormEntity entity = new UrlEncodedFormEntity(nvList);
-			entity.setContentEncoding("UTF-8");
+			UrlEncodedFormEntity entity = new UrlEncodedFormEntity(nvList,"UTF-8");
 			httpPost.setEntity(entity);
 		}
 		String result = doPost(url, httpPost, timeout);
