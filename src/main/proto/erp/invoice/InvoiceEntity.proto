@@ -9,7 +9,7 @@ option java_package = "com.usoft.b2b.external.erp.invoice.api.entity";
 message APBill {
     int64 ab_id = 1;
     string ab_code = 2;
-    string ab_date = 3;
+    int64 ab_date = 3;//时间戳
     int64 ab_yearmonth = 4;
     string ab_currency = 5;
     double ab_rate = 6;
@@ -17,10 +17,10 @@ message APBill {
     int64 ab_vendoruu = 8;
     string ab_status = 9;
     string ab_payments = 10;
-    string ab_paydate = 11;
+    int64 ab_paydate = 11;//时间戳
     string ab_refno = 12;
     string ab_recorder = 13;
-    string ab_indate = 14;
+    int64 ab_indate = 14;//时间戳
     double ab_apamount = 15;
     double ab_payamount = 16;
     string ab_pricetermdes = 17;

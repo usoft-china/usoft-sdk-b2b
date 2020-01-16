@@ -16,7 +16,7 @@ message SaleDown {
 	string sa_custmobile = 8; //客户联系人手机号(采购企业联系人手机号)
     int64 sa_useruu = 9; //企业业务员UU（供应商联系人uu）
 	int64 sa_date = 10; //单据归属日期(时间戳)
-    string sa_recorddate = 11; //new Date()
+    int64 sa_recorddate = 11; //new Date()(时间戳)
 	string sa_payments = 12; //付款方式
     string sa_currency = 13; //付款币种
 	float sa_rate = 14; //汇率
@@ -34,7 +34,7 @@ message SaleDown {
         string sd_custprodunit = 7; //物料单位
         int64 sd_delivery = 8; //交货日期(时间戳)
         double sd_replyqty = 9; //回复数量
-        string sd_replydate = 10; //(最近一次)回复的交期
+        int64 sd_replydate = 10; //(最近一次)回复的交期(时间戳)
         string sd_replydetail = 11; //(最近一次)回复的备注
         double sd_price = 12; //加工单价
         double sd_qty = 13; //数量
