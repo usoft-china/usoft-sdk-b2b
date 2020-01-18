@@ -34,7 +34,7 @@ message SaleOut {
         int64 pd_orderid = 4; //关联的平台客户采购明细ID
         int64 b2b_pn_id = 5; //关联的平台送货提醒单ID
     }
-    repeated SaleOutDetail detailList = 11; //明细
+    repeated SaleOutDetail details = 11; //明细
 }
 
 //卖家ERP系统的已结案客户送货提醒单

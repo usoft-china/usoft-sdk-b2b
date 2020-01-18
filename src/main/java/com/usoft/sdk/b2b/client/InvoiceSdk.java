@@ -37,8 +37,11 @@ public class InvoiceSdk extends BaseSdk {
 		url = HttpUtil.getPath(url, params);
 		Map<String, String> fromData = new HashMap<>();
 		fromData.put("data", ProtoBufUtil.toJSON(req.getDataList()));
-		HttpUtil.doPost(url, fromData, timeout);
-		return SaveApBillsResp.newBuilder().build();
+		String respJson = HttpUtil.doPost(url, fromData, timeout);
+		List<APBill> list = ProtoBufUtil.toProtoBufList(APBill.newBuilder().build(), respJson);
+		SaveApBillsResp.Builder resp = SaveApBillsResp.newBuilder();
+		resp.addAllData(list);
+		return resp.build();
 	}
 
 	/**

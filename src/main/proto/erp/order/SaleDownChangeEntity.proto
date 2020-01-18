@@ -32,7 +32,7 @@ message SaleDownChange {
         int64 scd_newdelivery = 10; //新交货日期(时间戳)
         string scd_remark = 11; //备注
     }
-    repeated SaleDownChangeDetail detailList = 14; //明细
+    repeated SaleDownChangeDetail changeDetails = 14; //明细
 }
 
 //采购变更单供应商回复信息

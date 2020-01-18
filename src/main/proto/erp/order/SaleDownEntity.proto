@@ -56,7 +56,7 @@ message SaleDown {
         string sd_prodbillname = 29; //客户物料开票名称
         string sd_prodorispeccode = 30; //客户物料开票型号
     }
-    repeated SaleDownDetail saleDownDetailList = 19;
+    repeated SaleDownDetail saleDownDetails = 19;
 }
 
 //SaleDown明细回复记录
