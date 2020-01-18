@@ -34,15 +34,17 @@ message AcceptNotify {
 	int64 an_date = 10; //发货单日期(时间戳)
 	int64 an_id = 11;// ERP主键字段
 	message AcceptNotifyDetail {
-		string and_ordercode = 1; //采购订单单号
-		int32 and_orderdetno = 2; //采购订单明细
-		int64 and_pnid = 3; //来源系统的送货提醒ID
-		double and_inqty = 4; //数量
-		double and_price = 5; //单价
-		string and_remark = 6; //备注
-		int32 and_detno = 7; //序号
+		int64 b2b_si_id = 1;
+		string and_ordercode = 2; //采购订单单号
+		int32 and_orderdetno = 3; //采购订单明细
+		int64 and_pnid = 4; //来源系统的送货提醒ID
+		double and_inqty = 5; //数量
+		double and_price = 6; //单价
+		string and_remark = 7; //备注
+		int32 and_detno = 8; //序号
+		int64 and_id = 9;
 	}
-	repeated AcceptNotifyDetail detailList = 12; //发货单明细
+	repeated AcceptNotifyDetail details = 12; //发货单明细
 }
 
 //用于修改收料通知
