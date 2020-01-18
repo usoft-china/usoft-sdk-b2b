@@ -2,6 +2,7 @@
 
 ## sdk接入说明
 
+#### A、私服方式
 - 私服地址
 
 ```
@@ -27,11 +28,18 @@
 <dependency>
     <groupId>com.usoft.sdk</groupId>
     <artifactId>usoft-sdk-b2b</artifactId>
+    <!--测试环境-->
+    <version>1.0-SNAPSHOT</version>
+    <!--生产环境--> 
     <version>1.0</version>
 </dependency>
 ```
 
-- 版本号地址
+#### B、单JAR包方式
+
+- “版本号地址”里，后缀以“jar-with-dependencies.jar”为结尾的Jar包，直接下载即可
+
+## 版本号地址
 
 [snapshot 版本](https://artifactory.uuzcc.cn/artifactory/libs-snapshot/com/usoft/sdk/usoft-sdk-b2b) 
 
