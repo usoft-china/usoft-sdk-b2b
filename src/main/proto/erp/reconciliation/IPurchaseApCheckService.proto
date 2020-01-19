@@ -12,7 +12,7 @@ service IPurchaseApCheckService {
     //买获取B2B新增的对账单信息 -restAPI /erp/sale/APCheck, method:get, type:json
     rpc getApCheckList(GetApCheckListReq) returns (GetApCheckListResp) {}
 
-    // 平台的应收对账传到供应商ERP之后，修改平台里面的订单的上传状态-restAPI /erp/sale/APCheck, method:post, type:json
+    // 平台的应收对账传到买家ERP之后，修改平台里面的订单的上传状态-restAPI /erp/sale/APCheck, method:post, type:json
     rpc onApCheckSuccess(OnApChcekSuccessReq) returns (OnApChcekSuccessResp) {}
 
     // 买家ERP回复平台传入的应收账单(不同意和确认)-restAPI /erp/sale/APCheck/reply, method:post, type:json
