@@ -1,4 +1,4 @@
-package com.usoft.sdk.b2b;
+package com.usoft.sdk.b2b.client;
 
 import com.usoft.b2b.external.erp.product.api.entity.Product;
 import com.usoft.b2b.external.erp.product.api.protobuf.UpdateProductsReq;
@@ -12,8 +12,10 @@ import java.io.IOException;
 
 /**
  * @author: wangcanyi
+ * @deprecated 废弃，请使用V2版
  * @date: 2019-12-13 14:20
  **/
+@Deprecated
 public class ProductSdkTest {
 	/**
 	 * 测试地址

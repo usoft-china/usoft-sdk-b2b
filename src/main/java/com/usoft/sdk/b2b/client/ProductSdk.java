@@ -11,8 +11,10 @@ import java.util.Map;
 
 /**
  * @author: wangcanyi
+ * @deprecated 废弃，请使用V2版
  * @date: 2019-12-12 17:41
  **/
+@Deprecated
 public class ProductSdk extends BaseSdk {
 
 

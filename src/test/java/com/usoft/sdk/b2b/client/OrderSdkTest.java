@@ -1,4 +1,4 @@
-package com.usoft.sdk.b2b;
+package com.usoft.sdk.b2b.client;
 
 import com.usoft.b2b.external.erp.order.api.entity.Purchase;
 import com.usoft.b2b.external.erp.order.api.protobuf.*;
@@ -13,8 +13,10 @@ import java.util.Random;
 
 /**
  * @author: wangcanyi
+ * @deprecated 废弃，请使用V2版
  * @date: 2019-12-13 14:20
  **/
+@Deprecated
 public class OrderSdkTest {
 	/**
 	 * 测试地址

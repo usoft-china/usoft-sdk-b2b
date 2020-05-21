@@ -1,4 +1,4 @@
-package com.usoft.sdk.b2b;
+package com.usoft.sdk.b2b.client;
 
 import com.usoft.b2b.external.erp.deliver.api.entity.AcceptNotify;
 import com.usoft.b2b.external.erp.deliver.api.entity.PurchaseNotify;
@@ -11,8 +11,10 @@ import java.io.IOException;
 
 /**
  * @author uas
+ * @deprecated 废弃，请使用V2版
  * @date 2019/12/16 15:57
  */
+@Deprecated
 public class DeliverSdkTest {
     /**
      * 测试地址

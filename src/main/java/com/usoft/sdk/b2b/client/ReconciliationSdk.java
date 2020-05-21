@@ -17,8 +17,10 @@ import java.util.Map;
 
 /**
  * @author: wangcanyi
+ * @deprecated 废弃，请使用V2版
  * @date: 2019-12-17 14:34
  **/
+@Deprecated
 public class ReconciliationSdk extends BaseSdk {
 
 	public ReconciliationSdk(String baseUrl, String secretId, String secretKey) {

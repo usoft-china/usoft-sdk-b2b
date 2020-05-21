@@ -1,4 +1,4 @@
-package com.usoft.sdk.b2b;
+package com.usoft.sdk.b2b.client;
 
 import com.usoft.b2b.external.erp.invoice.api.entity.APBill;
 import com.usoft.b2b.external.erp.invoice.api.protobuf.*;
@@ -10,8 +10,10 @@ import java.io.IOException;
 
 /**
  * @author uas
+ * @deprecated 废弃，请使用V2版
  * @date 2019/12/16 11:43
  */
+@Deprecated
 public class InvoiceSdkTest {
 
 	/**

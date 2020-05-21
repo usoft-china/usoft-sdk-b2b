@@ -10,8 +10,10 @@ import java.util.Map;
  * 基础SDK
  *
  * @author: wangcanyi
+ * @deprecated 废弃，请使用V2版
  * @date: 2019-12-12 17:26
  **/
+@Deprecated
 public abstract class BaseSdk {
 	/**
 	 * 默认超时时间

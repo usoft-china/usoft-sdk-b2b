@@ -1,7 +1,6 @@
-package com.usoft.sdk.b2b;
+package com.usoft.sdk.b2b.client;
 
 import com.usoft.b2b.external.erp.reconciliation.api.protobuf.*;
-import com.usoft.sdk.b2b.client.ReconciliationSdk;
 import com.usoft.sdk.b2b.utils.ProtoBufUtil;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +9,9 @@ import java.io.IOException;
 /**
  * @author: wangcanyi
  * @date: 2019-12-13 14:20
+ * @deprecated 废弃，请使用V2版
  **/
+@Deprecated
 public class ReconciliationSdkTest {
 	/**
 	 * 测试地址

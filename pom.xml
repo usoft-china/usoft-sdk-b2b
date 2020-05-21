@@ -53,7 +53,6 @@
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java-util</artifactId>
             <version>3.5.1</version>
-<!--            <version>3.11.1</version>-->
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -64,6 +63,17 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-crypto</artifactId>
             <version>4.2.7.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.usoft.framework</groupId>
+            <artifactId>usoft-security-utils</artifactId>
+            <version>${spring.active.profile}-1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.usoft.b2b</groupId>
+            <artifactId>usoft-b2b-external-api</artifactId>
+            <version>${spring.active.profile}-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
@@ -177,14 +187,16 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <version.number>1.0-SNAPSHOT</version.number>
+                <version.number>2.0-SNAPSHOT</version.number>
+                <spring.active.profile>dev</spring.active.profile>
             </properties>
         </profile>
         <!--生产环境-->
         <profile>
             <id>prod</id>
             <properties>
-                <version.number>1.0</version.number>
+                <version.number>2.0</version.number>
+                <spring.active.profile>prod</spring.active.profile>
             </properties>
         </profile>
     </profiles>

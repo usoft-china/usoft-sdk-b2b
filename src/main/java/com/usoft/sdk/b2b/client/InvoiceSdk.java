@@ -12,8 +12,10 @@ import java.util.Map;
 
 /**
  * @author uas
+ * @deprecated 废弃，请使用V2版
  * @date 2019/12/16 10:57
  */
+@Deprecated
 public class InvoiceSdk extends BaseSdk {
 
 

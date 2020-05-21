@@ -65,6 +65,23 @@ public class HttpUtil {
 		return path;
 	}
 
+	/**
+	 * 获取参数Map拼接字符串
+	 *
+	 * @param params
+	 * @return
+	 */
+	public static String getParamStr(Map<String, String> params) {
+		if (MapUtils.isEmpty(params)) {
+			return "";
+		}
+		StringBuilder sb = new StringBuilder();
+		for (Map.Entry<String, String> kv : params.entrySet()) {
+			sb.append(kv.getKey()).append("=").append(kv.getValue()).append("&");
+		}
+		return sb.toString().substring(0, sb.toString().length() - 1);
+	}
+
 	/***
 	 * 发起GET请求
 	 * @param url
@@ -118,7 +135,7 @@ public class HttpUtil {
 				BasicNameValuePair basicNameValuePair = new BasicNameValuePair(kv.getKey(), kv.getValue());
 				nvList.add(basicNameValuePair);
 			}
-			UrlEncodedFormEntity entity = new UrlEncodedFormEntity(nvList,"UTF-8");
+			UrlEncodedFormEntity entity = new UrlEncodedFormEntity(nvList, "UTF-8");
 			httpPost.setEntity(entity);
 		}
 		String result = doPost(url, httpPost, timeout);

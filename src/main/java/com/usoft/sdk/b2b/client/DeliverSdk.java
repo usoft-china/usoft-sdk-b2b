@@ -13,8 +13,10 @@ import java.util.Map;
 
 /**
  * @author uas
+ * @deprecated 废弃，请使用V2版
  * @date 2019/12/16 15:46
  */
+@Deprecated
 public class DeliverSdk extends BaseSdk{
 
     public DeliverSdk(String baseUrl, String secretId, String secretKey) {
