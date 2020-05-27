@@ -114,7 +114,7 @@ public class DeliverSdk extends BaseSdk{
         String respJson = HttpUtil.doPost(url, fromData, timeout);
         List<String> list = JSONObject.parseArray(respJson, String.class);
         UpdatePurchaseNotifyEndResp.Builder resp = UpdatePurchaseNotifyEndResp.newBuilder();
-        resp.setIdStr(list.get(0));
+        resp.addAllIdStr(list);
         return resp.build();
     }
 
