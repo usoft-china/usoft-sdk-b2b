@@ -34,31 +34,17 @@ public class UasProductSdk extends BaseSdk {
 		return resp.build();
 	}
 
-    /**
-	 * 批量导入产品
+	/**
+	 * 批量新增或修改产品
 	 *
 	 * @param req
 	 * @return
 	 */
-	public ImportProductResp importProduct(ImportProductReq.Builder req) throws Exception {
-		String url = baseUrl + "/uas/product/import";
+	public BatchCreateOrUpdateProductResp batchCreateOrUpdateProduct(BatchCreateOrUpdateProductReq.Builder req) throws Exception {
+		String url = baseUrl + "/uas/product/createorupdate/batch";
 		String paramJson = genSignToJson(req);
 		String respJson = HttpUtil.doPost(url, paramJson, timeout);
-		ImportProductResp.Builder resp = ProtoBufUtil.toProtoBuf(ImportProductResp.newBuilder(), respJson);
-		return resp.build();
-	}
-
-    /**
-	 * 导出产品
-	 *
-	 * @param req
-	 * @return
-	 */
-	public ExportProductResp exportProduct(ExportProductReq.Builder req) throws Exception {
-		String url = baseUrl + "/uas/product/export";
-		String paramJson = genSignToJson(req);
-		String respJson = HttpUtil.doPost(url, paramJson, timeout);
-		ExportProductResp.Builder resp = ProtoBufUtil.toProtoBuf(ExportProductResp.newBuilder(), respJson);
+		BatchCreateOrUpdateProductResp.Builder resp = ProtoBufUtil.toProtoBuf(BatchCreateOrUpdateProductResp.newBuilder(), respJson);
 		return resp.build();
 	}
 
