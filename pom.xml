@@ -75,6 +75,11 @@
             <artifactId>usoft-b2b-external-api</artifactId>
             <version>${spring.active.profile}-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.usoft.b2b.trade</groupId>
+            <artifactId>usoft-b2b-trade-external-api</artifactId>
+            <version>${spring.active.profile}-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <distributionManagement>
