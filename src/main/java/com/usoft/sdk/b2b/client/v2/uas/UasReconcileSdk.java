@@ -1,9 +1,9 @@
-package com.usoft.sdk.b2b.client.v2.open;
+package com.usoft.sdk.b2b.client.v2.uas;
 
+import com.usoft.b2b.trade.external.uas.api.protobuf.*;
 import com.usoft.sdk.b2b.client.v2.BaseSdk;
 import com.usoft.sdk.b2b.utils.HttpUtil;
 import com.usoft.sdk.b2b.utils.ProtoBufUtil;
-import com.usoft.b2b.trade.external.open.api.protobuf.*;
 
 import java.util.Map;
 
@@ -11,12 +11,12 @@ import java.util.Map;
  * @author uas
  * @date 2020/5/27 16:49
  */
-public class OpenReconcileSdk extends BaseSdk {
-    public OpenReconcileSdk(String baseUrl, String secretId, String secretKey) {
+public class UasReconcileSdk extends BaseSdk {
+    public UasReconcileSdk(String baseUrl, String secretId, String secretKey) {
         super(baseUrl, secretId, secretKey);
     }
 
-    public OpenReconcileSdk(String baseUrl, String secretId, String secretKey, int timeout) {
+    public UasReconcileSdk(String baseUrl, String secretId, String secretKey, int timeout) {
         super(baseUrl, secretId, secretKey, timeout);
     }
 
@@ -27,7 +27,7 @@ public class OpenReconcileSdk extends BaseSdk {
      * @return
      */
     public PagingBuyerReconcileEntResp pagingBuyerReconcileEnt(PagingBuyerReconcileEntReq.Builder req) throws Exception {
-        String url = baseUrl + "/open/buyer/reconcile/ent/paging";
+        String url = baseUrl + "/uas/buyer/reconcile/ent/paging";
         Map<String, String> params = genSignToMap(req);
         String respJson = HttpUtil.doGet(url, params, timeout);
         PagingBuyerReconcileEntResp.Builder resp = ProtoBufUtil.toProtoBuf(PagingBuyerReconcileEntResp.newBuilder(), respJson);
@@ -41,7 +41,7 @@ public class OpenReconcileSdk extends BaseSdk {
      * @return
      */
     public GetBuyerReconcileEntDetailResp getBuyerReconcileEntDetail(GetBuyerReconcileEntDetailReq.Builder req) throws Exception {
-        String url = baseUrl + "/open/buyer/reconcile/ent/detail/get";
+        String url = baseUrl + "/uas/buyer/reconcile/ent/detail/get";
         Map<String, String> params = genSignToMap(req);
         String respJson = HttpUtil.doGet(url, params, timeout);
         GetBuyerReconcileEntDetailResp.Builder resp = ProtoBufUtil.toProtoBuf(GetBuyerReconcileEntDetailResp.newBuilder(), respJson);
@@ -55,7 +55,7 @@ public class OpenReconcileSdk extends BaseSdk {
      * @return
      */
     public PagingBuyerReconcileResp pagingBuyerReconcile(PagingBuyerReconcileReq.Builder req) throws Exception {
-        String url = baseUrl + "/open/buyer/reconcile/paging";
+        String url = baseUrl + "/uas/buyer/reconcile/paging";
         Map<String, String> params = genSignToMap(req);
         String respJson = HttpUtil.doGet(url, params, timeout);
         PagingBuyerReconcileResp.Builder resp = ProtoBufUtil.toProtoBuf(PagingBuyerReconcileResp.newBuilder(), respJson);
@@ -69,7 +69,7 @@ public class OpenReconcileSdk extends BaseSdk {
      * @return
      */
     public GetBuyerReconcileDetailResp getBuyerReconcileDetail(GetBuyerReconcileDetailReq.Builder req) throws Exception {
-        String url = baseUrl + "/open/buyer/reconcile/detail/get";
+        String url = baseUrl + "/uas/buyer/reconcile/detail/get";
         Map<String, String> params = genSignToMap(req);
         String respJson = HttpUtil.doGet(url, params, timeout);
         GetBuyerReconcileDetailResp.Builder resp = ProtoBufUtil.toProtoBuf(GetBuyerReconcileDetailResp.newBuilder(), respJson);
@@ -83,7 +83,7 @@ public class OpenReconcileSdk extends BaseSdk {
      * @return
      */
     public ConfirmBuyerReconcileResp confirmBuyerReconcile(ConfirmBuyerReconcileReq.Builder req) throws Exception {
-        String url = baseUrl + "/open/buyer/reconcile/confirm";
+        String url = baseUrl + "/uas/buyer/reconcile/confirm";
         String paramJson = genSignToJson(req);
         String respJson = HttpUtil.doPost(url, paramJson, timeout);
         ConfirmBuyerReconcileResp.Builder resp = ProtoBufUtil.toProtoBuf(ConfirmBuyerReconcileResp.newBuilder(), respJson);
@@ -97,7 +97,7 @@ public class OpenReconcileSdk extends BaseSdk {
      * @return
      */
     public PagingSellerReconcileEntResp pagingSellerReconcileEnt(PagingSellerReconcileEntReq.Builder req) throws Exception {
-        String url = baseUrl + "/open/seller/reconcile/ent/paging";
+        String url = baseUrl + "/uas/seller/reconcile/ent/paging";
         Map<String, String> params = genSignToMap(req);
         String respJson = HttpUtil.doGet(url, params, timeout);
         PagingSellerReconcileEntResp.Builder resp = ProtoBufUtil.toProtoBuf(PagingSellerReconcileEntResp.newBuilder(), respJson);
@@ -111,7 +111,7 @@ public class OpenReconcileSdk extends BaseSdk {
      * @return
      */
     public GetSellerReconcileEntDetailResp getSellerReconcileEntDetail(GetSellerReconcileEntDetailReq.Builder req) throws Exception {
-        String url = baseUrl + "/open/seller/reconcile/ent/detail/get";
+        String url = baseUrl + "/uas/seller/reconcile/ent/detail/get";
         Map<String, String> params = genSignToMap(req);
         String respJson = HttpUtil.doGet(url, params, timeout);
         GetSellerReconcileEntDetailResp.Builder resp = ProtoBufUtil.toProtoBuf(GetSellerReconcileEntDetailResp.newBuilder(), respJson);
@@ -125,7 +125,7 @@ public class OpenReconcileSdk extends BaseSdk {
      * @return
      */
     public PagingSellerReconcileResp pagingSellerReconcile(PagingSellerReconcileReq.Builder req) throws Exception {
-        String url = baseUrl + "/open/seller/reconcile/paging";
+        String url = baseUrl + "/uas/seller/reconcile/paging";
         Map<String, String> params = genSignToMap(req);
         String respJson = HttpUtil.doGet(url, params, timeout);
         PagingSellerReconcileResp.Builder resp = ProtoBufUtil.toProtoBuf(PagingSellerReconcileResp.newBuilder(), respJson);
@@ -139,7 +139,7 @@ public class OpenReconcileSdk extends BaseSdk {
      * @return
      */
     public GetSellerReconcileDetailResp getSellerReconcileDetail(GetSellerReconcileDetailReq.Builder req) throws Exception {
-        String url = baseUrl + "/open/seller/reconcile/detail/get";
+        String url = baseUrl + "/uas/seller/reconcile/detail/get";
         Map<String, String> params = genSignToMap(req);
         String respJson = HttpUtil.doGet(url, params, timeout);
         GetSellerReconcileDetailResp.Builder resp = ProtoBufUtil.toProtoBuf(GetSellerReconcileDetailResp.newBuilder(), respJson);
@@ -153,7 +153,7 @@ public class OpenReconcileSdk extends BaseSdk {
      * @return
      */
     public ConfirmSellerReconcileResp confirmSellerReconcile(ConfirmSellerReconcileReq.Builder req) throws Exception {
-        String url = baseUrl + "/open/seller/reconcile/confirm";
+        String url = baseUrl + "/uas/seller/reconcile/confirm";
         String paramJson = genSignToJson(req);
         String respJson = HttpUtil.doPost(url, paramJson, timeout);
         ConfirmSellerReconcileResp.Builder resp = ProtoBufUtil.toProtoBuf(ConfirmSellerReconcileResp.newBuilder(), respJson);
