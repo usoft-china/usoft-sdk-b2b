@@ -12,15 +12,15 @@ import java.util.Map;
  * @date 2020/5/27 16:32
  */
 public class UasProductSdk extends BaseSdk {
-    public UasProductSdk(String baseUrl, String secretId, String secretKey) {
-        super(baseUrl, secretId, secretKey);
-    }
+	public UasProductSdk(String baseUrl, String secretId, String secretKey) {
+		super(baseUrl, secretId, secretKey);
+	}
 
-    public UasProductSdk(String baseUrl, String secretId, String secretKey, int timeout) {
-        super(baseUrl, secretId, secretKey, timeout);
-    }
+	public UasProductSdk(String baseUrl, String secretId, String secretKey, int timeout) {
+		super(baseUrl, secretId, secretKey, timeout);
+	}
 
-    /**
+	/**
 	 * 新增或修改产品
 	 *
 	 * @param req
@@ -30,7 +30,7 @@ public class UasProductSdk extends BaseSdk {
 		String url = baseUrl + "/uas/product/createorupdate";
 		String paramJson = genSignToJson(req);
 		String respJson = HttpUtil.doPost(url, paramJson, timeout);
-        CreateOrUpdateProductResp.Builder resp = ProtoBufUtil.toProtoBuf(CreateOrUpdateProductResp.newBuilder(), respJson);
+		CreateOrUpdateProductResp.Builder resp = ProtoBufUtil.toProtoBuf(CreateOrUpdateProductResp.newBuilder(), respJson);
 		return resp.build();
 	}
 
@@ -61,4 +61,20 @@ public class UasProductSdk extends BaseSdk {
 		PagingProductResp.Builder resp = ProtoBufUtil.toProtoBuf(PagingProductResp.newBuilder(), respJson);
 		return resp.build();
 	}
+
+	/**
+	 * 获取产品
+	 *
+	 * @param req
+	 * @return
+	 * @throws Exception
+	 */
+	public GetProductResp getProduct(GetProductReq.Builder req) throws Exception {
+		String url = baseUrl + "/uas/product/get";
+		Map<String, String> params = genSignToMap(req);
+		String respJson = HttpUtil.doGet(url, params, timeout);
+		GetProductResp.Builder resp = ProtoBufUtil.toProtoBuf(GetProductResp.newBuilder(), respJson);
+		return resp.build();
+	}
+
 }
