@@ -157,4 +157,18 @@ public class UasOrderOptSdk extends BaseSdk {
         BatchReplyOrderProductResp.Builder resp = ProtoBufUtil.toProtoBuf(BatchReplyOrderProductResp.newBuilder(), respJson);
         return resp.build();
     }
+
+    /**
+     * 批量修改卖家买家数据状态
+     *
+     * @param req
+     * @return
+     */
+    public BatchUpdateDataStatusResp batchUpdateDataStatus(BatchUpdateDataStatusReq.Builder req) throws Exception {
+        String url = baseUrl + "/uas/order/datastatus/update/batch";
+        String paramJson = genSignToJson(req);
+        String respJson = HttpUtil.doPost(url, paramJson, timeout);
+        BatchUpdateDataStatusResp.Builder resp = ProtoBufUtil.toProtoBuf(BatchUpdateDataStatusResp.newBuilder(), respJson);
+        return resp.build();
+    }
 }
