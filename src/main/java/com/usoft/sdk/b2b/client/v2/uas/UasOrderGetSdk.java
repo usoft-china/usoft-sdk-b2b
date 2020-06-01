@@ -217,6 +217,20 @@ public class UasOrderGetSdk extends BaseSdk {
 	}
 
 	/**
+	 * 分页查询订单产品回复
+	 *
+	 * @param req
+	 * @return
+	 */
+	public PagingSellerOrderProductReplyResp pagingSellerOrderProductReply(PagingSellerOrderProductReplyReq.Builder req) throws Exception {
+		String url = baseUrl + "/uas/seller/order/product/reply/paging";
+		Map<String, String> params = genSignToMap(req);
+		String respJson = HttpUtil.doGet(url, params, timeout);
+		PagingSellerOrderProductReplyResp.Builder resp = ProtoBufUtil.toProtoBuf(PagingSellerOrderProductReplyResp.newBuilder(), respJson);
+		return resp.build();
+	}
+
+	/**
 	 * 分页查询卖家采购发货提醒单
 	 *
 	 * @param req
