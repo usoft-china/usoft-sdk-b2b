@@ -337,17 +337,17 @@ public class DeliverSdk extends BaseSdk{
     }
 
     /**
-     * 卖家ERP从平台获取在平台维护的发货单
+     * 卖家ERP从平台获取结案、反结案客户送货提醒
      * @param req
      * @return
      * @throws IOException
      */
-    public UpdateSaleNotifyDownEndResp updateSaleNotifyDownEnd(UpdateSaleNotifyDownEndReq req) throws IOException {
+    public GetSaleNotifyEndResp getSaleNotifyEnd(GetSaleNotifyEndReq req) throws IOException {
         String url = baseUrl + "/erp/sale/notice/end";
         Map<String, String> params = generateSignature(url, null);
         String respJson = HttpUtil.doGet(url, params, timeout);
         List<SaleNotifyDownEnd> list = ProtoBufUtil.toProtoBufList(SaleNotifyDownEnd.newBuilder().build(), respJson);
-        UpdateSaleNotifyDownEndResp.Builder resp = UpdateSaleNotifyDownEndResp.newBuilder();
+        GetSaleNotifyEndResp.Builder resp = GetSaleNotifyEndResp.newBuilder();
         resp.addAllEndList(list);
         return resp.build();
     }
