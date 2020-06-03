@@ -313,4 +313,18 @@ public class UasOrderGetSdk extends BaseSdk {
 		BatchGetOrderDetailResp.Builder resp = ProtoBufUtil.toProtoBuf(BatchGetOrderDetailResp.newBuilder(), respJson);
 		return resp.build();
 	}
+
+	/**
+	 * 批量查询订单产品
+	 *
+	 * @param req
+	 * @return
+	 */
+	public BatchGetOrderProductResp batchGetOrderProduct(BatchGetOrderProductReq.Builder req) throws Exception {
+		String url = baseUrl + "/uas/order/product/get/batch";
+		String paramJson = genSignToJson(req);
+		String respJson = HttpUtil.doPost(url, paramJson, timeout);
+		BatchGetOrderProductResp.Builder resp = ProtoBufUtil.toProtoBuf(BatchGetOrderProductResp.newBuilder(), respJson);
+		return resp.build();
+	}
 }
