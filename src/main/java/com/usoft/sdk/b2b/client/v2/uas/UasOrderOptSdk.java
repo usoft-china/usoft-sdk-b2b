@@ -122,7 +122,7 @@ public class UasOrderOptSdk extends BaseSdk {
      * @param req
      * @return
      */
-    public CloseOrderRemindResp closeOrder(CloseOrderRemindReq.Builder req) throws Exception {
+    public CloseOrderRemindResp closeOrderRemind(CloseOrderRemindReq.Builder req) throws Exception {
         String url = baseUrl + "/uas/order/remind/close";
         String paramJson = genSignToJson(req);
         String respJson = HttpUtil.doPost(url, paramJson, timeout);
