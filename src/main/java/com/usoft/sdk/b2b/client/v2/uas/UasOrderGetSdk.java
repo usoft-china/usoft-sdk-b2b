@@ -327,4 +327,74 @@ public class UasOrderGetSdk extends BaseSdk {
 		BatchGetOrderProductResp.Builder resp = ProtoBufUtil.toProtoBuf(BatchGetOrderProductResp.newBuilder(), respJson);
 		return resp.build();
 	}
+
+	/**
+	 * 查询采购发货提醒单详情
+	 *
+	 * @param req
+	 * @return
+	 */
+	public GetOrderRemindDetailResp getOrderRemindDetail(GetOrderRemindDetailReq.Builder req) throws Exception {
+		String url = baseUrl + "/uas/order/remind/detail/get";
+		Map<String, String> params = genSignToMap(req);
+		String respJson = HttpUtil.doGet(url, params, timeout);
+		GetOrderRemindDetailResp.Builder resp = ProtoBufUtil.toProtoBuf(GetOrderRemindDetailResp.newBuilder(), respJson);
+		return resp.build();
+	}
+
+	/**
+	 * 查询采购发货单详情
+	 *
+	 * @param req
+	 * @return
+	 */
+	public GetOrderDeliveryDetailResp getOrderDeliveryDetail(GetOrderDeliveryDetailReq.Builder req) throws Exception {
+		String url = baseUrl + "/uas/order/delivery/detail/get";
+		Map<String, String> params = genSignToMap(req);
+		String respJson = HttpUtil.doGet(url, params, timeout);
+		GetOrderDeliveryDetailResp.Builder resp = ProtoBufUtil.toProtoBuf(GetOrderDeliveryDetailResp.newBuilder(), respJson);
+		return resp.build();
+	}
+
+	/**
+	 * 查询采购收货单详情
+	 *
+	 * @param req
+	 * @return
+	 */
+	public GetOrderReceiveDetailResp getOrderReceiveDetail(GetOrderReceiveDetailReq.Builder req) throws Exception {
+		String url = baseUrl + "/uas/order/receive/detail/get";
+		Map<String, String> params = genSignToMap(req);
+		String respJson = HttpUtil.doGet(url, params, timeout);
+		GetOrderReceiveDetailResp.Builder resp = ProtoBufUtil.toProtoBuf(GetOrderReceiveDetailResp.newBuilder(), respJson);
+		return resp.build();
+	}
+
+	/**
+	 * 查询采购验收单详情
+	 *
+	 * @param req
+	 * @return
+	 */
+	public GetOrderAcceptDetailResp getOrderAcceptDetail(GetOrderAcceptDetailReq.Builder req) throws Exception {
+		String url = baseUrl + "/uas/order/accept/detail/get";
+		Map<String, String> params = genSignToMap(req);
+		String respJson = HttpUtil.doGet(url, params, timeout);
+		GetOrderAcceptDetailResp.Builder resp = ProtoBufUtil.toProtoBuf(GetOrderAcceptDetailResp.newBuilder(), respJson);
+		return resp.build();
+	}
+
+	/**
+	 * 查询采购验退单详情
+	 *
+	 * @param req
+	 * @return
+	 */
+	public GetOrderReturnDetailResp getOrderReturnDetail(GetOrderReturnDetailReq.Builder req) throws Exception {
+		String url = baseUrl + "/uas/order/return/detail/get";
+		Map<String, String> params = genSignToMap(req);
+		String respJson = HttpUtil.doGet(url, params, timeout);
+		GetOrderReturnDetailResp.Builder resp = ProtoBufUtil.toProtoBuf(GetOrderReturnDetailResp.newBuilder(), respJson);
+		return resp.build();
+	}
 }
