@@ -21,8 +21,8 @@ public class OrderSdkTest {
 	/**
 	 * 测试地址
 	 */
-	private OrderSdk orderSdk = new OrderSdk("http://test-b2b.uuzcc.cn", "10050624", "c49f7be6a861461ab951e55030055a5c");
-//	private OrderSdk orderSdk = new OrderSdk("http://local.uuzcc.cn:8090/platform-b2b", "10050624", "c49f7be6a861461ab951e55030055a5c");
+//	private OrderSdk orderSdk = new OrderSdk("http://test-b2b.uuzcc.cn", "10050624", "c49f7be6a861461ab951e55030055a5c");
+	private OrderSdk orderSdk = new OrderSdk("http://127.0.0.1:27120", "10050624", "c49f7be6a861461ab951e55030055a5c");
 
 	/**
 	 * 正式地址
@@ -149,7 +149,7 @@ public class OrderSdkTest {
 		//订单明细
 		Purchase.PurchaseDetail.Builder detail = Purchase.PurchaseDetail.newBuilder();
 		detail.setPdCode("PuCode" + random); //采购单号
-		detail.setPdProdcode("PdProdcode"); //物料编号   PdProdcode
+		detail.setPdProdcode("PdProdcodeERP"); //物料编号   PdProdcode
 		detail.setPdQty(10); //采购数量
 		detail.setPdPrice(10.0); //单价
 //		detail.setPdDelivery(DateUtil.getCurrentDate("yyyy/MM/dd")); //交货日期DateUtil.getCurrentDate(DateUtil.PATTERN_DATE_TIME)

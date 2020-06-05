@@ -21,34 +21,6 @@ public class UasReconcileSdk extends BaseSdk {
     }
 
     /**
-     * 分页查询买家应收应付企业
-     *
-     * @param req
-     * @return
-     */
-    public PagingBuyerReconcileEntResp pagingBuyerReconcileEnt(PagingBuyerReconcileEntReq.Builder req) throws Exception {
-        String url = baseUrl + "/uas/buyer/reconcile/ent/paging";
-        Map<String, String> params = genSignToMap(req);
-        String respJson = HttpUtil.doGet(url, params, timeout);
-        PagingBuyerReconcileEntResp.Builder resp = ProtoBufUtil.toProtoBuf(PagingBuyerReconcileEntResp.newBuilder(), respJson);
-        return resp.build();
-    }
-
-    /**
-     * 查询买家应收应付企业详情
-     *
-     * @param req
-     * @return
-     */
-    public GetBuyerReconcileEntDetailResp getBuyerReconcileEntDetail(GetBuyerReconcileEntDetailReq.Builder req) throws Exception {
-        String url = baseUrl + "/uas/buyer/reconcile/ent/detail/get";
-        Map<String, String> params = genSignToMap(req);
-        String respJson = HttpUtil.doGet(url, params, timeout);
-        GetBuyerReconcileEntDetailResp.Builder resp = ProtoBufUtil.toProtoBuf(GetBuyerReconcileEntDetailResp.newBuilder(), respJson);
-        return resp.build();
-    }
-
-    /**
      * 分页查询买家对账单
      *
      * @param req
@@ -87,34 +59,6 @@ public class UasReconcileSdk extends BaseSdk {
         String paramJson = genSignToJson(req);
         String respJson = HttpUtil.doPost(url, paramJson, timeout);
         ConfirmBuyerReconcileResp.Builder resp = ProtoBufUtil.toProtoBuf(ConfirmBuyerReconcileResp.newBuilder(), respJson);
-        return resp.build();
-    }
-
-    /**
-     * 分页查询卖家应收应付企业
-     *
-     * @param req
-     * @return
-     */
-    public PagingSellerReconcileEntResp pagingSellerReconcileEnt(PagingSellerReconcileEntReq.Builder req) throws Exception {
-        String url = baseUrl + "/uas/seller/reconcile/ent/paging";
-        Map<String, String> params = genSignToMap(req);
-        String respJson = HttpUtil.doGet(url, params, timeout);
-        PagingSellerReconcileEntResp.Builder resp = ProtoBufUtil.toProtoBuf(PagingSellerReconcileEntResp.newBuilder(), respJson);
-        return resp.build();
-    }
-
-    /**
-     * 查询卖家应收应付企业详情
-     *
-     * @param req
-     * @return
-     */
-    public GetSellerReconcileEntDetailResp getSellerReconcileEntDetail(GetSellerReconcileEntDetailReq.Builder req) throws Exception {
-        String url = baseUrl + "/uas/seller/reconcile/ent/detail/get";
-        Map<String, String> params = genSignToMap(req);
-        String respJson = HttpUtil.doGet(url, params, timeout);
-        GetSellerReconcileEntDetailResp.Builder resp = ProtoBufUtil.toProtoBuf(GetSellerReconcileEntDetailResp.newBuilder(), respJson);
         return resp.build();
     }
 

@@ -171,9 +171,9 @@ public class DeliverSdkTest {
     }
 
     @Test
-    public void updateSaleNotifyDownEnd() throws IOException {
-        UpdateSaleNotifyDownEndReq.Builder req = UpdateSaleNotifyDownEndReq.newBuilder();
-        UpdateSaleNotifyDownEndResp resp = deliverSdk.updateSaleNotifyDownEnd(req.build());
+    public void getSaleNotifyEnd() throws IOException {
+        GetSaleNotifyEndReq.Builder req = GetSaleNotifyEndReq.newBuilder();
+        GetSaleNotifyEndResp resp = deliverSdk.getSaleNotifyEnd(req.build());
         System.out.println(ProtoBufUtil.toJSON(resp));
     }
 
