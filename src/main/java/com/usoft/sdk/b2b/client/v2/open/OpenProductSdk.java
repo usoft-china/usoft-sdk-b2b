@@ -8,7 +8,7 @@ import com.usoft.sdk.b2b.utils.ProtoBufUtil;
 import java.util.Map;
 
 /**
- * @author uas
+ * @author open
  * @date 2020/5/27 16:32
  */
 public class OpenProductSdk extends BaseSdk {
@@ -20,7 +20,7 @@ public class OpenProductSdk extends BaseSdk {
         super(baseUrl, secretId, secretKey, timeout);
     }
 
-    /**
+	/**
 	 * 新增或修改产品
 	 *
 	 * @param req
@@ -30,11 +30,11 @@ public class OpenProductSdk extends BaseSdk {
 		String url = baseUrl + "/open/product/createorupdate";
 		String paramJson = genSignToJson(req);
 		String respJson = HttpUtil.doPost(url, paramJson, timeout);
-        CreateOrUpdateProductResp.Builder resp = ProtoBufUtil.toProtoBuf(CreateOrUpdateProductResp.newBuilder(), respJson);
+		CreateOrUpdateProductResp.Builder resp = ProtoBufUtil.toProtoBuf(CreateOrUpdateProductResp.newBuilder(), respJson);
 		return resp.build();
 	}
 
-    /**
+	/**
 	 * 批量新增或修改产品
 	 *
 	 * @param req
@@ -59,6 +59,21 @@ public class OpenProductSdk extends BaseSdk {
 		Map<String, String> params = genSignToMap(req);
 		String respJson = HttpUtil.doGet(url, params, timeout);
 		PagingProductResp.Builder resp = ProtoBufUtil.toProtoBuf(PagingProductResp.newBuilder(), respJson);
+		return resp.build();
+	}
+
+	/**
+	 * 获取产品
+	 *
+	 * @param req
+	 * @return
+	 * @throws Exception
+	 */
+	public GetProductResp getProduct(GetProductReq.Builder req) throws Exception {
+		String url = baseUrl + "/open/product/get";
+		Map<String, String> params = genSignToMap(req);
+		String respJson = HttpUtil.doGet(url, params, timeout);
+		GetProductResp.Builder resp = ProtoBufUtil.toProtoBuf(GetProductResp.newBuilder(), respJson);
 		return resp.build();
 	}
 }

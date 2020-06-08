@@ -6,7 +6,7 @@ import com.usoft.sdk.b2b.utils.HttpUtil;
 import com.usoft.sdk.b2b.utils.ProtoBufUtil;
 
 /**
- * @author uas
+ * @author open
  * @date 2020/5/28 15:00
  */
 public class OpenOrderOptSdk extends BaseSdk {
@@ -99,6 +99,34 @@ public class OpenOrderOptSdk extends BaseSdk {
         String paramJson = genSignToJson(req);
         String respJson = HttpUtil.doPost(url, paramJson, timeout);
         ReturnOrderAcceptResp.Builder resp = ProtoBufUtil.toProtoBuf(ReturnOrderAcceptResp.newBuilder(), respJson);
+        return resp.build();
+    }
+
+    /**
+     * 订单结案（反结案）
+     *
+     * @param req
+     * @return
+     */
+    public CloseOrderResp closeOrder(CloseOrderReq.Builder req) throws Exception {
+        String url = baseUrl + "/open/order/close";
+        String paramJson = genSignToJson(req);
+        String respJson = HttpUtil.doPost(url, paramJson, timeout);
+        CloseOrderResp.Builder resp = ProtoBufUtil.toProtoBuf(CloseOrderResp.newBuilder(), respJson);
+        return resp.build();
+    }
+
+    /**
+     * 发货提醒单结案（反结案）
+     *
+     * @param req
+     * @return
+     */
+    public CloseOrderRemindResp closeOrderRemind(CloseOrderRemindReq.Builder req) throws Exception {
+        String url = baseUrl + "/open/order/remind/close";
+        String paramJson = genSignToJson(req);
+        String respJson = HttpUtil.doPost(url, paramJson, timeout);
+        CloseOrderRemindResp.Builder resp = ProtoBufUtil.toProtoBuf(CloseOrderRemindResp.newBuilder(), respJson);
         return resp.build();
     }
 
