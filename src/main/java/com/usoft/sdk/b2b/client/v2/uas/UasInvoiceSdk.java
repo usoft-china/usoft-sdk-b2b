@@ -91,4 +91,18 @@ public class UasInvoiceSdk extends BaseSdk {
 		GetSellerInvoiceDetailResp.Builder resp = ProtoBufUtil.toProtoBuf(GetSellerInvoiceDetailResp.newBuilder(), respJson);
 		return resp.build();
 	}
+
+	/**
+	 * 批量删除发票单
+	 *
+	 * @param req
+	 * @return
+	 */
+	public BatchDeleteInvoiceResp batchDeleteInvoice(BatchDeleteInvoiceReq.Builder req) throws Exception {
+		String url = baseUrl + "/uas/invoice/delete/batch";
+		String paramJson = genSignToJson(req);
+		String respJson = HttpUtil.doPost(url, paramJson, timeout);
+		BatchDeleteInvoiceResp.Builder resp = ProtoBufUtil.toProtoBuf(BatchDeleteInvoiceResp.newBuilder(), respJson);
+		return resp.build();
+	}
 }

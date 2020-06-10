@@ -199,4 +199,32 @@ public class UasOrderOptSdk extends BaseSdk {
         BatchUpdateDataStatusResp.Builder resp = ProtoBufUtil.toProtoBuf(BatchUpdateDataStatusResp.newBuilder(), respJson);
         return resp.build();
     }
+
+    /**
+     * 批量更新验收单产品
+     *
+     * @param req
+     * @return
+     */
+    public BatchUpdateAcceptProductResp batchUpdateAcceptProduct(BatchUpdateAcceptProductReq.Builder req) throws Exception {
+        String url = baseUrl + "/uas/order/accept/product/update/batch";
+        String paramJson = genSignToJson(req);
+        String respJson = HttpUtil.doPost(url, paramJson, timeout);
+        BatchUpdateAcceptProductResp.Builder resp = ProtoBufUtil.toProtoBuf(BatchUpdateAcceptProductResp.newBuilder(), respJson);
+        return resp.build();
+    }
+
+    /**
+     * 批量更新验退单产品
+     *
+     * @param req
+     * @return
+     */
+    public BatchUpdateReturnProductResp batchUpdateReturnProduct(BatchUpdateReturnProductReq.Builder req) throws Exception {
+        String url = baseUrl + "/uas/order/return/product/update/batch";
+        String paramJson = genSignToJson(req);
+        String respJson = HttpUtil.doPost(url, paramJson, timeout);
+        BatchUpdateReturnProductResp.Builder resp = ProtoBufUtil.toProtoBuf(BatchUpdateReturnProductResp.newBuilder(), respJson);
+        return resp.build();
+    }
 }
