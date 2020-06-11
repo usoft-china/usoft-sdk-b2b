@@ -227,4 +227,32 @@ public class UasOrderOptSdk extends BaseSdk {
         BatchUpdateReturnProductResp.Builder resp = ProtoBufUtil.toProtoBuf(BatchUpdateReturnProductResp.newBuilder(), respJson);
         return resp.build();
     }
+
+    /**
+     * 批量删除验收单
+     *
+     * @param req
+     * @return
+     */
+    public BatchDeleteOrderAcceptResp batchDeleteOrderAccept(BatchDeleteOrderAcceptReq.Builder req) throws Exception {
+        String url = baseUrl + "/uas/order/accept/delete/batch";
+        String paramJson = genSignToJson(req);
+        String respJson = HttpUtil.doPost(url, paramJson, timeout);
+        BatchDeleteOrderAcceptResp.Builder resp = ProtoBufUtil.toProtoBuf(BatchDeleteOrderAcceptResp.newBuilder(), respJson);
+        return resp.build();
+    }
+
+    /**
+     * 批量删除验退单
+     *
+     * @param req
+     * @return
+     */
+    public BatchDeleteOrderReturnResp batchDeleteOrderReturn(BatchDeleteOrderReturnReq.Builder req) throws Exception {
+        String url = baseUrl + "/uas/order/return/delete/batch";
+        String paramJson = genSignToJson(req);
+        String respJson = HttpUtil.doPost(url, paramJson, timeout);
+        BatchDeleteOrderReturnResp.Builder resp = ProtoBufUtil.toProtoBuf(BatchDeleteOrderReturnResp.newBuilder(), respJson);
+        return resp.build();
+    }
 }

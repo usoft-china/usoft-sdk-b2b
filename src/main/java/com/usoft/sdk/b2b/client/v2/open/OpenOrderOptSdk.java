@@ -185,4 +185,60 @@ public class OpenOrderOptSdk extends BaseSdk {
         BatchReplyOrderProductResp.Builder resp = ProtoBufUtil.toProtoBuf(BatchReplyOrderProductResp.newBuilder(), respJson);
         return resp.build();
     }
+
+    /**
+     * 批量更新验收单产品
+     *
+     * @param req
+     * @return
+     */
+    public BatchUpdateAcceptProductResp batchUpdateAcceptProduct(BatchUpdateAcceptProductReq.Builder req) throws Exception {
+        String url = baseUrl + "/open/order/accept/product/update/batch";
+        String paramJson = genSignToJson(req);
+        String respJson = HttpUtil.doPost(url, paramJson, timeout);
+        BatchUpdateAcceptProductResp.Builder resp = ProtoBufUtil.toProtoBuf(BatchUpdateAcceptProductResp.newBuilder(), respJson);
+        return resp.build();
+    }
+
+    /**
+     * 批量更新验退单产品
+     *
+     * @param req
+     * @return
+     */
+    public BatchUpdateReturnProductResp batchUpdateReturnProduct(BatchUpdateReturnProductReq.Builder req) throws Exception {
+        String url = baseUrl + "/open/order/return/product/update/batch";
+        String paramJson = genSignToJson(req);
+        String respJson = HttpUtil.doPost(url, paramJson, timeout);
+        BatchUpdateReturnProductResp.Builder resp = ProtoBufUtil.toProtoBuf(BatchUpdateReturnProductResp.newBuilder(), respJson);
+        return resp.build();
+    }
+
+    /**
+     * 批量删除验收单
+     *
+     * @param req
+     * @return
+     */
+    public BatchDeleteOrderAcceptResp batchDeleteOrderAccept(BatchDeleteOrderAcceptReq.Builder req) throws Exception {
+        String url = baseUrl + "/open/order/accept/delete/batch";
+        String paramJson = genSignToJson(req);
+        String respJson = HttpUtil.doPost(url, paramJson, timeout);
+        BatchDeleteOrderAcceptResp.Builder resp = ProtoBufUtil.toProtoBuf(BatchDeleteOrderAcceptResp.newBuilder(), respJson);
+        return resp.build();
+    }
+
+    /**
+     * 批量删除验退单
+     *
+     * @param req
+     * @return
+     */
+    public BatchDeleteOrderReturnResp batchDeleteOrderReturn(BatchDeleteOrderReturnReq.Builder req) throws Exception {
+        String url = baseUrl + "/open/order/return/delete/batch";
+        String paramJson = genSignToJson(req);
+        String respJson = HttpUtil.doPost(url, paramJson, timeout);
+        BatchDeleteOrderReturnResp.Builder resp = ProtoBufUtil.toProtoBuf(BatchDeleteOrderReturnResp.newBuilder(), respJson);
+        return resp.build();
+    }
 }
