@@ -1,9 +1,9 @@
 package com.usoft.sdk.b2b.client;
 
 import com.usoft.b2b.external.erp.order.api.entity.Purchase;
+import com.usoft.b2b.external.erp.order.api.entity.PurchaseDetailEnd;
+import com.usoft.b2b.external.erp.order.api.entity.SaleReply;
 import com.usoft.b2b.external.erp.order.api.protobuf.*;
-import com.usoft.sdk.b2b.client.OrderSdk;
-import com.usoft.sdk.b2b.utils.DateUtil;
 import com.usoft.sdk.b2b.utils.ProtoBufUtil;
 import org.junit.jupiter.api.Test;
 
@@ -13,8 +13,8 @@ import java.util.Random;
 
 /**
  * @author: wangcanyi
- * @deprecated 废弃，请使用V2版
  * @date: 2019-12-13 14:20
+ * @deprecated 废弃，请使用V2版
  **/
 @Deprecated
 public class OrderSdkTest {
@@ -38,7 +38,7 @@ public class OrderSdkTest {
 	@Test
 	public void updateSaleDownStatus() throws IOException {
 		UpdateSaleDownStatusReq.Builder req = UpdateSaleDownStatusReq.newBuilder();
-		req.setIdStr("123");
+		req.setIdStr("200611184550540200");
 		UpdateSaleDownStatusResp resp = orderSdk.updateSaleDownStatus(req.build());
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}
@@ -53,6 +53,21 @@ public class OrderSdkTest {
 	@Test
 	public void saleReply() throws IOException {
 		SaleReplyReq.Builder req = SaleReplyReq.newBuilder();
+		SaleReply.Builder sr = SaleReply.newBuilder();
+		int random = new Random().nextInt(100000000);
+		sr.setSrId(random); //erpid
+		sr.setSrQty(1); //数量
+		sr.setSrDelivery(new Date().getTime());//交货日期(时间戳)
+		sr.setSrRemark("SrRemark");//备注
+		sr.setSrSacode("PuCode93468538");//采购单单号
+		sr.setSrSddetno(1); //采购明细序号
+		sr.setSrDate(new Date().getTime());//回复日期(时间戳)
+//		string sr_recorder = 8; //回复人
+		sr.setCuUu(10050624);
+//		int64 b2b_pd_id = 10; //明细id
+//		int64 b2b_pr_id = 11; //回复id
+//		string sr_type = 12; //类型{供应商ERP回复、供应商平台回复、采购主动回复}
+		req.addData(sr);
 		SaleReplyResp resp = orderSdk.saleReply(req.build());
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}
@@ -75,7 +90,7 @@ public class OrderSdkTest {
 	@Test
 	public void updateSaleDownDetailEnd() throws IOException {
 		UpdateSaleDownDetailEndReq.Builder req = UpdateSaleDownDetailEndReq.newBuilder();
-		req.setIdStr("123");
+		req.setIdStr("200611184550541001");
 		UpdateSaleDownDetailEndResp resp = orderSdk.updateSaleDownDetailEnd(req.build());
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}
@@ -171,9 +186,9 @@ public class OrderSdkTest {
 //		float pd_purcprice = 20; //终端价格
 //		float pd_purctaxrate = 21; //终端税率
 //		string pd_purccurrency = 22; //终端币别
-//		string pd_taxcode = 23; //税收分类编码
-//		string pd_billname = 24; //开票名称
-//		string pd_orispeccode = 25;//开票型号
+		detail.setPdTaxcode("PdTaxcode"); //税收分类编码
+		detail.setPdBillname("PdBillname"); //开票名称
+		detail.setPdOrispeccode("PdOrispeccode");//开票型号
 //		message Attach {
 //			int64 fp_id = 1; //id
 //			string fp_name = 2; //附件名称
@@ -210,7 +225,7 @@ public class OrderSdkTest {
 	@Test
 	public void updatePurchaseReplyStatus() throws IOException {
 		UpdatePurchaseReplyStatusReq.Builder req = UpdatePurchaseReplyStatusReq.newBuilder();
-		req.setIdStr("123");
+		req.setIdStr("200611185881734500,200611184674226800");
 		UpdatePurchaseReplyStatusResp resp = orderSdk.updatePurchaseReplyStatus(req.build());
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}
@@ -218,6 +233,11 @@ public class OrderSdkTest {
 	@Test
 	public void updatePurchaseDetailEnd() throws IOException {
 		UpdatePurchaseDetailEndReq.Builder req = UpdatePurchaseDetailEndReq.newBuilder();
+		PurchaseDetailEnd.Builder end = PurchaseDetailEnd.newBuilder();
+		end.setPdCode("PuCode93468538");
+		end.setPdDetno(1);
+		end.setPdEnded(1);
+		req.addData(end);
 		UpdatePurchaseDetailEndResp resp = orderSdk.updatePurchaseDetailEnd(req.build());
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}
@@ -241,6 +261,16 @@ public class OrderSdkTest {
 	public void savePurchaseDetailList() throws IOException {
 		SavePurchaseDetailListReq.Builder req = SavePurchaseDetailListReq.newBuilder();
 		SavePurchaseDetailListResp resp = orderSdk.savePurchaseDetailList(req.build());
+		System.out.println(ProtoBufUtil.toJSON(resp));
+	}
+
+	@Test
+	public void getPurchaseB2bId() throws IOException {
+		GetPurchaseB2bIdReq.Builder req = GetPurchaseB2bIdReq.newBuilder();
+		Purchase.Builder builder = Purchase.newBuilder();
+		builder.setPuId(93468538);
+		req.addData(builder);
+		GetPurchaseB2bIdResp resp = orderSdk.getPurchaseB2bId(req.build());
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}
 

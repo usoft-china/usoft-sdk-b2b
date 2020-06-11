@@ -12,8 +12,8 @@ import java.util.Map;
 
 /**
  * @author: wangcanyi
- * @deprecated 废弃，请使用V2版
  * @date: 2019-12-12 17:41
+ * @deprecated 废弃，请使用V2版
  **/
 @Deprecated
 public class OrderSdk extends BaseSdk {
@@ -351,6 +351,25 @@ public class OrderSdk extends BaseSdk {
 		return SavePurchaseDetailListResp.newBuilder().build();
 	}
 
+	/**
+	 * 通过上传id查询平台采购单对应的id
+	 *
+	 * @param req
+	 * @return
+	 * @throws IOException
+	 */
+	public GetPurchaseB2bIdResp getPurchaseB2bId(GetPurchaseB2bIdReq req) throws IOException {
+		String url = baseUrl + "/erp/buyer/purchase";
+		Map<String, String> params = generateSignature(url, null);
+		url = HttpUtil.getPath(url, params);
+		Map<String, String> fromData = new HashMap<>(1);
+		fromData.put("data", ProtoBufUtil.toJSON(req.getDataList()));
+		String respJson = HttpUtil.doPost(url, fromData, timeout);
+		List<Purchase> resultList = ProtoBufUtil.toProtoBufList(Purchase.newBuilder().build(), respJson);
+		GetPurchaseB2bIdResp.Builder result = GetPurchaseB2bIdResp.newBuilder();
+		result.addAllData(resultList);
+		return result.build();
+	}
 
 	/**
 	 * 将买家ERP的采购变更单写到平台
