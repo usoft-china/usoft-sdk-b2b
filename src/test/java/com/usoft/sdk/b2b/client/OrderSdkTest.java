@@ -325,7 +325,7 @@ public class OrderSdkTest {
 	@Test
 	public void updatePurchaseChangeReplyStatus() throws IOException {
 		UpdatePurchaseChangeReplyStatusReq.Builder req = UpdatePurchaseChangeReplyStatusReq.newBuilder();
-		req.setIdStr("123");
+		req.setIdStr("200612193205966100");
 		UpdatePurchaseChangeReplyStatusResp resp = orderSdk.updatePurchaseChangeReplyStatus(req.build());
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}

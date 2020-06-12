@@ -3,6 +3,8 @@ package com.usoft.sdk.b2b.client;
 import com.alibaba.fastjson.JSONObject;
 import com.usoft.b2b.external.erp.deliver.api.entity.*;
 import com.usoft.b2b.external.erp.deliver.api.protobuf.*;
+import com.usoft.b2b.external.erp.order.api.entity.Purchase;
+import com.usoft.b2b.external.erp.order.api.protobuf.GetPurchaseB2bIdResp;
 import com.usoft.sdk.b2b.utils.HttpUtil;
 import com.usoft.sdk.b2b.utils.ProtoBufUtil;
 
@@ -182,6 +184,24 @@ public class DeliverSdk extends BaseSdk{
         return SaveUnAcceptNotifyVerifyListResp.newBuilder().build();
     }
 
+    /**
+     * 通过上传id查询平台送货提醒对应的id
+     *
+     * @param req
+     * @return
+     */
+    public GetPurchaseNotifyB2bIdResp getPurchaseNotifyB2bId(GetPurchaseNotifyB2bIdReq req) throws IOException {
+        String url = baseUrl + "/erp/buyer/notify";
+        Map<String, String> params = generateSignature(url, null);
+        url = HttpUtil.getPath(url, params);
+        Map<String, String> fromData = new HashMap<>();
+        fromData.put("data", ProtoBufUtil.toJSON(req.getPurchaseNotifyListList()));
+        String respJson = HttpUtil.doPost(url, fromData, timeout);
+        List<PurchaseNotify> resultList = ProtoBufUtil.toProtoBufList(PurchaseNotify.newBuilder().build(), respJson);
+        GetPurchaseNotifyB2bIdResp.Builder result = GetPurchaseNotifyB2bIdResp.newBuilder();
+        result.addAllPurchaseNotifyList(resultList);
+        return result.build();
+    }
 
     /**
      * 将ERP的采购验收单写到平台
@@ -359,7 +379,7 @@ public class DeliverSdk extends BaseSdk{
      * @return
      */
     public UpdateSaleNotifyDownEndStatusResp updateSaleNotifyDownEndStatus(UpdateSaleNotifyDownEndStatusReq req) throws IOException {
-        String url = baseUrl + "/erp/sale/notice/send/back";
+        String url = baseUrl + "/erp/sale/notice/end/back";
         Map<String, String> params = generateSignature(url, null);
         url = HttpUtil.getPath(url, params);
         Map<String, String> fromData = new HashMap<>();
