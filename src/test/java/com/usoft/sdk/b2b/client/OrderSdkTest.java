@@ -1,8 +1,6 @@
 package com.usoft.sdk.b2b.client;
 
-import com.usoft.b2b.external.erp.order.api.entity.Purchase;
-import com.usoft.b2b.external.erp.order.api.entity.PurchaseDetailEnd;
-import com.usoft.b2b.external.erp.order.api.entity.SaleReply;
+import com.usoft.b2b.external.erp.order.api.entity.*;
 import com.usoft.b2b.external.erp.order.api.protobuf.*;
 import com.usoft.sdk.b2b.utils.ProtoBufUtil;
 import org.junit.jupiter.api.Test;
@@ -105,7 +103,7 @@ public class OrderSdkTest {
 	@Test
 	public void updateSaleDownChangeStatus() throws IOException {
 		UpdateSaleDownChangeStatusReq.Builder req = UpdateSaleDownChangeStatusReq.newBuilder();
-		req.setIdStr("123");
+		req.setIdStr("200612193205966100");
 		UpdateSaleDownChangeStatusResp resp = orderSdk.updateSaleDownChangeStatus(req.build());
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}
@@ -113,6 +111,12 @@ public class OrderSdkTest {
 	@Test
 	public void saveSaleDownChangeReply() throws IOException {
 		SaveSaleDownChangeReplyReq.Builder req = SaveSaleDownChangeReplyReq.newBuilder();
+		SaleDownChangeReply.Builder builder = SaleDownChangeReply.newBuilder();
+		builder.setB2BPcId(200612193205966100L);//平台采购订单变更单id
+		builder.setScCode("PcCode36454303"); //采购变更单号
+		builder.setScAgreed(1);//供应商是否同意了我的变更请求(1,0)
+		builder.setScReplyremark("Replyremark");//供应商的回复备注
+		req.addChangeReplyList(builder);
 		SaveSaleDownChangeReplyResp resp = orderSdk.saveSaleDownChangeReply(req.build());
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}
@@ -277,6 +281,36 @@ public class OrderSdkTest {
 	@Test
 	public void savePurchaseChangeList() throws IOException {
 		SavePurchaseChangeListReq.Builder req = SavePurchaseChangeListReq.newBuilder();
+		PurchaseChange.Builder builder = PurchaseChange.newBuilder();
+		int random = new Random().nextInt(100000000);
+		builder.setPcId(random);
+		builder.setPcCode("PcCode" + random); //采购变更单号
+		builder.setPcPurccode("PuCode86280899");//采购单单号
+		builder.setPcIndate(new Date().getTime());//单据录入日期(时间戳)
+//		string pc_recorder = 5; //录单人
+		builder.setPcNewpayments("月结30天");//新付款方式
+		builder.setPcNewcurrency("RMB"); //新付款币种
+		builder.setPcNewrate(2);//新汇率
+//		string pc_apvendname = 9; //采购变更单原应付供应商
+//		string pc_newapvendname = 10; //采购变更单新应付供应商
+//		string pc_apvendcode = 11; //原应付供应商编号
+//		string pc_newapvendcode = 12; //新应付供应商编号
+//		string pc_description = 13; //变更内容描述
+//		string pc_remark = 14; //备注
+//		int32 pc_agreed = 15; //卖家是否同意了买家的变更请求(1,0)
+//		int32 pc_needvendcheck = 16; //不需要供应商确认(1表示不需要确认,0表示需要确认)
+		PurchaseChange.PurchaseChangeDetail.Builder detail = PurchaseChange.PurchaseChangeDetail.newBuilder();
+		detail.setPcdDetno(1);//序号(变更单)
+		detail.setPcdPddetno(1); //采购订单明细序号
+//		string pcd_prodcode = 3; //
+//		string pcd_newprodcode = 4; //新物料编号
+		detail.setPcdNewqty(30);//新数量
+		detail.setPcdNewprice(20);//新含税单价
+//		int64 pcd_newdelivery = 7; //新交货日期(时间戳)
+//		float pcd_newtaxrate = 8; //新税率
+//		string pcd_remark = 9; //备注
+		builder.addChangeDetails(detail);
+		req.addPurchaseChangeList(builder);
 		SavePurchaseChangeListResp resp = orderSdk.savePurchaseChangeList(req.build());
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}

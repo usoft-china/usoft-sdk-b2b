@@ -11,10 +11,7 @@ import com.google.protobuf.util.JsonFormat;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * ProtoBuf 工具类
@@ -115,7 +112,7 @@ public class ProtoBufUtil {
 		if (MapUtils.isEmpty(fieldMap)) {
 			return new HashMap<>(0);
 		}
-		Map<String, String> result = new HashMap<>(fieldMap.size());
+		Map<String, String> result = new LinkedHashMap<>(fieldMap.size());
 		for (Map.Entry<Descriptors.FieldDescriptor, Object> kv : fieldMap.entrySet()) {
 			Descriptors.FieldDescriptor.JavaType javaType = kv.getKey().getJavaType();
 			//如果为二进制数组，枚举，实体，则跳过

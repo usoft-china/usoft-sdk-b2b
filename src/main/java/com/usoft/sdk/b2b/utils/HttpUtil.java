@@ -55,12 +55,7 @@ public class HttpUtil {
 	public static String getPath(String url, Map<String, String> params) {
 		String path = url;
 		if (StringUtils.isNotBlank(url) && MapUtils.isNotEmpty(params)) {
-			StringBuilder sb = new StringBuilder(url);
-			sb.append("?");
-			for (Map.Entry<String, String> kv : params.entrySet()) {
-				sb.append(kv.getKey()).append("=").append(kv.getValue()).append("&");
-			}
-			path = sb.toString().substring(0, sb.toString().length() - 1);
+			path = url + "?" + getParamStr(params);
 		}
 		return path;
 	}
