@@ -1,5 +1,6 @@
 package com.usoft.sdk.b2b.client;
 
+import com.alibaba.fastjson.JSON;
 import com.usoft.b2b.external.erp.invoice.api.entity.APBill;
 import com.usoft.b2b.external.erp.invoice.api.protobuf.*;
 import com.usoft.sdk.b2b.utils.HttpUtil;
@@ -47,6 +48,24 @@ public class InvoiceSdk extends BaseSdk {
 	}
 
 	/**
+	 * 买家ERP-将ERP的反过账的应付发票写到平台
+	 *
+	 * @param req
+	 * @return
+	 */
+	public SaveNonPostingApBillsResp saveNonPostingApBills(SaveNonPostingApBillsReq req) throws IOException {
+		String url = baseUrl + "/erp/purchase/APBill/nonPosting";
+		Map<String, String> params = generateSignature(url, null);
+		url = HttpUtil.getPath(url, params);
+		Map<String, String> fromData = new HashMap<>();
+		fromData.put("data", ProtoBufUtil.toJSON(req.getDataList()));
+		String respJson = HttpUtil.doPost(url, fromData, timeout);
+		ProtoBufUtil.toProtoBufList(APBill.newBuilder().build(), respJson);
+		SaveNonPostingApBillsResp.Builder resp = SaveNonPostingApBillsResp.newBuilder();
+		return resp.build();
+	}
+
+	/**
 	 * 卖家ERP-从平台获取未下载的客户应付票据
 	 *
 	 * @param req
@@ -78,5 +97,39 @@ public class InvoiceSdk extends BaseSdk {
 		fromData.put("data", req.getIdStr());
 		HttpUtil.doPost(url, fromData, timeout);
 		return OnSaleAPBillDownSuccessResp.newBuilder().build();
+	}
+
+	/**
+	 * 卖家ERP-卖家ERP从平台获取未下载客户已反过帐的的客户应付票据
+	 *
+	 * @param req
+	 * @return
+	 * @throws IOException
+	 */
+	public GetSaleNonPostingAPBillsResp getSaleNonPostingAPBills(GetSaleNonPostingAPBillsReq req) throws IOException {
+		String url = baseUrl + "/erp/sale/APBill/nonPosting";
+		Map<String, String> params = generateSignature(url, null);
+		String respJson = HttpUtil.doGet(url, params, timeout);
+		List<Long> list = JSON.parseArray(respJson,Long.class);
+		GetSaleNonPostingAPBillsResp.Builder resp = GetSaleNonPostingAPBillsResp.newBuilder();
+		resp.addAllData(list);
+		return resp.build();
+	}
+
+	/**
+	 * 平台的客户采购验收单传到供应商ERP之后，修改平台里面的客户应付票据的上传状态
+	 *
+	 * @param req
+	 * @return
+	 * @throws IOException
+	 */
+	public OnSaleNonPostingAPBillDownSuccessResp onSaleNonPostingAPBillDownSuccess(OnSaleNonPostingAPBillDownSuccessReq req) throws IOException {
+		String url = baseUrl + "/erp/sale/APBill/nonPosting";
+		Map<String, String> params = generateSignature(url, null);
+		url = HttpUtil.getPath(url, params);
+		Map<String, String> fromData = new HashMap<>(1);
+		fromData.put("data", req.getIdStr());
+		HttpUtil.doPost(url, fromData, timeout);
+		return OnSaleNonPostingAPBillDownSuccessResp.newBuilder().build();
 	}
 }
