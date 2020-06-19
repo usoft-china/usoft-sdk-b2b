@@ -397,4 +397,18 @@ public class UasOrderGetSdk extends BaseSdk {
 		GetOrderReturnDetailResp.Builder resp = ProtoBufUtil.toProtoBuf(GetOrderReturnDetailResp.newBuilder(), respJson);
 		return resp.build();
 	}
+
+	/**
+	 * 查询采购验退单详情
+	 *
+	 * @param req
+	 * @return
+	 */
+	public GetOrderDeliveryProductResp getOrderDeliveryProduct(GetOrderDeliveryProductReq.Builder req) throws Exception {
+		String url = baseUrl + "/uas/order/delivery/product/get";
+		Map<String, String> params = genSignToMap(req);
+		String respJson = HttpUtil.doGet(url, params, timeout);
+		GetOrderDeliveryProductResp.Builder resp = ProtoBufUtil.toProtoBuf(GetOrderDeliveryProductResp.newBuilder(), respJson);
+		return resp.build();
+	}
 }

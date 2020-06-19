@@ -19,7 +19,7 @@ public class OrderSdkTest {
 	/**
 	 * 测试地址
 	 */
-//	private OrderSdk orderSdk = new OrderSdk("http://test-b2b.uuzcc.cn", "10050624", "c49f7be6a861461ab951e55030055a5c");
+//	private OrderSdk orderSdk = new OrderSdk("http://b2brest.uuzcc.cn:27120", "10050904", "c97d043cb9894c1e8c4dac330cf3cde9");
 	private OrderSdk orderSdk = new OrderSdk("http://127.0.0.1:27120", "10050624", "c49f7be6a861461ab951e55030055a5c");
 
 	/**
