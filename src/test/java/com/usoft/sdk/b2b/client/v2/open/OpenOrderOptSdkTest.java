@@ -223,4 +223,13 @@ public class OpenOrderOptSdkTest {
         BatchDeleteOrderReturnResp resp = openOrderOptSdk.batchDeleteOrderReturn(req);
         System.out.println(ProtoBufUtil.toJSON(resp));
     }
+
+    @Test
+    public void updateDeliveryQuantity() throws Exception {
+        UpdateDeliveryQuantityReq.Builder req = UpdateDeliveryQuantityReq.newBuilder();
+        req.setCode("DP200624296517171307");
+        req.setQuantityDelivery(8);
+        UpdateDeliveryQuantityResp resp = openOrderOptSdk.updateDeliveryQuantity(req);
+        System.out.println(ProtoBufUtil.toJSON(resp));
+    }
 }
