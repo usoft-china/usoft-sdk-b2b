@@ -19,7 +19,7 @@ public class DeliverSdkTest {
 	/**
 	 * 测试地址
 	 */
-//    private DeliverSdk deliverSdk = new DeliverSdk("http://test-b2b.uuzcc.cn", "10041559", "2c1ea089876b796fe050007f01002ea6");
+//	private DeliverSdk deliverSdk = new DeliverSdk("http://b2brest.uuzcc.cn:27120", "10050624", "c49f7be6a861461ab951e55030055a5c");
 	private DeliverSdk deliverSdk = new DeliverSdk("http://127.0.0.1:27120", "10050624", "c49f7be6a861461ab951e55030055a5c");
 
 	/**
@@ -94,6 +94,11 @@ public class DeliverSdkTest {
 	@Test
 	public void saveAcceptNotifyConfirm() throws IOException {
 		SaveAcceptNotifyConfirmListReq.Builder req = SaveAcceptNotifyConfirmListReq.newBuilder();
+		AcceptNotifyConfirm.Builder builder = AcceptNotifyConfirm.newBuilder();
+		builder.setB2BSsId(200701358959082319L);
+		builder.setAndDetno(1);
+		builder.setAndInqty(0);
+		req.addAcceptNotifyConfirmList(builder);
 		SaveAcceptNotifyConfirmListResp resp = deliverSdk.saveAcceptNotifyConfirm(req.build());
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}
@@ -201,6 +206,57 @@ public class DeliverSdkTest {
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}
 
+
+	@Test
+	public void savePurchaseProdBadIn() throws IOException {
+		SavePurchaseProdBadInReq.Builder req = SavePurchaseProdBadInReq.newBuilder();
+		PurchaseProdInOut.Builder builder = PurchaseProdInOut.newBuilder();
+		int random = new Random().nextInt(100000000);
+		builder.setPiId(random); //erp出入库单据的id
+		builder.setPiInoutno("BadIn" + random); //erp出入库单据单号
+//        int64 pi_vendoruu = 3; //供应商UU
+//        string pi_currency = 4; //币别
+//        float pi_rate = 5; //汇率
+//        string pi_payment = 6; //付款方式
+//        string pi_transport = 7; //运输方式
+//        string pi_remark = 8; //备注
+//        string pi_inoutman = 9; //过账人
+		builder.setPiDate(new Date().getTime()); //过账日期(时间戳)
+//        string pi_sendcode = 11; //送货单号
+//        string pi_receivename = 12; //应付供应商名
+//        string pi_receivecode = 13; //应付供应商编号
+//        int64 pi_b2b_id = 14; //b2bId
+		PurchaseProdInOut.PurchaseProdInOutDetail.Builder detail = PurchaseProdInOut.PurchaseProdInOutDetail.newBuilder();
+		detail.setPdDetno(1); // 明细行序号
+        // 采购单编号
+		detail.setPdOrdercode("PuCode93468538");
+        // 采购单明细行号
+		detail.setPdOrderdetno(1);
+		detail.setPdInqty(2); // 入库数量
+//        double pd_outqty = 5; // 出库数量
+//        double pd_orderprice = 6; // 采购成本
+//        double pd_taxrate = 7; // 税率
+//        string pd_batchcode = 8; // 批号
+//        string pd_remark = 9; // 备注
+//        string pd_prodcode = 10; //物料编号
+//        string pd_whname = 11; //仓库名称
+//		detail.setB2BSiId(200612195196455702L);//平台送货单明细id
+		builder.addDetails(detail);
+		req.addData(builder);
+		SavePurchaseProdBadInResp resp = deliverSdk.savePurchaseProdBadIn(req.build());
+		System.out.println(ProtoBufUtil.toJSON(resp));
+	}
+
+	@Test
+	public void nonPostingProdBadIn() throws IOException {
+		NonPostingProdBadInReq.Builder req = NonPostingProdBadInReq.newBuilder();
+		PurchaseProdInOut.Builder builder = PurchaseProdInOut.newBuilder();
+		builder.setPiInoutno("BadIn82942671");
+		req.addData(builder);
+		NonPostingProdBadInResp resp = deliverSdk.nonPostingProdBadIn(req.build());
+		System.out.println(ProtoBufUtil.toJSON(resp));
+	}
+
 	@Test
 	public void savePurchaseProdReturn() throws IOException {
 		SavePurchaseProdReturnReq.Builder req = SavePurchaseProdReturnReq.newBuilder();
@@ -262,6 +318,53 @@ public class DeliverSdkTest {
 //		string pbu_piclass = 8; //单据类型
 		req.addData(builder);
 		RefreshPriceForPurcReturnResp resp = deliverSdk.refreshPriceForPurcReturn(req.build());
+		System.out.println(ProtoBufUtil.toJSON(resp));
+	}
+
+	@Test
+	public void savePurchaseProdBadOut() throws IOException {
+		SavePurchaseProdBadOutReq.Builder req = SavePurchaseProdBadOutReq.newBuilder();
+		PurchaseProdInOut.Builder builder = PurchaseProdInOut.newBuilder();
+		int random = new Random().nextInt(100000000);
+		builder.setPiId(random); //erp出入库单据的id
+		builder.setPiInoutno("BadOut" + random); //erp出入库单据单号
+//        int64 pi_vendoruu = 3; //供应商UU
+//        string pi_currency = 4; //币别
+//        float pi_rate = 5; //汇率
+//        string pi_payment = 6; //付款方式
+//        string pi_transport = 7; //运输方式
+//        string pi_remark = 8; //备注
+//        string pi_inoutman = 9; //过账人
+		builder.setPiDate(new Date().getTime()); //过账日期(时间戳)
+//        string pi_sendcode = 11; //送货单号
+//        string pi_receivename = 12; //应付供应商名
+//        string pi_receivecode = 13; //应付供应商编号
+//        int64 pi_b2b_id = 14; //b2bId
+		PurchaseProdInOut.PurchaseProdInOutDetail.Builder detail = PurchaseProdInOut.PurchaseProdInOutDetail.newBuilder();
+		detail.setPdDetno(1); // 明细行序号
+		detail.setPdOrdercode("PuCode93468538"); // 采购单编号
+		detail.setPdOrderdetno(1); // 采购单明细行号
+//		detail.setPdInqty(2); // 入库数量
+		detail.setPdOutqty(2); // 出库数量
+//        double pd_orderprice = 6; // 采购成本
+//        double pd_taxrate = 7; // 税率
+//        string pd_batchcode = 8; // 批号
+//        string pd_remark = 9; // 备注
+//        string pd_prodcode = 10; //物料编号
+//        string pd_whname = 11; //仓库名称
+		builder.addDetails(detail);
+		req.addData(builder);
+		SavePurchaseProdBadOutResp resp = deliverSdk.savePurchaseProdBadOut(req.build());
+		System.out.println(ProtoBufUtil.toJSON(resp));
+	}
+
+	@Test
+	public void nonPostingProdBadOut() throws IOException {
+		NonPostingProdBadOutReq.Builder req = NonPostingProdBadOutReq.newBuilder();
+		PurchaseProdInOut.Builder builder = PurchaseProdInOut.newBuilder();
+		builder.setPiInoutno("BadOut12448918");
+		req.addData(builder);
+		NonPostingProdBadOutResp resp = deliverSdk.nonPostingProdBadOut(req.build());
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}
 
@@ -367,6 +470,39 @@ public class DeliverSdkTest {
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}
 
+
+
+	@Test
+	public void getSaleProdBadIn() throws IOException {
+		GetSaleProdBadInReq.Builder req = GetSaleProdBadInReq.newBuilder();
+		GetSaleProdBadInResp resp = deliverSdk.getSaleProdBadIn(req.build());
+		System.out.println(ProtoBufUtil.toJSON(resp));
+	}
+
+	@Test
+	public void onSaleProdBadInSuccess() throws IOException {
+		OnSaleProdBadInSuccessReq.Builder req = OnSaleProdBadInSuccessReq.newBuilder();
+		req.setIdStr("200702366998778007");
+		OnSaleProdBadInSuccessResp resp = deliverSdk.onSaleProdBadInSuccess(req.build());
+		System.out.println(ProtoBufUtil.toJSON(resp));
+	}
+
+	@Test
+	public void getNonPostingSaleProdBadIn() throws IOException {
+		GetNonPostingSaleProdBadInReq.Builder req = GetNonPostingSaleProdBadInReq.newBuilder();
+		GetNonPostingSaleProdBadInResp resp = deliverSdk.getNonPostingSaleProdBadIn(req.build());
+		System.out.println(ProtoBufUtil.toJSON(resp));
+	}
+
+	@Test
+	public void onNonPostingSaleProdBadInSuccess() throws IOException {
+		OnNonPostingSaleProdBadInSuccessReq.Builder req = OnNonPostingSaleProdBadInSuccessReq.newBuilder();
+		req.setIdStr("200702366998778007");
+		OnNonPostingSaleProdBadInSuccessResp resp = deliverSdk.onNonPostingSaleProdBadInSuccess(req.build());
+		System.out.println(ProtoBufUtil.toJSON(resp));
+	}
+
+
 	@Test
 	public void getSaleProdReturn() throws IOException {
 		GetSaleProdReturnReq.Builder req = GetSaleProdReturnReq.newBuilder();
@@ -396,4 +532,35 @@ public class DeliverSdkTest {
 		OnNonPostingSaleProdReturnSuccessResp resp = deliverSdk.onNonPostingSaleProdReturnSuccess(req.build());
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}
+
+	@Test
+	public void getSaleProdBadOut() throws IOException {
+		GetSaleProdBadOutReq.Builder req = GetSaleProdBadOutReq.newBuilder();
+		GetSaleProdBadOutResp resp = deliverSdk.getSaleProdBadOut(req.build());
+		System.out.println(ProtoBufUtil.toJSON(resp));
+	}
+
+	@Test
+	public void onSaleProdBadOutSuccess() throws IOException {
+		OnSaleProdBadOutSuccessReq.Builder req = OnSaleProdBadOutSuccessReq.newBuilder();
+		req.setIdStr("200702367021906909");
+		OnSaleProdBadOutSuccessResp resp = deliverSdk.onSaleProdBadOutSuccess(req.build());
+		System.out.println(ProtoBufUtil.toJSON(resp));
+	}
+
+	@Test
+	public void getNonPostingSaleProdBadOut() throws IOException {
+		GetNonPostingSaleProdBadOutReq.Builder req = GetNonPostingSaleProdBadOutReq.newBuilder();
+		GetNonPostingSaleProdBadOutResp resp = deliverSdk.getNonPostingSaleProdBadOut(req.build());
+		System.out.println(ProtoBufUtil.toJSON(resp));
+	}
+
+	@Test
+	public void onNonPostingSaleProdBadOutSuccess() throws IOException {
+		OnNonPostingSaleProdBadOutSuccessReq.Builder req = OnNonPostingSaleProdBadOutSuccessReq.newBuilder();
+		req.setIdStr("200702367021906909");
+		OnNonPostingSaleProdBadOutSuccessResp resp = deliverSdk.onNonPostingSaleProdBadOutSuccess(req.build());
+		System.out.println(ProtoBufUtil.toJSON(resp));
+	}
+
 }

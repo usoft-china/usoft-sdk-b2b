@@ -255,6 +255,43 @@ public class DeliverSdk extends BaseSdk {
 		return RefreshPriceResp.newBuilder().build();
 	}
 
+
+	/**
+	 * 将ERP的不良品入库单写到平台
+	 *
+	 * @param req
+	 * @return
+	 */
+	public SavePurchaseProdBadInResp savePurchaseProdBadIn(SavePurchaseProdBadInReq req) throws IOException {
+		String url = baseUrl + "/erp/purchase/prodBadIn";
+		Map<String, String> params = generateSignature(url, null);
+		url = HttpUtil.getPath(url, params);
+		Map<String, String> fromData = new HashMap<>();
+		fromData.put("data", ProtoBufUtil.toJSON(req.getDataList()));
+
+		String respJson = HttpUtil.doPost(url, fromData, timeout);
+		List<PurchaseProdInOut> list = ProtoBufUtil.toProtoBufList(PurchaseProdInOut.newBuilder().build(), respJson);
+		SavePurchaseProdBadInResp.Builder resp = SavePurchaseProdBadInResp.newBuilder();
+		resp.addAllData(list);
+		return resp.build();
+	}
+
+	/**
+	 * 将ERP的反过账的不良品入库单写到平台
+	 *
+	 * @param req
+	 * @return
+	 */
+	public NonPostingProdBadInResp nonPostingProdBadIn(NonPostingProdBadInReq req) throws IOException {
+		String url = baseUrl + "/erp/purchase/prodBadIn/nonPosting";
+		Map<String, String> params = generateSignature(url, null);
+		url = HttpUtil.getPath(url, params);
+		Map<String, String> fromData = new HashMap<>();
+		fromData.put("data", ProtoBufUtil.toJSON(req.getDataList()));
+		HttpUtil.doPost(url, fromData, timeout);
+		return NonPostingProdBadInResp.newBuilder().build();
+	}
+
 	/**
 	 * 将ERP的采购验退单写到平台
 	 *
@@ -305,6 +342,42 @@ public class DeliverSdk extends BaseSdk {
 		fromData.put("data", ProtoBufUtil.toJSON(req.getDataList()));
 		HttpUtil.doPost(url, fromData, timeout);
 		return RefreshPriceForPurcReturnResp.newBuilder().build();
+	}
+
+	/**
+	 * 将ERP的不良品出库单写到平台
+	 *
+	 * @param req
+	 * @return
+	 */
+	public SavePurchaseProdBadOutResp savePurchaseProdBadOut(SavePurchaseProdBadOutReq req) throws IOException {
+		String url = baseUrl + "/erp/purchase/prodBadOut";
+		Map<String, String> params = generateSignature(url, null);
+		url = HttpUtil.getPath(url, params);
+		Map<String, String> fromData = new HashMap<>();
+		fromData.put("data", ProtoBufUtil.toJSON(req.getDataList()));
+
+		String respJson = HttpUtil.doPost(url, fromData, timeout);
+		List<PurchaseProdInOut> list = ProtoBufUtil.toProtoBufList(PurchaseProdInOut.newBuilder().build(), respJson);
+		SavePurchaseProdBadOutResp.Builder resp = SavePurchaseProdBadOutResp.newBuilder();
+		resp.addAllData(list);
+		return resp.build();
+	}
+
+	/**
+	 * 将ERP的反过账的不良品出库单写到平台
+	 *
+	 * @param req
+	 * @return
+	 */
+	public NonPostingProdBadOutResp nonPostingProdBadOut(NonPostingProdBadOutReq req) throws IOException {
+		String url = baseUrl + "/erp/purchase/prodBadOut/nonPosting";
+		Map<String, String> params = generateSignature(url, null);
+		url = HttpUtil.getPath(url, params);
+		Map<String, String> fromData = new HashMap<>();
+		fromData.put("data", ProtoBufUtil.toJSON(req.getDataList()));
+		HttpUtil.doPost(url, fromData, timeout);
+		return NonPostingProdBadOutResp.newBuilder().build();
 	}
 
 	/**
@@ -488,6 +561,73 @@ public class DeliverSdk extends BaseSdk {
 		return OnNonPostingSaleProdInOutSuccessResp.newBuilder().build();
 	}
 
+
+	/**
+	 * 卖家ERP从平台获取未下载的客户不良品入库单
+	 *
+	 * @param req
+	 * @return
+	 * @throws IOException
+	 */
+	public GetSaleProdBadInResp getSaleProdBadIn(GetSaleProdBadInReq req) throws IOException {
+		String url = baseUrl + "/erp/sale/prodBadIn";
+		Map<String, String> params = generateSignature(url, null);
+		String respJson = HttpUtil.doGet(url, params, timeout);
+		List<SaleProdInOutDown> list = ProtoBufUtil.toProtoBufList(SaleProdInOutDown.newBuilder().build(), respJson);
+		GetSaleProdBadInResp.Builder resp = GetSaleProdBadInResp.newBuilder();
+		resp.addAllData(list);
+		return resp.build();
+	}
+
+	/**
+	 * 平台的客户不良品入库单传到供应商ERP之后，修改平台里面的客户不良品入库单的上传状态
+	 *
+	 * @param req
+	 * @return
+	 */
+	public OnSaleProdBadInSuccessResp onSaleProdBadInSuccess(OnSaleProdBadInSuccessReq req) throws IOException {
+		String url = baseUrl + "/erp/sale/prodBadIn";
+		Map<String, String> params = generateSignature(url, null);
+		url = HttpUtil.getPath(url, params);
+		Map<String, String> fromData = new HashMap<>();
+		fromData.put("data", req.getIdStr());
+		HttpUtil.doPost(url, fromData, timeout);
+		return OnSaleProdBadInSuccessResp.newBuilder().build();
+	}
+
+	/**
+	 * 卖家ERP从平台获取未下载客户已反过帐的的客户不良品入库单
+	 *
+	 * @param req
+	 * @return
+	 * @throws IOException
+	 */
+	public GetNonPostingSaleProdBadInResp getNonPostingSaleProdBadIn(GetNonPostingSaleProdBadInReq req) throws IOException {
+		String url = baseUrl + "/erp/sale/prodBadIn/nonPosting";
+		Map<String, String> params = generateSignature(url, null);
+		String respJson = HttpUtil.doGet(url, params, timeout);
+		List<Long> list = JSON.parseArray(respJson, Long.class);
+		GetNonPostingSaleProdBadInResp.Builder resp = GetNonPostingSaleProdBadInResp.newBuilder();
+		resp.addAllData(list);
+		return resp.build();
+	}
+
+	/**
+	 * 平台的客户不良品入库单传到供应商ERP之后，修改平台里面的客户不良品入库单的上传状态
+	 *
+	 * @param req
+	 * @return
+	 */
+	public OnNonPostingSaleProdBadInSuccessResp onNonPostingSaleProdBadInSuccess(OnNonPostingSaleProdBadInSuccessReq req) throws IOException {
+		String url = baseUrl + "/erp/sale/prodBadIn/nonPosting";
+		Map<String, String> params = generateSignature(url, null);
+		url = HttpUtil.getPath(url, params);
+		Map<String, String> fromData = new HashMap<>();
+		fromData.put("data", req.getIdStr());
+		HttpUtil.doPost(url, fromData, timeout);
+		return OnNonPostingSaleProdBadInSuccessResp.newBuilder().build();
+	}
+
 	/**
 	 * 卖家ERP从平台获取未下载的客户采购验退单
 	 *
@@ -553,4 +693,71 @@ public class DeliverSdk extends BaseSdk {
 		HttpUtil.doPost(url, fromData, timeout);
 		return OnNonPostingSaleProdReturnSuccessResp.newBuilder().build();
 	}
+
+	/**
+	 * 卖家ERP从平台获取未下载的客户不良品出库单
+	 *
+	 * @param req
+	 * @return
+	 * @throws IOException
+	 */
+	public GetSaleProdBadOutResp getSaleProdBadOut(GetSaleProdBadOutReq req) throws IOException {
+		String url = baseUrl + "/erp/sale/prodBadOut";
+		Map<String, String> params = generateSignature(url, null);
+		String respJson = HttpUtil.doGet(url, params, timeout);
+		List<SaleProdInOutDown> list = ProtoBufUtil.toProtoBufList(SaleProdInOutDown.newBuilder().build(), respJson);
+		GetSaleProdBadOutResp.Builder resp = GetSaleProdBadOutResp.newBuilder();
+		resp.addAllData(list);
+		return resp.build();
+	}
+
+	/**
+	 * 平台的客户不良品出库单传到供应商ERP之后，修改平台里面的客户不良品出库单的上传状态
+	 *
+	 * @param req
+	 * @return
+	 */
+	public OnSaleProdBadOutSuccessResp onSaleProdBadOutSuccess(OnSaleProdBadOutSuccessReq req) throws IOException {
+		String url = baseUrl + "/erp/sale/prodBadOut";
+		Map<String, String> params = generateSignature(url, null);
+		url = HttpUtil.getPath(url, params);
+		Map<String, String> fromData = new HashMap<>();
+		fromData.put("data", req.getIdStr());
+		HttpUtil.doPost(url, fromData, timeout);
+		return OnSaleProdBadOutSuccessResp.newBuilder().build();
+	}
+
+	/**
+	 * 卖家ERP从平台获取未下载客户已反过帐的的客户不良品出库单
+	 *
+	 * @param req
+	 * @return
+	 * @throws IOException
+	 */
+	public GetNonPostingSaleProdBadOutResp getNonPostingSaleProdBadOut(GetNonPostingSaleProdBadOutReq req) throws IOException {
+		String url = baseUrl + "/erp/sale/prodBadOut/nonPosting";
+		Map<String, String> params = generateSignature(url, null);
+		String respJson = HttpUtil.doGet(url, params, timeout);
+		List<Long> list = JSON.parseArray(respJson, Long.class);
+		GetNonPostingSaleProdBadOutResp.Builder resp = GetNonPostingSaleProdBadOutResp.newBuilder();
+		resp.addAllData(list);
+		return resp.build();
+	}
+
+	/**
+	 * 平台的客户不良品出库单传到供应商ERP之后，修改平台里面的客户不良品出库单的上传状态
+	 *
+	 * @param req
+	 * @return
+	 */
+	public OnNonPostingSaleProdBadOutSuccessResp onNonPostingSaleProdBadOutSuccess(OnNonPostingSaleProdBadOutSuccessReq req) throws IOException {
+		String url = baseUrl + "/erp/sale/prodBadOut/nonPosting";
+		Map<String, String> params = generateSignature(url, null);
+		url = HttpUtil.getPath(url, params);
+		Map<String, String> fromData = new HashMap<>();
+		fromData.put("data", req.getIdStr());
+		HttpUtil.doPost(url, fromData, timeout);
+		return OnNonPostingSaleProdBadOutSuccessResp.newBuilder().build();
+	}
+
 }
