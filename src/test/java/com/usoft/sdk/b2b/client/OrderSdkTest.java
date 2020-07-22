@@ -176,9 +176,9 @@ public class OrderSdkTest {
 		detail.setPdRemark("PdRemark"); //备注
 		detail.setPdRate(0.01f); //税率
 		detail.setPdDetno(1); //序号
-//		string pd_factory = 9; //送货工厂
+		detail.setPdFactory("PdFactory"); //送货工厂
 		detail.setPdVendspec("PdVendspec"); //供应商规格
-//		int32 pd_beipin = 11; //备品数量
+		detail.setPdBeipin(10); //备品数量
 		detail.setPdPurcvendname("PdPurcvendname"); //终端供应商名称
 //		int64 pd_purcvenduu = 13; //终端供应商uu
 //		string pd_custpurchasecode = 14; //客户采购订单号
@@ -193,19 +193,20 @@ public class OrderSdkTest {
 		detail.setPdTaxcode("PdTaxcode"); //税收分类编码
 		detail.setPdBillname("PdBillname"); //开票名称
 		detail.setPdOrispeccode("PdOrispeccode");//开票型号
-//		message Attach {
-//			int64 fp_id = 1; //id
-//			string fp_name = 2; //附件名称
-//			string fp_url = 3; //附件Url
-//			int64 fp_size = 4; //附件大小
-//		}
-//		repeated Attach attaches = 26; //附件
-//		string pd_repprodcode = 27; //替代料号
-//		string pd_repdetail = 28; //替代料名称
-//		string pd_repspec = 29; //替代料规格
-//		string pr_oldcode = 30; //旧料编号
-//		string pr_oldname = 31; //旧料名称
-//		string pr_oldspec = 32; //旧料规格
+		//附件
+		Purchase.PurchaseDetail.Attach.Builder attach = Purchase.PurchaseDetail.Attach.newBuilder();
+		attach.setFpName("apic26584.jpg");
+		attach.setFpUrl("http://pic.sc.chinaz.com/files/pic/pic9/202007/apic26584.jpg");
+		attach.setFpSize(157696);
+		detail.addAttaches(attach);
+		detail.setPdRepprodcode("PdRepprodcode"); //替代料号
+		detail.setPdRepdetail("PdRepdetail"); //替代料名称
+		detail.setPdRepspec("PdRepspec"); //替代料规格
+		detail.setPrOldcode("PrOldcode"); //旧料编号
+		detail.setPrOldname("PrOldname"); //旧料名称
+		detail.setPrOldspec("PrOldspec"); //旧料规格
+		detail.setPdPrmaterial("PdPrmaterial"); //物料承认状态
+		detail.setPdTopmothercode("PdTopmothercode"); //顶层物料编码
 		purchase.addPurchaseDetails(detail);
 		req.addData(purchase);
 		SavePurchaseListResp resp = orderSdk.savePurchaseList(req.build());
