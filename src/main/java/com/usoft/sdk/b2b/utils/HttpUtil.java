@@ -19,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +43,11 @@ public class HttpUtil {
 	 * @throws IOException
 	 */
 	public static String doGet(String url, Map<String, String> params, int timeout) throws IOException {
+		if (MapUtils.isNotEmpty(params)) {
+			for (Map.Entry<String, String> kv : params.entrySet()) {
+				kv.setValue(URLEncoder.encode(kv.getValue(), "UTF-8"));
+			}
+		}
 		return doGet(getPath(url, params), timeout);
 	}
 

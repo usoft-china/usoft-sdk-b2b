@@ -13,18 +13,24 @@ public class OpenProductSdkTest {
     /**
      * 测试地址
      */
-    private OpenProductSdk productSdk = new OpenProductSdk("https://b2btraderest.uuzcc.cn", "10042875", "c49f7be6a861461ab951e55030055a5c");
+    private OpenProductSdk productSdk = new OpenProductSdk("http://127.0.0.1:27320", "10050624", "c49f7be6a861461ab951e55030055a5c");
 
     /**
      * 正式地址
      */
-//	private RatingSdk ratingSdk = new RatingSdk("http://api-product.usoftchina.com");
+//    private OpenProductSdk productSdk = new OpenProductSdk("https://b2btraderest.usoftchina.com", "20002873", "1067591a3adb44a8ab9605790969b30a");
     @Test
     public void createOrUpdateProduct() throws Exception {
         CreateOrUpdateProductReq.Builder req = CreateOrUpdateProductReq.newBuilder();
         CreateOrUpdateProduct.Builder product = CreateOrUpdateProduct.newBuilder();
-        product.setBrand("123");
+        product.setCode("PD200721532754541201");
+        product.setMaterialCode("Material Code");
+        product.setModel("Model2");
+        product.setBrand("Brand3");
+        product.setName("Name2");
+        product.setSpec("Spec2");
         req.setProduct(product.build());
+        req.setUu(1000027480);
         CreateOrUpdateProductResp resp = productSdk.createOrUpdateProduct(req);
         System.out.println(ProtoBufUtil.toJSON(resp));
     }
@@ -52,7 +58,8 @@ public class OpenProductSdkTest {
     @Test
     public void getProduct() throws Exception{
         GetProductReq.Builder req = GetProductReq.newBuilder();
-        req.setCode("PD200616229890022300");
+//        req.setCode("PD200616229890022300");
+        req.setMaterialCode("Material Code");
         GetProductResp resp = productSdk.getProduct(req);
         System.out.println(ProtoBufUtil.toJSON(resp));
     }
