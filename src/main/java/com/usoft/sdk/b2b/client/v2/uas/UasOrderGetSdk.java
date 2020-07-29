@@ -301,6 +301,20 @@ public class UasOrderGetSdk extends BaseSdk {
 	}
 
 	/**
+	 * 分页查询卖家MRB单
+	 *
+	 * @param req
+	 * @return
+	 */
+	public PagingSellerOrderMrbResp pagingSellerOrderMrb(PagingSellerOrderMrbReq.Builder req) throws Exception {
+		String url = baseUrl + "/uas/seller/order/mrb/paging";
+		Map<String, String> params = genSignToMap(req);
+		String respJson = HttpUtil.doGet(url, params, timeout);
+		PagingSellerOrderMrbResp.Builder resp = ProtoBufUtil.toProtoBuf(PagingSellerOrderMrbResp.newBuilder(), respJson);
+		return resp.build();
+	}
+
+	/**
 	 * 批量查询订单详情
 	 *
 	 * @param req

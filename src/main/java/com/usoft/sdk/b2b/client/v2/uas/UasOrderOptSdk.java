@@ -257,7 +257,7 @@ public class UasOrderOptSdk extends BaseSdk {
     }
 
     /**
-     * 批量删除验退单
+     * 修改发货数量
      *
      * @param req
      * @return
@@ -267,6 +267,20 @@ public class UasOrderOptSdk extends BaseSdk {
         String paramJson = genSignToJson(req);
         String respJson = HttpUtil.doPost(url, paramJson, timeout);
         UpdateDeliveryQuantityResp.Builder resp = ProtoBufUtil.toProtoBuf(UpdateDeliveryQuantityResp.newBuilder(), respJson);
+        return resp.build();
+    }
+
+    /**
+     * 新增Mrb单
+     *
+     * @param req
+     * @return
+     */
+    public CreateOrderMrbResp createOrderMrb(CreateOrderMrbReq.Builder req) throws Exception {
+        String url = baseUrl + "/uas/order/mrb/create";
+        String paramJson = genSignToJson(req);
+        String respJson = HttpUtil.doPost(url, paramJson, timeout);
+        CreateOrderMrbResp.Builder resp = ProtoBufUtil.toProtoBuf(CreateOrderMrbResp.newBuilder(), respJson);
         return resp.build();
     }
 }
