@@ -2,6 +2,7 @@ package com.usoft.sdk.b2b.client;
 
 import com.usoft.b2b.external.erp.deliver.api.entity.*;
 import com.usoft.b2b.external.erp.deliver.api.protobuf.*;
+import com.usoft.b2b.external.erp.order.api.entity.Purchase;
 import com.usoft.sdk.b2b.utils.ProtoBufUtil;
 import org.junit.jupiter.api.Test;
 
@@ -228,9 +229,9 @@ public class DeliverSdkTest {
 //        int64 pi_b2b_id = 14; //b2bId
 		PurchaseProdInOut.PurchaseProdInOutDetail.Builder detail = PurchaseProdInOut.PurchaseProdInOutDetail.newBuilder();
 		detail.setPdDetno(1); // 明细行序号
-        // 采购单编号
+		// 采购单编号
 		detail.setPdOrdercode("PuCode93468538");
-        // 采购单明细行号
+		// 采购单明细行号
 		detail.setPdOrderdetno(1);
 		detail.setPdInqty(2); // 入库数量
 //        double pd_outqty = 5; // 出库数量
@@ -471,7 +472,6 @@ public class DeliverSdkTest {
 	}
 
 
-
 	@Test
 	public void getSaleProdBadIn() throws IOException {
 		GetSaleProdBadInReq.Builder req = GetSaleProdBadInReq.newBuilder();
@@ -563,4 +563,70 @@ public class DeliverSdkTest {
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}
 
+	@Test
+	public void savePurchaseMrb() throws IOException {
+		SavePurchaseMrbReq.Builder req = SavePurchaseMrbReq.newBuilder();
+		PurchaseQuaMRB.Builder builder = PurchaseQuaMRB.newBuilder();
+		int random = new Random().nextInt(100000000);
+		builder.setMrId(random); // id
+		builder.setMrCode("MR"+random); // 编号
+		builder.setMrDate(new Date().getTime()); // 日期(时间戳)
+		builder.setMrVenduu(10050624); // 供应商uu
+		builder.setMrPucode("PuCode89660023"); // 采购单编号
+		builder.setMrPudetno(1); // 采购单明细行号
+//		builder.setMrVecode(); // 来源不良品入库单号
+		builder.setMrDatein(new Date().getTime()); // 送检日期(时间戳)
+		builder.setMrInqty(100); // 来料数量
+		builder.setMrCheckqty(50); // 检验数量
+		builder.setMrNgqty(20); // 不合格数
+		builder.setMrOkqty(30); // 合格数
+		builder.setMrResult("MrResult"); // 检验结果
+		builder.setMrRemark("MrRemark"); // 备注
+		builder.setMrShcode("Shcode"+random); // 收货单号 // 附件
+		Attach.Builder attach = Attach.newBuilder();
+		attach.setFpName("apic26584.jpg");
+		attach.setFpUrl("http://pic.sc.chinaz.com/files/pic/pic9/202007/apic26584.jpg");
+		attach.setFpSize(157696);
+		builder.addAttaches(attach);
+		//检验明细行
+		PurchaseQuaMRBCheckItem.Builder checkItem = PurchaseQuaMRBCheckItem.newBuilder();
+		checkItem.setMdDetno(1); //明细行序号
+		checkItem.setMdNgqty(10); //不合格数
+		checkItem.setMdOkqty(10); //合格数
+		checkItem.setMdDate(new Date().getTime()); //送检日期(时间戳)
+		checkItem.setMdTestman("MdTestman"); //检验员
+		checkItem.setMdCheckdate(new Date().getTime()); //检验日期(时间戳)
+		checkItem.setMdCheckqty(20); //检验数量
+		checkItem.setMdSamplingqty(15); //抽检数量
+		checkItem.setMdSamplingokqty(10); //抽检合格数
+		checkItem.setMdSamplingngqty(5); //戳见不合格数
+		checkItem.setMdRemark("MdRemark"); //不合格描述
+		builder.addCheckItems(checkItem);
+		// 项目明细行
+		PurchaseQuaMRBProjectItem.Builder projectItem = PurchaseQuaMRBProjectItem.newBuilder();
+		projectItem.setMrdDetno(1); //明细行号
+		projectItem.setMrdCiname("MrdCiname"); //项目名称
+		projectItem.setMrdContent("MrdContent"); //异常情况
+		projectItem.setMrdResult("MrdResult"); //处理结果
+		projectItem.setMrdNgqty(5); //不合格数
+		builder.addProjectItems(projectItem);
+		req.addData(builder);
+		SavePurchaseMrbResp resp = deliverSdk.savePurchaseMrb(req.build());
+		System.out.println(ProtoBufUtil.toJSON(resp));
+	}
+
+	@Test
+	public void getSaleMrb() throws IOException {
+		GetSaleMrbReq.Builder req = GetSaleMrbReq.newBuilder();
+		GetSaleMrbResp resp = deliverSdk.getSaleMrb(req.build());
+		System.out.println(ProtoBufUtil.toJSON(resp));
+	}
+
+	@Test
+	public void onSaleMrbSuccess() throws IOException {
+		OnSaleMrbSuccessReq.Builder req = OnSaleMrbSuccessReq.newBuilder();
+		req.setIdStr("200730607941056500");
+		OnSaleMrbSuccessResp resp = deliverSdk.onSaleMrbSuccess(req.build());
+		System.out.println(ProtoBufUtil.toJSON(resp));
+	}
 }

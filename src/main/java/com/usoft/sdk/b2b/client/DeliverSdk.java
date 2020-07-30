@@ -381,6 +381,25 @@ public class DeliverSdk extends BaseSdk {
 	}
 
 	/**
+	 * 将ERP的MRB单据上传到平台
+	 *
+	 * @param req
+	 * @return
+	 */
+	public SavePurchaseMrbResp savePurchaseMrb(SavePurchaseMrbReq req) throws IOException {
+		String url = baseUrl + "/erp/purchase/MRB";
+		Map<String, String> params = generateSignature(url, null);
+		url = HttpUtil.getPath(url, params);
+		Map<String, String> fromData = new HashMap<>();
+		fromData.put("data", ProtoBufUtil.toJSON(req.getDataList()));
+		String respJson = HttpUtil.doPost(url, fromData, timeout);
+		List<PurchaseQuaMRB> list = ProtoBufUtil.toProtoBufList(PurchaseQuaMRB.newBuilder().build(), respJson);
+		SavePurchaseMrbResp.Builder resp = SavePurchaseMrbResp.newBuilder();
+		resp.addAllData(list);
+		return resp.build();
+	}
+
+	/**
 	 * 卖家ERP从平台获取客户送货提醒
 	 *
 	 * @param req
@@ -760,4 +779,36 @@ public class DeliverSdk extends BaseSdk {
 		return OnNonPostingSaleProdBadOutSuccessResp.newBuilder().build();
 	}
 
+	/**
+	 * 卖家ERP从平台获取未下载的MRB单
+	 *
+	 * @param req
+	 * @return
+	 * @throws IOException
+	 */
+	public GetSaleMrbResp getSaleMrb(GetSaleMrbReq req) throws IOException {
+		String url = baseUrl + "/erp/sale/MRB";
+		Map<String, String> params = generateSignature(url, null);
+		String respJson = HttpUtil.doGet(url, params, timeout);
+		List<SaleQuaMRB> list = ProtoBufUtil.toProtoBufList(SaleQuaMRB.newBuilder().build(), respJson);
+		GetSaleMrbResp.Builder resp = GetSaleMrbResp.newBuilder();
+		resp.addAllData(list);
+		return resp.build();
+	}
+
+	/**
+	 * 平台的MRB单传到供应商ERP之后，修改平台里面的MRB单的上传状态
+	 *
+	 * @param req
+	 * @return
+	 */
+	public OnSaleMrbSuccessResp onSaleMrbSuccess(OnSaleMrbSuccessReq req) throws IOException {
+		String url = baseUrl + "/erp/sale/MRB";
+		Map<String, String> params = generateSignature(url, null);
+		url = HttpUtil.getPath(url, params);
+		Map<String, String> fromData = new HashMap<>();
+		fromData.put("data", req.getIdStr());
+		HttpUtil.doPost(url, fromData, timeout);
+		return OnSaleMrbSuccessResp.newBuilder().build();
+	}
 }
