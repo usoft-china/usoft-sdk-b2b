@@ -84,7 +84,6 @@ public abstract class BaseSdk {
 		String paramStr = HttpUtil.getParamStr(paramMap);
 		LOGGER.debug("[BaseSdk.genSignToMap]待签名串：{}", paramStr);
 		String signatureValue = OpenApiSignUtil.sign(paramStr, secretKey);
-		signatureValue = URLEncoder.encode(signatureValue, "UTF-8");
 		//设置签名
 		paramMap.put(OpenApiSignUtil.SIGNATURE_KEY, signatureValue);
 		return paramMap;
