@@ -93,7 +93,7 @@ public class SampleSdkTest {
 	@Test
 	public void onSampleSendDownSuccess() throws IOException {
 		OnSampleSendDownSuccessReq.Builder req = OnSampleSendDownSuccessReq.newBuilder();
-		req.setIdStr("200623289400091302");
+		req.setIdStr("200812722634298501");
 		OnSampleSendDownSuccessResp resp = sampleSdk.onSampleSendDownSuccess(req.build());
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}
@@ -195,9 +195,7 @@ public class SampleSdkTest {
 	@Test
 	public void invalidateProductSample() throws IOException {
 		InvalidateProductSampleReq.Builder req = InvalidateProductSampleReq.newBuilder();
-//	Inquiry.Builder inquiry = Inquiry.newBuilder();
-//	inquiry.setInId(64235889);
-//	req.addData(inquiry);
+		req.setIdStr("21911892");
 		InvalidateProductSampleResp resp = sampleSdk.invalidateProductSample(req.build());
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}
@@ -212,7 +210,7 @@ public class SampleSdkTest {
 	@Test
 	public void onSampleDownSuccess() throws IOException {
 		OnSampleDownSuccessReq.Builder req = OnSampleDownSuccessReq.newBuilder();
-		req.setIdStr("200623289400091302");
+		req.setIdStr("200812722597004900");
 		OnSampleDownSuccessResp resp = sampleSdk.onSampleDownSuccess(req.build());
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}
@@ -223,7 +221,7 @@ public class SampleSdkTest {
 		SaleSampleSend.Builder send = SaleSampleSend.newBuilder();
 		int random = new Random().nextInt(100000000);
 		//客户送样申请b2b Id
-		send.setB2BPsId(0);
+		send.setB2BPsId(200812722597004900L);
 		//送样单号
 		send.setSsCode("SsCode" + random);
 		//送样数量
@@ -258,7 +256,7 @@ public class SampleSdkTest {
 		//录入人（送样人）
 		send.setSsRecorder("WCY");
 		//申请单号
-		send.setSsPscode("");
+		send.setSsPscode("PsCode4325251");
 		//申请单明细序号
 		send.setSsPddetno(1);
 		//买方申请人uu
@@ -280,7 +278,7 @@ public class SampleSdkTest {
 	@Test
 	public void onSampleApprovalDownSuccess() throws IOException {
 		OnSampleApprovalDownSuccessReq.Builder req = OnSampleApprovalDownSuccessReq.newBuilder();
-		req.setIdStr("200623289400091302");
+		req.setIdStr("200812722658437102");
 		OnSampleApprovalDownSuccessResp resp = sampleSdk.onSampleApprovalDownSuccess(req.build());
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}
