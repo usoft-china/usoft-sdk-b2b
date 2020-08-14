@@ -255,4 +255,18 @@ public class OpenOrderOptSdk extends BaseSdk {
         UpdateDeliveryQuantityResp.Builder resp = ProtoBufUtil.toProtoBuf(UpdateDeliveryQuantityResp.newBuilder(), respJson);
         return resp.build();
     }
+
+    /**
+     * 批量删除订单
+     *
+     * @param req
+     * @return
+     */
+    public BatchDeleteOrderResp batchDeleteOrder(BatchDeleteOrderReq.Builder req) throws Exception {
+        String url = baseUrl + "/open/order/delete/batch";
+        String paramJson = genSignToJson(req);
+        String respJson = HttpUtil.doPost(url, paramJson, timeout);
+        BatchDeleteOrderResp.Builder resp = ProtoBufUtil.toProtoBuf(BatchDeleteOrderResp.newBuilder(), respJson);
+        return resp.build();
+    }
 }
