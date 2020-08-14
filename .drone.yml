@@ -22,6 +22,18 @@ steps:
     event:
     - push
 
+
+- name: sync_github_develop
+  image: usoft/protoc-gen-doc:3.6.1
+  commands:
+    - git remote add github git@github.com:usoft-china/usoft-sdk-b2b.git
+    - git push github develop:develop
+  when:
+    branch:
+      - develop
+    event:
+      - push
+
 - name: sync_github_master
   image: usoft/protoc-gen-doc:3.6.1
   commands:
