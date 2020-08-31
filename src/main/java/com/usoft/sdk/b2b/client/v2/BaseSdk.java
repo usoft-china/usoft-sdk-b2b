@@ -23,7 +23,7 @@ public abstract class BaseSdk {
 	/**
 	 * 默认超时时间
 	 */
-	protected static int DEFAULT_TIMEOUT = 60000;
+	protected static int DEFAULT_TIMEOUT = 600000;
 
 	/**
 	 * 域名地址
