@@ -29,9 +29,9 @@
     <groupId>com.usoft.sdk</groupId>
     <artifactId>usoft-sdk-b2b</artifactId>
     <!--测试环境-->
-    <version>1.0-SNAPSHOT</version>
+    <version>2.0-SNAPSHOT</version>
     <!--生产环境--> 
-    <version>1.0</version>
+    <version>2.0</version>
 </dependency>
 ```
 
