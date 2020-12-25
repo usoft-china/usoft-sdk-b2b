@@ -286,7 +286,7 @@ public class OrderSdkTest {
 		int random = new Random().nextInt(100000000);
 		builder.setPcId(random);
 		builder.setPcCode("PcCode" + random); //采购变更单号
-		builder.setPcPurccode("PuCode86280899");//采购单单号
+		builder.setPcPurccode("OR201223871330354255");//采购单单号
 		builder.setPcIndate(new Date().getTime());//单据录入日期(时间戳)
 //		string pc_recorder = 5; //录单人
 		builder.setPcNewpayments("月结30天");//新付款方式
@@ -300,11 +300,13 @@ public class OrderSdkTest {
 //		string pc_remark = 14; //备注
 //		int32 pc_agreed = 15; //卖家是否同意了买家的变更请求(1,0)
 //		int32 pc_needvendcheck = 16; //不需要供应商确认(1表示不需要确认,0表示需要确认)
+		builder.setPcNeedvendcheck(-1);
 		PurchaseChange.PurchaseChangeDetail.Builder detail = PurchaseChange.PurchaseChangeDetail.newBuilder();
 		detail.setPcdDetno(1);//序号(变更单)
 		detail.setPcdPddetno(1); //采购订单明细序号
 //		string pcd_prodcode = 3; //
 //		string pcd_newprodcode = 4; //新物料编号
+		detail.setPcdNewprodcode("MSDM40029098097897"); //新物料编号
 		detail.setPcdNewqty(30);//新数量
 		detail.setPcdNewprice(20);//新含税单价
 //		int64 pcd_newdelivery = 7; //新交货日期(时间戳)
