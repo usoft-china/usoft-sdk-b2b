@@ -13,7 +13,7 @@ public class OpenProductSdkTest {
     /**
      * 测试地址
      */
-    private OpenProductSdk productSdk = new OpenProductSdk("http://127.0.0.1:27320", "10050624", "c49f7be6a861461ab951e55030055a5c");
+    private OpenProductSdk productSdk = new OpenProductSdk("https://b2btraderest.uuzcc.cn", "10050624", "c49f7be6a861461ab951e55030055a5c");
 
     /**
      * 正式地址
@@ -61,6 +61,15 @@ public class OpenProductSdkTest {
 //        req.setCode("PD200616229890022300");
         req.setMaterialCode("Material Code");
         GetProductResp resp = productSdk.getProduct(req);
+        System.out.println(ProtoBufUtil.toJSON(resp));
+    }
+
+    @Test
+    public void batchDeleteProduct() throws Exception {
+        BatchDeleteProductReq.Builder req = BatchDeleteProductReq.newBuilder();
+        req.addCode("PD201228914604470721");
+        req.addCode("PD201208740984521544");
+        BatchDeleteProductResp resp = productSdk.batchDeleteProduct(req);
         System.out.println(ProtoBufUtil.toJSON(resp));
     }
 }

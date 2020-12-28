@@ -76,4 +76,18 @@ public class OpenProductSdk extends BaseSdk {
 		GetProductResp.Builder resp = ProtoBufUtil.toProtoBuf(GetProductResp.newBuilder(), respJson);
 		return resp.build();
 	}
+
+	/**
+	 * 批量删除产品
+	 *
+	 * @param req
+	 * @return
+	 */
+	public BatchDeleteProductResp batchDeleteProduct(BatchDeleteProductReq.Builder req) throws Exception {
+		String url = baseUrl + "/open/product/delete/batch";
+		String paramJson = genSignToJson(req);
+		String respJson = HttpUtil.doPost(url, paramJson, timeout);
+		BatchDeleteProductResp.Builder resp = ProtoBufUtil.toProtoBuf(BatchDeleteProductResp.newBuilder(), respJson);
+		return resp.build();
+	}
 }
