@@ -49,6 +49,20 @@ public class OpenReconcileSdk extends BaseSdk {
     }
 
     /**
+     * 买家发起对账
+     *
+     * @param req
+     * @return
+     */
+    public SendBuyerReconcileResp sendBuyerReconcile(SendBuyerReconcileReq.Builder req) throws Exception {
+        String url = baseUrl + "/open/buyer/reconcile/send";
+        String paramJson = genSignToJson(req);
+        String respJson = HttpUtil.doPost(url, paramJson, timeout);
+        SendBuyerReconcileResp.Builder resp = ProtoBufUtil.toProtoBuf(SendBuyerReconcileResp.newBuilder(), respJson);
+        return resp.build();
+    }
+
+    /**
      * 买家确认对账
      *
      * @param req
@@ -87,6 +101,20 @@ public class OpenReconcileSdk extends BaseSdk {
         Map<String, String> params = genSignToMap(req);
         String respJson = HttpUtil.doGet(url, params, timeout);
         GetSellerReconcileDetailResp.Builder resp = ProtoBufUtil.toProtoBuf(GetSellerReconcileDetailResp.newBuilder(), respJson);
+        return resp.build();
+    }
+
+    /**
+     * 卖家发起对账
+     *
+     * @param req
+     * @return
+     */
+    public SendSellerReconcileResp sendSellerReconcile(SendSellerReconcileReq.Builder req) throws Exception {
+        String url = baseUrl + "/open/seller/reconcile/send";
+        String paramJson = genSignToJson(req);
+        String respJson = HttpUtil.doPost(url, paramJson, timeout);
+        SendSellerReconcileResp.Builder resp = ProtoBufUtil.toProtoBuf(SendSellerReconcileResp.newBuilder(), respJson);
         return resp.build();
     }
 
