@@ -240,4 +240,15 @@ public class OpenOrderOptSdkTest {
         BatchDeleteOrderResp resp = openOrderOptSdk.batchDeleteOrder(req);
         System.out.println(ProtoBufUtil.toJSON(resp));
     }
+
+    @Test
+    public void modifyOrderPerson() throws Exception {
+        ModifyOrderPersonReq.Builder req = ModifyOrderPersonReq.newBuilder();
+        req.setCode("OR200715477597404215");
+        req.setSellerRecorder("33");
+//		req.setSellerAuditor("11");
+        req.setSellerApprover("66");
+        ModifyOrderPersonResp resp = openOrderOptSdk.modifyOrderPerson(req);
+        System.out.println(ProtoBufUtil.toJSON(resp));
+    }
 }
