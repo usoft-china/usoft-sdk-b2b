@@ -18,12 +18,13 @@ public class ReconciliationSdkTest {
 	 * 测试地址
 	 */
 //	private ReconciliationSdk reconciliationSdk = new ReconciliationSdk("http://test-b2b.uuzcc.cn", "10041559", "2c1ea089876b796fe050007f01002ea6");
-	private ReconciliationSdk reconciliationSdk = new ReconciliationSdk("http://127.0.0.1:27120", "10050624", "c49f7be6a861461ab951e55030055a5c");
+//	private ReconciliationSdk reconciliationSdk = new ReconciliationSdk("http://127.0.0.1:27120", "10050624", "c49f7be6a861461ab951e55030055a5c");
 
 	/**
-	 * 正式地址
+	 * 正式地址 "50001455", "c11e1355528c40fe811940851429f0d8"
 	 */
-//	private ProductSdk productSdk = new ProductSdk("http://b2b-api.usoftchina.com/");
+	private ReconciliationSdk reconciliationSdk = new ReconciliationSdk("http://b2brest.usoftchina.com", "50001455", "c11e1355528c40fe811940851429f0d8");
+
 	@Test
 	public void getApCheckList() throws IOException {
 		GetApCheckListReq.Builder req = GetApCheckListReq.newBuilder();

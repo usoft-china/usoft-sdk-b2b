@@ -19,8 +19,8 @@ public class OrderSdkTest {
 	/**
 	 * 测试地址
 	 */
-	private OrderSdk orderSdk = new OrderSdk("http://b2brest.uuzcc.cn:27120", "10050624", "c49f7be6a861461ab951e55030055a5c");
-//	private OrderSdk orderSdk = new OrderSdk("http://b2brest.usoftchina.com", "10042599", "c640c95bbdfa4aff9be4d3e690178ed4");
+//	private OrderSdk orderSdk = new OrderSdk("http://b2brest.uuzcc.cn:27120", "10050624", "c49f7be6a861461ab951e55030055a5c");
+	private OrderSdk orderSdk = new OrderSdk("http://b2brest.usoftchina.com", "10046539", "aff1d9aac85042a491b21ef3d382abd1");
 
 	/**
 	 * 正式地址
@@ -230,7 +230,7 @@ public class OrderSdkTest {
 	@Test
 	public void updatePurchaseReplyStatus() throws IOException {
 		UpdatePurchaseReplyStatusReq.Builder req = UpdatePurchaseReplyStatusReq.newBuilder();
-		req.setIdStr("200611185881734500,200611184674226800");
+		req.setIdStr("200611185881734500");
 		UpdatePurchaseReplyStatusResp resp = orderSdk.updatePurchaseReplyStatus(req.build());
 		System.out.println(ProtoBufUtil.toJSON(resp));
 	}

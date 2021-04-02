@@ -49,6 +49,20 @@ public class UasOrderGetSdk extends BaseSdk {
 	}
 
 	/**
+	 * 查询买家采购订单产品
+	 *
+	 * @param req
+	 * @return
+	 */
+	public GetBuyerOrderProductResp getBuyerOrderProduct(GetBuyerOrderProductReq.Builder req) throws Exception {
+		String url = baseUrl + "/uas/buyer/order/product/get";
+		Map<String, String> params = genSignToMap(req);
+		String respJson = HttpUtil.doGet(url, params, timeout);
+		GetBuyerOrderProductResp.Builder resp = ProtoBufUtil.toProtoBuf(GetBuyerOrderProductResp.newBuilder(), respJson);
+		return resp.build();
+	}
+
+	/**
 	 * 分页查询买家采购变更单
 	 *
 	 * @param req

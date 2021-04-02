@@ -15,7 +15,7 @@ public class OpenDemandSdkTest {
     /**
      * 测试地址
      */
-    private OpenDemandSdk openDemandSdk = new OpenDemandSdk("https://b2btraderest.uuzcc.cn", "10042875", "c49f7be6a861461ab951e55030055a5c");
+    private OpenDemandSdk openDemandSdk = new OpenDemandSdk("https://b2btraderest.uuzcc.cn", "50000119", "bee13ab9a9a646eeb74c8b6b96e0d403");
 
     /**
      * 正式地址
@@ -67,8 +67,12 @@ public class OpenDemandSdkTest {
     @Test
     public void pagingBuyerDemand() throws Exception {
         PagingBuyerDemandReq.Builder req = PagingBuyerDemandReq.newBuilder();
-        req.setPageNumber(10);
-        req.setPageSize(1);
+        req.setPageNumber(1);
+        req.setPageSize(999);
+        req.setCategory(10);
+        req.setStatus(20);
+        req.setStartTime("2021-02-10  00:00:00");
+        req.setEndTime("2021-03-01  23:59:59");
         PagingBuyerDemandResp resp = openDemandSdk.pagingBuyerDemand(req);
         System.out.println(ProtoBufUtil.toJSON(resp));
     }
