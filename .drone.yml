@@ -48,11 +48,11 @@ steps:
 - name: notify_email
   image: drillster/drone-email
   settings:
-    host: smtp.mxhichina.com
+    host: smtp.exmail.qq.com
     port: 25
-    username: alert@usoftchina.com
-    password: Mall1234567890
-    from: alert@usoftchina.com
+    username: mall@worldshinedata.com
+    password: eMbnJyUaKCucveUh
+    from: mall@worldshinedata.com
   when:
     branch:
     - develop
