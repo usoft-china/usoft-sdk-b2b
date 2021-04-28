@@ -83,7 +83,7 @@ public class OpenPartnersSdk extends BaseSdk {
      * @return
      */
     public AuditPartnersApplyResp auditPartnersApply(AuditPartnersApplyReq.Builder req) throws Exception {
-        String url = baseUrl + "/open/partners/apply/add";
+        String url = baseUrl + "/open/partners/apply/audit";
         String paramJson = genSignToJson(req);
         String respJson = HttpUtil.doPost(url, paramJson, timeout);
         AuditPartnersApplyResp.Builder resp = ProtoBufUtil.toProtoBuf(AuditPartnersApplyResp.newBuilder(), respJson);
