@@ -397,4 +397,18 @@ public class OpenOrderGetSdk extends BaseSdk {
         GetOrderReturnDetailResp.Builder resp = ProtoBufUtil.toProtoBuf(GetOrderReturnDetailResp.newBuilder(), respJson);
         return resp.build();
     }
+
+    /**
+     * 分页查询卖家MRB单
+     *
+     * @param req
+     * @return
+     */
+    public PagingSellerOrderMrbResp pagingSellerOrderMrb(PagingSellerOrderMrbReq.Builder req) throws Exception {
+        String url = baseUrl + "/open/seller/order/mrb/paging";
+        Map<String, String> params = genSignToMap(req);
+        String respJson = HttpUtil.doGet(url, params, timeout);
+        PagingSellerOrderMrbResp.Builder resp = ProtoBufUtil.toProtoBuf(PagingSellerOrderMrbResp.newBuilder(), respJson);
+        return resp.build();
+    }
 }

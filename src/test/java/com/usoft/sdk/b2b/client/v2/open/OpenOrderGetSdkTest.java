@@ -277,4 +277,16 @@ public class OpenOrderGetSdkTest {
         GetOrderReturnDetailResp resp = openOrderGetSdk.getOrderReturnDetail(req);
         System.out.println(ProtoBufUtil.toJSON(resp));
     }
+
+    @Test
+    public void pagingSellerOrderMrb() throws Exception {
+        PagingSellerOrderMrbReq.Builder req = PagingSellerOrderMrbReq.newBuilder();
+        req.setPageNumber(10);
+        req.setPageSize(1);
+//        req.setKeywords("wc");
+//        req.setStartTime("2020-03-24");
+//        req.setEndTime("2020-07-24");
+        PagingSellerOrderMrbResp resp = openOrderGetSdk.pagingSellerOrderMrb(req);
+        System.out.println(ProtoBufUtil.toJSON(resp));
+    }
 }
