@@ -28,40 +28,39 @@ public class OpenSampleDemandSdkTest {
     public void createSampleDemand() throws Exception {
         CreateSampleDemandReq.Builder req = CreateSampleDemandReq.newBuilder();
         req.setCategory(20);
-//		req.addSellerEnuu(10050624);
+//		req.addSellerEnuu(50000120);
         req.setCurrency("RMB");
-        req.setOfferDeadline("2021-10-09");
-        req.setAddr("广东省1111");
+        req.setOfferDeadline("2021-06-09");
+        req.setAddr("广东省222");
 
         ImportSampleDemandProduct.Builder op1 = ImportSampleDemandProduct.newBuilder();
-        op1.setProductMaterialCode("MaterialCode");
-        op1.setProductName("Name");
-        op1.setProductSpec("Spec");
-        op1.setQuantity(20);
-        op1.setUnit("KPCS");
-        op1.setSourceId("66");
-        op1.setTechnicalRequirement("技术要求1");
+        op1.setProductMaterialCode("W");
+        op1.setProductName("W");
+        op1.setProductSpec("W");
+        op1.setQuantity(100);
+        op1.setUnit("PCS");
+//        op1.setSourceId("99");
+        op1.setTechnicalRequirement("技术要求66");
         req.addDemandProduct(op1);
         AttachFile.Builder file1 = AttachFile.newBuilder();
         file1.setCode("11200618246794932149");
         op1.setAttachFile(file1);
 
         ImportSampleDemandProduct.Builder op2 = ImportSampleDemandProduct.newBuilder();
-        op2.setProductMaterialCode("MaterialCode1");
-        op2.setProductName("Name2");
-        op2.setProductSpec("Spec2");
-        op2.setQuantity(20);
-        op2.setSourceId("12");
-        op2.setTechnicalRequirement("技术要求2");
+        op2.setProductMaterialCode("W2");
+        op2.setProductName("W2");
+        op2.setProductSpec("W2");
+        op2.setQuantity(1000);
+        op2.setSourceId("111");
+        op2.setTechnicalRequirement("技术要求66666");
         AttachFile.Builder file2 = AttachFile.newBuilder();
         file2.setUrl("https://static.uuzcc.cn/appmall/12200604123893460688.jpg");
         file2.setName("测试.jpg");
         op2.setAttachFile(file2);
         req.addDemandProduct(op2);
-        req.setSourceId("123123");
-        req.setBizCode("666666");
+//        req.setSourceId("7777");
+//        req.setBizCode("7777");
         req.setDemandTime(DateUtil.getCurrentDate(DateUtil.PATTERN_DATE_TIME));
-        req.setUu(1000027480);
         req.setUu(200040196);
         CreateSampleDemandResp resp = openSampleDemandSdk.createSampleDemand(req);
         System.out.println(ProtoBufUtil.toJSON(resp));
@@ -91,8 +90,8 @@ public class OpenSampleDemandSdkTest {
     @Test
     public void replySampleDemandProductOffer() throws Exception {
         ReplySampleDemandProductOfferReq.Builder req = ReplySampleDemandProductOfferReq.newBuilder();
-        req.setSampleDemandProductOfferCode("PO200509900506414803");
-        req.setCategory(20);
+        req.setSampleDemandProductOfferCode("PO210602259943817110");
+        req.setCategory(10);
         ReplySampleDemandProductOfferResp resp = openSampleDemandSdk.replySampleDemandProductOffer(req);
         System.out.println(ProtoBufUtil.toJSON(resp));
     }
