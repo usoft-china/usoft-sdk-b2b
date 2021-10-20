@@ -49,7 +49,7 @@ steps:
   image: drillster/drone-email
   settings:
     host: smtp.exmail.qq.com
-    port: 25
+    port: 465
     username: mall@worldshinedata.com
     password: eMbnJyUaKCucveUh
     from: mall@worldshinedata.com
